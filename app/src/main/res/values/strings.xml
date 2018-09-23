@@ -16,4 +16,6 @@
     </string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_registration">Registration</string>
+    <string name="registration">REGISTRATION</string>
+    <string name="button">Button</string>
 </resources>
