@@ -16,8 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="Sign In"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
