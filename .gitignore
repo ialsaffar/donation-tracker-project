@@ -1,20 +1,3 @@
-# This first part was written by Ibrahim
-
-# Main Gradle build files excetion (will be tracked)
-!app/build.gradle
-!build.gradle
-
-# Misc. Gradle files
-gradle.properties
-gradle/
-gradlew
-gradlew.bat
-settings.gradle
-
-# Misc. Android Studio
-/.idea
-
-# End of Ibrahim's addition
 
 # Below is created by https://www.gitignore.io/api/androidstudio
 
