@@ -6,10 +6,25 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.app.Activity;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
+import static android.Manifest.permission.READ_CONTACTS;
 
 public class Registration extends AppCompatActivity {
+
+    //UI Widgets
+    private Button registerButton;
+    private Spinner userTypeSpinner;
+    private EditText passwordInputText;
+    private EditText reenterPasswordInputText;
+    private Button cancelButton;
+    private EditText nameTextInputPlainText;
+    private EditText emailInputText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +41,17 @@ public class Registration extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+
+
+
     }
+
+
+
+
+
+
 
 }
