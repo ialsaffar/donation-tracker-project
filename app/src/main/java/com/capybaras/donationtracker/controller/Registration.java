@@ -1,18 +1,16 @@
 package com.capybaras.donationtracker.controller;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
-import android.app.Activity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
-import static android.Manifest.permission.READ_CONTACTS;
 
 public class Registration extends AppCompatActivity {
 
