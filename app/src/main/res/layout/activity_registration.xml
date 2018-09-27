@@ -21,7 +21,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_registration" />
+    <include
+        layout="@layout/content_registration"
+        android:layout_width="5dp"
+        android:layout_height="7dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
