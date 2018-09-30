@@ -3,7 +3,9 @@ package com.capybaras.donationtracker.controller;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.support.design.widget.FloatingActionButton;
@@ -11,8 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.model.UserTypes;
 
-public class Registration extends AppCompatActivity {
+public class Registration extends AppCompatActivity implements View.OnClickListener {
 
     //UI Widgets
     private Button registerButton;
@@ -47,18 +50,36 @@ public class Registration extends AppCompatActivity {
         this.emailInputText = (EditText) findViewById(R.id.emailInputText);
 
         this.registerButton = (Button) findViewById(R.id.registerButton);
-        //Make on click listener
-
         this.cancelButton = (Button) findViewById(R.id.cancelButton);
-        //make on click listener
 
+        this.userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
+
+        //Sets the adapter to display the user types
+        ArrayAdapter<UserTypes> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.userTypeSpinner.setAdapter(adapter);
 
     }
 
 
 
-
-
-
+    @Override
+    public void onClick(View view)
+    {
+        switch (view.getId()) {
+            case R.id.registerButton:
+                //Check email/username and password are not already used
+                Log.d("Button Pressed", "The register button was pressed.");
+                //todo would send to account page or login page?
+//                setContentView(R.layout.activity_login);
+                break;
+            case R.id.cancelButton:
+                //Go back to Main UI page
+                Log.d("Button Pressed", "The cancel button was pressed.");
+                //todo would send to login in page or welcome page?
+                setContentView(R.layout.activity_login);
+                break;
+        }
+    }
 
 }
