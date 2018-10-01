@@ -11,11 +11,12 @@ import android.widget.EditText;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.model.UserTypes;
 
-public class Registration extends AppCompatActivity implements View.OnClickListener {
+public class Registration extends AppCompatActivity {
 
     //UI Widgets
     private Button registerButton;
@@ -33,16 +34,6 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
 
         this.passwordInputText = (EditText) findViewById(R.id.passwordInputText);
         this.reenterPasswordInputText = (EditText) findViewById(R.id.reenterPasswordInputText);
@@ -62,24 +53,38 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /**
+     * Event handler for the Register button
+     *
+     * @param view
+     */
+    public void onRegisterPressed(View view) {
+        Log.d("Button Pressed", "The register button was pressed.");
 
-    @Override
-    public void onClick(View view)
-    {
-        switch (view.getId()) {
-            case R.id.registerButton:
-                //Check email/username and password are not already used
-                Log.d("Button Pressed", "The register button was pressed.");
-                //todo would send to account page or login page?
-//                setContentView(R.layout.activity_login);
-                break;
-            case R.id.cancelButton:
-                //Go back to Main UI page
-                Log.d("Button Pressed", "The cancel button was pressed.");
-                //todo would send to login in page or welcome page?
-                setContentView(R.layout.activity_login);
-                break;
+        if (this.passwordInputText.equals(this.reenterPasswordInputText)) {
+            //means password and re entered passwords are equal (may continue)
+
+            //todo add to the database of user info
+
+            setContentView(R.layout.content_main);
+            finish();
+
+        } else {
+            Toast.makeText(Registration.this, "The passwords do not match. Please try again.", Toast.LENGTH_LONG);
+            finish();
         }
+    }
+
+    /**
+     * Event handler for the Cancel Button
+     *
+     * Nothing is saved
+     * @param view
+     */
+    public void onCancelPressed(View view) {
+        Log.d("Donation Tracker App", "Cancel Button Pressed");
+        setContentView(R.layout.activity_login);
+        finish();
     }
 
 }
