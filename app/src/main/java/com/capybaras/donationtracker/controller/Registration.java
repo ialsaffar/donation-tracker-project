@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -63,7 +62,6 @@ public class Registration extends AppCompatActivity {
 
         if (this.passwordInputText.equals(this.reenterPasswordInputText)) {
             //means password and re entered passwords are equal (may continue)
-
             //todo add to the database of user info
 
             setContentView(R.layout.content_main);
