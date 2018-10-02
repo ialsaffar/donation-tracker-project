@@ -31,6 +31,7 @@ public class Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Hellop", "Hello");
         setContentView(R.layout.activity_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,10 +49,13 @@ public class Registration extends AppCompatActivity {
         this.userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
 
         //Sets the adapter to display the user types
-        ArrayAdapter<UserTypes> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.userTypeSpinner.setAdapter(adapter);
 
+        Log.d(UserTypes.values().toString(), "Test");
+        Log.d("Test", UserTypes.values().toString());
+        Log.d("Hello", "Hello");
     }
 
 
