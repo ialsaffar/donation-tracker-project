@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
 
 /**
  * A login screen that offers login via username/password.
@@ -218,9 +219,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (success) {
                 finish();
-                /*Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), LandingActivity.class);
                 startActivity(intent);
-                */
             } else {
                 mPasswordView.setError(getString(R.string.error_bad_login_attempt));
                 mPasswordView.requestFocus();
