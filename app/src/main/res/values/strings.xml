@@ -12,5 +12,8 @@
     <string name="error_bad_login_attempt">This username or password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="registration">REGISTRATION</string>
+    <string name="button">Button</string>
     <string name="sign_in_button">Sign In</string>
 </resources>

@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="Sign In" />
+            android:label="@string/title_activity_login">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -28,6 +29,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LandingActivity"></activity>
+        <activity
+            android:name=".controller.Registration"
+            android:label="@string/title_activity_registration"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
