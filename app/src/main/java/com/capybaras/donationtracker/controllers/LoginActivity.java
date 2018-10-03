@@ -1,4 +1,4 @@
-package com.capybaras.donationtracker;
+package com.capybaras.donationtracker.controllers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.Model;
+
 /**
  * A login screen that offers login via username/password.
  */
@@ -27,14 +30,8 @@ public class LoginActivity extends AppCompatActivity {
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    private Model model;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "user:pass"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -74,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        model = Model.getInstance();
     }
 
 
@@ -201,15 +199,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUsername)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-            // If username is not registered.
-            return false;
+            return model.userPasswordMatch(mUsername, mPassword);
         }
 
         @Override

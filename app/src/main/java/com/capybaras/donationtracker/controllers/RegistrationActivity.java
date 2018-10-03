@@ -1,4 +1,4 @@
-package com.capybaras.donationtracker.controller;
+package com.capybaras.donationtracker.controllers;
 
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.model.UserTypes;
+import com.capybaras.donationtracker.models.Model;
+import com.capybaras.donationtracker.models.UserTypes;
 
-public class Registration extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
     //UI Widgets
     private Button registerButton;
@@ -26,12 +27,12 @@ public class Registration extends AppCompatActivity {
     private EditText nameTextInputPlainText;
     private EditText emailInputText;
     private LinearLayout linearLayout;
+    private Model model;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Hellop", "Hello");
         setContentView(R.layout.activity_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,10 +53,7 @@ public class Registration extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.userTypeSpinner.setAdapter(adapter);
-
-        Log.d(UserTypes.values().toString(), "Test");
-        Log.d("Test", UserTypes.values().toString());
-        Log.d("Hello", "Hello");
+        model = Model.getInstance();
     }
 
 
@@ -65,25 +63,19 @@ public class Registration extends AppCompatActivity {
      * @param view
      */
     public void onRegisterPressed(View view) {
-        Log.d("Button Pressed", "The register button was pressed.");
-
         if (this.allBoxesFilled()) {
+            if (this.passwordsMatch()) {
+                //means password and re entered passwords are equal (may continue)
+                //todo add to the database of user info
+                model.addUser(this.nameTextInputPlainText.getText().toString(), this.passwordInputText.getText().toString());
+                finish();
+            } else {
+                Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        } else {
             Snackbar.make(view, "Not all boxes are filled.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            finish();
-        }
-
-        if (this.passwordsMatch()) {
-            //means password and re entered passwords are equal (may continue)
-            //todo add to the database of user info
-
-            setContentView(R.layout.activity_main);
-            finish();
-
-        } else {
-            Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            finish();
         }
     }
 
@@ -95,30 +87,18 @@ public class Registration extends AppCompatActivity {
      */
     public void onCancelPressed(View view) {
         Log.d("Donation Tracker App", "Cancel Button Pressed");
-        setContentView(R.layout.activity_login);
         finish();
     }
 
     private boolean allBoxesFilled() {
-       if (this.nameTextInputPlainText.getText().toString().isEmpty()) {
-           return false;
-       } else if (this.emailInputText.getText().toString().isEmpty()) {
-           return false;
-       } else if (this.passwordInputText.getText().toString().isEmpty()) {
-           return false;
-       } else if (this.reenterPasswordInputText.getText().toString().isEmpty()) {
-           return false;
-       }
-
-        return true;
+       return !(this.nameTextInputPlainText.getText().toString().isEmpty()
+       || this.emailInputText.getText().toString().isEmpty()
+       || this.passwordInputText.getText().toString().isEmpty()
+       || this.reenterPasswordInputText.getText().toString().isEmpty());
     }
 
     private boolean passwordsMatch() {
-        if (this.passwordInputText.getText().toString().equals(this.reenterPasswordInputText.getText().toString())) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.passwordInputText.getText().toString().equals(this.reenterPasswordInputText.getText().toString());
     }
 
     private boolean emailAlreadyUse() {
@@ -126,6 +106,5 @@ public class Registration extends AppCompatActivity {
         //(No where to store the data)
         return false;
     }
-
 
 }

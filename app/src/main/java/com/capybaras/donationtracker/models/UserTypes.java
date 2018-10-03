@@ -1,4 +1,4 @@
-package com.capybaras.donationtracker.model;
+package com.capybaras.donationtracker.models;
 
 public enum UserTypes {
     ADMIN("Administrator"),
