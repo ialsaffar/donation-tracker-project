@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-            return model.userPasswordMatch(mUsername, mPassword);
+            return model.isUser(mUsername) && model.userPasswordMatch(mUsername, mPassword);
         }
 
         @Override
