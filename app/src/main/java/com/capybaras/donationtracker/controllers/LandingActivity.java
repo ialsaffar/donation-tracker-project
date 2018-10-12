@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.LocationList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LandingActivity extends AppCompatActivity {
 
@@ -28,6 +32,7 @@ public class LandingActivity extends AppCompatActivity {
 
         Context ctx = getApplicationContext();
         LocationList locations = new LocationList(ctx);
+        List<Location> listOfLocations = locations.getLocations();
 
     }
 
