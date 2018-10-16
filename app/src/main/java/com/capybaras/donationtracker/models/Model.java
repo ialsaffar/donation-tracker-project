@@ -1,6 +1,7 @@
 package com.capybaras.donationtracker.models;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Model {
     /** Singleton instance */
@@ -24,4 +25,15 @@ public class Model {
     public boolean userPasswordMatch(String user, String password){
         return users.get(user).equals(password);
     }
+
+    LocationList locationList = new LocationList();
+    private List<Location> locations = locationList.getLocations();
+    public List<Location> getLocations() {
+        return locations;
+    }
+    private HashMap<Integer, Location> locationMap = locationList.getLocationMap();
+    public HashMap<Integer, Location> getLocationMap() {
+        return locationMap;
+    }
+
 }

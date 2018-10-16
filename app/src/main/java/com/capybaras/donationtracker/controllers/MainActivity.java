@@ -1,18 +1,12 @@
 package com.capybaras.donationtracker.controllers;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
-
-
 import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.models.Location;
-import com.capybaras.donationtracker.models.LocationList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), LocationListActivity.class);
                 startActivity(intent);
             }
         });

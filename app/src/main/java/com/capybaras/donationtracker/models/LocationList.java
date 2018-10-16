@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,10 +21,12 @@ import java.util.List;
 public class LocationList {
 
     private List<Location> locations = new ArrayList<>();
+    private HashMap<Integer, Location> locationMap = new HashMap<>();
 
-    public LocationList(Context ctx) {
+    public LocationList() {
+
         // Read the raw csv file
-        InputStream is = ctx.getResources().openRawResource(R.raw.locationdata);
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("res/raw/locationdata.csv");
 
         // Reads text from character-input stream, buffering characters for efficient reading
         BufferedReader reader = new BufferedReader(
@@ -47,7 +50,7 @@ public class LocationList {
                 Location location = new Location();
 
                 // Setters
-                location.setKey( Integer.parseInt(tokens[0]) );
+                location.setKey(Integer.parseInt(tokens[0]));
                 location.setName(tokens[1]);
                 location.setLatitude(Double.parseDouble(tokens[2].trim()));
                 location.setLongitude(Double.parseDouble(tokens[3].trim()));
@@ -61,6 +64,7 @@ public class LocationList {
 
                 // Adding object to a class
                 locations.add(location);
+                locationMap.put(location.getKey(), location);
 
                 // Log the object
                 Log.d("My Activity", "Just created: " + locations);
@@ -77,5 +81,9 @@ public class LocationList {
 
     public List<Location> getLocations() {
         return locations;
+    }
+
+    public HashMap<Integer, Location> getLocationMap() {
+        return locationMap;
     }
 }
