@@ -16,8 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".controllers.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".controllers.MainActivity"
             android:label="@string/title_activity_main"
@@ -28,11 +27,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.LandingActivity"></activity>
+        <activity android:name=".controllers.LandingActivity" />
         <activity
             android:name=".controllers.RegistrationActivity"
             android:label="@string/title_activity_registration"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controllers.LocationListActivity"
+            android:label="@string/title_location_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controllers.LocationDetailActivity"
+            android:label="@string/title_location_detail"
+            android:parentActivityName=".controllers.LocationListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.capybaras.donationtracker.controllers.LocationListActivity" />
+        </activity>
     </application>
 
 </manifest>

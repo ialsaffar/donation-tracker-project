@@ -16,6 +16,6 @@
     <string name="registration">REGISTRATION</string>
     <string name="button">Button</string>
     <string name="sign_in_button">Sign In</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="welcome_label">Welcome!</string>
+    <string name="title_location_list">Locations</string>
+    <string name="title_location_detail">Location Detail</string>
 </resources>
