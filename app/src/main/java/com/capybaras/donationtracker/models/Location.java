@@ -1,5 +1,9 @@
 package com.capybaras.donationtracker.models;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by mogedi on 10/11/2018.
  */
@@ -17,6 +21,11 @@ public class Location {
     private String type;
     private String phone;
     private String website;
+    private List<Item> items = new ArrayList<>();
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
 
     public int getKey() {
         return key;
@@ -104,6 +113,14 @@ public class Location {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override

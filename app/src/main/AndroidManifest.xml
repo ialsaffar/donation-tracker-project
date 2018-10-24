@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -44,6 +45,21 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.capybaras.donationtracker.controllers.LocationListActivity" />
+        </activity>
+        <activity
+            android:name=".controllers.ItemEditFragment"
+            android:label="@string/title_activity_item_edit" />
+        <activity
+            android:name=".controllers.ItemListActivity"
+            android:label="@string/title_activity_item_list"
+            android:parentActivityName=".controllers.LandingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.capybaras.donationtracker.controllers.LandingActivity" />
+        </activity>
+        <activity
+            android:name=".controllers.NewItemActivity"
+            android:label="@string/title_activity_new_item">
         </activity>
     </application>
 

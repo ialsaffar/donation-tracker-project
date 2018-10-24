@@ -72,6 +72,9 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         model = Model.getInstance();
+
+        //reset logged in user
+        Model.getInstance().setLoggedInUser(null);
     }
 
 
@@ -199,6 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
+            System.out.println(model.isUser(mUsername) && model.userPasswordMatch(mUsername, mPassword));
             return model.isUser(mUsername) && model.userPasswordMatch(mUsername, mPassword);
         }
 
@@ -208,6 +212,7 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
+                Model.getInstance().setLoggedInUser(Model.getUsers().get(mUsername));
                 finish();
                 Intent intent = new Intent(getActivity(), LandingActivity.class);
                 startActivity(intent);

@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -61,6 +62,7 @@ public class LocationList {
                 location.setType(tokens[8]);
                 location.setPhone(tokens[9]);
                 location.setWebsite(tokens[10]);
+                location.setItems(new LinkedList<Item>());
 
                 // Adding object to a class
                 locations.add(location);

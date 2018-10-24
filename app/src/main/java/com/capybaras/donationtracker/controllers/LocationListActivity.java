@@ -99,9 +99,9 @@ public class LocationListActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(LocationListActivity parent,
-                                      List<Location> locations,
-                                      boolean twoPane) {
+        public SimpleItemRecyclerViewAdapter(LocationListActivity parent,
+                                             List<Location> locations,
+                                             boolean twoPane) {
             mValues = locations;
             mParentActivity = parent;
             mTwoPane = twoPane;
