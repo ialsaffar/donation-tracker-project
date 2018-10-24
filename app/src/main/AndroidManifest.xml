@@ -47,9 +47,6 @@
                 android:value="com.capybaras.donationtracker.controllers.LocationListActivity" />
         </activity>
         <activity
-            android:name=".controllers.ItemEditFragment"
-            android:label="@string/title_activity_item_edit" />
-        <activity
             android:name=".controllers.ItemListActivity"
             android:label="@string/title_activity_item_list"
             android:parentActivityName=".controllers.LandingActivity">
@@ -60,7 +57,13 @@
         <activity
             android:name=".controllers.NewItemActivity"
             android:label="@string/title_activity_new_item">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.capybaras.donationtracker.controllers.ItemListActivity" />
         </activity>
+        <activity
+            android:name=".controllers.ItemDetailsActivity"
+            android:label="@string/title_activity_item_details"></activity>
     </application>
 
 </manifest>

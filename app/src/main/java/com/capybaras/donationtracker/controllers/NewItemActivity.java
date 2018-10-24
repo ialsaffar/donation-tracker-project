@@ -62,7 +62,13 @@ public class NewItemActivity extends Activity {
     }
 
     private void setUpCancelButton() {
-        this.finish();
+        cancelButton = findViewById(R.id.new_item_cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setUpSubmitButton() {
@@ -71,7 +77,11 @@ public class NewItemActivity extends Activity {
             public void onClick(View v) {
                 if (!itemNameField.getText().toString().isEmpty()) {
                     Item item = new Item(itemNameField.getText().toString(), location);
-                    item.setCents(Integer.parseInt(valueField.getText().toString()) * 100);
+                    if (!valueField.getText().toString().isEmpty()) {
+                        item.setCents((int) (Double.parseDouble(valueField.getText().toString()) * 100));
+                    } else {
+                        item.setCents(0);
+                    }
                     item.setCreator(Model.getInstance().getLoggedInUser().getUsername());
                     item.setTimeStamp(new Date());
                     item.setFullDescription(fullDescriptionField.getText().toString());
@@ -79,6 +89,7 @@ public class NewItemActivity extends Activity {
                     String cat = categorySpinner.getSelectedItem().toString();
                     item.setCategory(ItemCategory.getCategoryByName(cat));
                     location.addItem(item);
+                    finish();
                 } else {
                     throw new IllegalArgumentException("must fill in name");
                 }

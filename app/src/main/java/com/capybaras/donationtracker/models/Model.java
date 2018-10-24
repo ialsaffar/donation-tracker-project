@@ -3,6 +3,7 @@ package com.capybaras.donationtracker.models;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Model {
     /** Singleton instance */
@@ -70,5 +71,14 @@ public class Model {
 
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
+    }
+
+    public Location getLocationByKey(int key) {
+        for (Location l: locations) {
+            if (key == l.getKey()) {
+                return l;
+            }
+        }
+        throw new NoSuchElementException("No location with key: " + key);
     }
 }

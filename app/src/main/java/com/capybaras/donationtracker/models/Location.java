@@ -3,6 +3,7 @@ package com.capybaras.donationtracker.models;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by mogedi on 10/11/2018.
@@ -25,6 +26,15 @@ public class Location {
 
     public void addItem(Item item) {
         items.add(item);
+    }
+
+    public Item getItemById(int id) {
+        for (Item i: items) {
+            if (i.getId() == id) {
+                return i;
+            }
+        }
+        throw new NoSuchElementException("No item with ID: " + id + "in location: " + this.name);
     }
 
     public int getKey() {

@@ -40,6 +40,16 @@ public class ItemListActivity extends Activity {
         setUpButton();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setUpRecycler();
+
+    }
+
+    public String getLocationName() {
+        return selectedLocation.getName();
+    }
 
     private void setUpSpinner() {
         spinner = findViewById(R.id.spinner);
@@ -65,7 +75,7 @@ public class ItemListActivity extends Activity {
                 } else {
                     addItemButton.setVisibility(View.GONE);
                 }
-                setUpRecycler(selectedLocation.getItems());
+                setUpRecycler();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -75,12 +85,11 @@ public class ItemListActivity extends Activity {
         });
     }
 
-    private void setUpRecycler(List<Item> locationItems) {
+    private void setUpRecycler() {
         recyclerView = findViewById(R.id.recycler);
-        RecyclerAdapter adapter = new RecyclerAdapter(this, locationItems);
+        RecyclerAdapter adapter = new RecyclerAdapter(this, selectedLocation);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     private void setUpButton() {

@@ -1,6 +1,7 @@
 package com.capybaras.donationtracker.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Item;
+import com.capybaras.donationtracker.models.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +26,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
+    private Location location;
+    private List<Item> items;
     private List<String> mItemNames = new ArrayList<>();
     //private List<Image> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerAdapter(Context mContext, List<Item> items) {
+    public RecyclerAdapter(Context mContext, Location location) {
+        this.location = location;
+        this.items = location.getItems();
         for (Item i: items) {
             mItemNames.add(i.getName());
             //mImages.add(i.getImage());
@@ -53,8 +59,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick clicked" + mItemNames.get(i));
-
-                Toast.makeText(mContext, mItemNames.get(i), Toast.LENGTH_SHORT);
+                Intent intent = new Intent(mContext, ItemDetailsActivity.class);
+                intent.putExtra("item_id", "" + items.get(i).getId());
+                intent.putExtra("location_key", "" + location.getKey());
+                mContext.startActivity(intent);
             }
         });
     }
