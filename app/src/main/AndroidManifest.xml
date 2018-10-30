@@ -15,8 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Controller.WelcomeActivity"
-            android:label="@string/welcome_activity"
+            android:name=".controllers.LoginActivity"
+            android:label="@string/title_activity_login">
+        </activity>
+        <activity
+            android:name=".controllers.MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controllers.LandingActivity"></activity>
+        <activity
+            android:name=".controllers.RegistrationActivity"
+            android:label="@string/title_activity_registration"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
