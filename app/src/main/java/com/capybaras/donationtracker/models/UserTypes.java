@@ -20,4 +20,15 @@ public enum UserTypes {
         return this.userTypeNonCaps;
     }
 
+    public static UserTypes getByName(String name) {
+        if (name.equals("Administrator")) {
+            return ADMIN;
+        } else if (name.equals("Location Employee")) {
+            return LOCATION_EMPLOYEE;
+        } else if (name.equals("Manager")) {
+            return MANAGER;
+        } else {
+            throw new IllegalArgumentException("No such UserType");
+        }
+    }
 }
