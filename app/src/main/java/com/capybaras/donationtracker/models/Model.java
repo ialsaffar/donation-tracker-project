@@ -1,13 +1,24 @@
 package com.capybaras.donationtracker.models;
 
+import android.app.Application;
+import android.content.Context;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Model {
+public class Model extends Application{
     /** Singleton instance */
     private static final Model instance = new Model();
+    private static final String FILE_NAME = "ModelData";
     private static User loggedInUser;
     private static HashMap<String, User> users;
     private LocationList locationList;
@@ -25,6 +36,17 @@ public class Model {
         locationList = new LocationList();
         locations = locationList.getLocations();
         locationMap = locationList.getLocationMap();
+
+        try {
+            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
+            users = (HashMap<String, User>) pleaseOpen.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addUser(String username, String password, String email, UserTypes type){
@@ -33,6 +55,17 @@ public class Model {
         }
         User user = new User(username, password, email, type);
         users.put(username, user);
+
+        try {
+            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
+            pleaseWorkOut.writeObject(users);
+            pleaseWorkOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isUser(String username){
@@ -71,6 +104,16 @@ public class Model {
 
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
+        try {
+            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
+            pleaseWorkOut.writeObject(users);
+            pleaseWorkOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Location getLocationByKey(int key) {
