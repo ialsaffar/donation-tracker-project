@@ -2,8 +2,10 @@ package com.capybaras.donationtracker.models;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,7 +20,7 @@ import java.util.NoSuchElementException;
 public class Model extends Application{
     /** Singleton instance */
     private static final Model instance = new Model();
-    private static final String FILE_NAME = "ModelData";
+    private static final String FILE_NAME = "ModelData.txt";
     private static User loggedInUser;
     private static HashMap<String, User> users;
     private LocationList locationList;
@@ -29,7 +31,7 @@ public class Model extends Application{
         return instance;
     }
 
-    private Model() {
+    public Model() {
         users = new HashMap<>();
         users.put("user", new User("user", "pass", "abc@example.com", UserTypes.ADMIN));
         loggedInUser = null;
@@ -56,6 +58,10 @@ public class Model extends Application{
         User user = new User(username, password, email, type);
         users.put(username, user);
 
+//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+//            File pleaseWork = new File(Environment.getExternalStoragePublicDirectory(
+//                    Environment.DIRECTORY_DOCUMENTS), FILE_NAME);
+//        }
         try {
             FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
             ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);

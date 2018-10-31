@@ -1,6 +1,16 @@
 package com.capybaras.donationtracker.models;
 
+import android.app.Application;
+import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -9,8 +19,9 @@ import java.util.NoSuchElementException;
  * Created by mogedi on 10/11/2018.
  */
 
-public class Location {
+public class Location extends Application{
 
+    private static final String FILE_NAME = "LocationData";
     private int key;
     private String name;
     private double latitude;
@@ -24,8 +35,31 @@ public class Location {
     private String website;
     private List<Item> items = new ArrayList<>();
 
+    public Location() {
+        try {
+            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
+            items = (List<Item>) pleaseOpen.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addItem(Item item) {
         items.add(item);
+        try {
+            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
+            pleaseWorkOut.writeObject(items);
+            pleaseWorkOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Item getItemById(int id) {
