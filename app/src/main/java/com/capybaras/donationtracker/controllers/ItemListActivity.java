@@ -28,7 +28,7 @@ public class ItemListActivity extends Activity {
 
     private static final String TAG = "ItemListActivity";
     private Spinner spinner;
-    private Spinner sortSpinnerCategory;
+    private Spinner sortByCategory;
     private Location selectedLocation;
     private RecyclerView recyclerView;
     private Button addItemButton;
@@ -41,6 +41,7 @@ public class ItemListActivity extends Activity {
         user = Model.getInstance().getLoggedInUser();
         setUpSpinner();
         setUpButton();
+        setUpSortSpinnerCategory();
     }
 
     @Override
@@ -55,12 +56,17 @@ public class ItemListActivity extends Activity {
     }
 
     private void setUpSortSpinnerCategory() {
-        sortSpinnerCategory = findViewById(R.id.sortSpinnerCategory);
+        sortByCategory = findViewById(R.id.sortSpinnerCategory);
         List<ItemCategory> sortCategoryList = ItemCategory.getCurrentCategories();
         List<String> categoryNames = new ArrayList<>();
+        categoryNames.add("None");
         for(int i = 0; i < sortCategoryList.size(); i++) {
             categoryNames.add(sortCategoryList.get(i).getCategoryName());
         }
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, categoryNames);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(categoryAdapter);
     }
 
     private void setUpSpinner() {
