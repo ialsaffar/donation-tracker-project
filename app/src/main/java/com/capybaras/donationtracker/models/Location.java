@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 
 public class Location extends Application{
 
-    private static final String FILE_NAME = "LocationData";
+    private static final String FILE_NAME = "LocationData.txt";
     private int key;
     private String name;
     private double latitude;
@@ -36,30 +36,30 @@ public class Location extends Application{
     private List<Item> items = new ArrayList<>();
 
     public Location() {
-        try {
-            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
-            items = (List<Item>) pleaseOpen.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
+//            items = (List<Item>) pleaseOpen.readObject();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void addItem(Item item) {
         items.add(item);
-        try {
-            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
-            pleaseWorkOut.writeObject(items);
-            pleaseWorkOut.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+//            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
+//            pleaseWorkOut.writeObject(items);
+//            pleaseWorkOut.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public Item getItemById(int id) {

@@ -14,11 +14,13 @@ import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Item;
+import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
 import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class ItemListActivity extends Activity {
 
     private static final String TAG = "ItemListActivity";
     private Spinner spinner;
+    private Spinner sortSpinnerCategory;
     private Location selectedLocation;
     private RecyclerView recyclerView;
     private Button addItemButton;
@@ -49,6 +52,15 @@ public class ItemListActivity extends Activity {
 
     public String getLocationName() {
         return selectedLocation.getName();
+    }
+
+    private void setUpSortSpinnerCategory() {
+        sortSpinnerCategory = findViewById(R.id.sortSpinnerCategory);
+        List<ItemCategory> sortCategoryList = ItemCategory.getCurrentCategories();
+        List<String> categoryNames = new ArrayList<>();
+        for(int i = 0; i < sortCategoryList.size(); i++) {
+            categoryNames.add(sortCategoryList.get(i).getCategoryName());
+        }
     }
 
     private void setUpSpinner() {

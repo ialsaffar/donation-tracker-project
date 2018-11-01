@@ -39,16 +39,16 @@ public class Model extends Application{
         locations = locationList.getLocations();
         locationMap = locationList.getLocationMap();
 
-        try {
-            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
-            users = (HashMap<String, User>) pleaseOpen.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
+//            users = (HashMap<String, User>) pleaseOpen.readObject();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void addUser(String username, String password, String email, UserTypes type){
@@ -62,16 +62,16 @@ public class Model extends Application{
 //            File pleaseWork = new File(Environment.getExternalStoragePublicDirectory(
 //                    Environment.DIRECTORY_DOCUMENTS), FILE_NAME);
 //        }
-        try {
-            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
-            pleaseWorkOut.writeObject(users);
-            pleaseWorkOut.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+//            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
+//            pleaseWorkOut.writeObject(users);
+//            pleaseWorkOut.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public boolean isUser(String username){
@@ -110,16 +110,16 @@ public class Model extends Application{
 
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
-        try {
-            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
-            pleaseWorkOut.writeObject(users);
-            pleaseWorkOut.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+//            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
+//            pleaseWorkOut.writeObject(users);
+//            pleaseWorkOut.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public Location getLocationByKey(int key) {
