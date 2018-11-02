@@ -85,12 +85,15 @@ public class Model extends Application{
         return users;
     }
 
+    public static List<User> getUserList() { return userList; }
+
     // Utility method
     public static int hash(Object... values) {
         return Arrays.hashCode(values);
     }
 
     public void addUser(User newUser) {
+        userList.add(newUser);
         users.put(newUser.getUsername(), newUser);
     }
 

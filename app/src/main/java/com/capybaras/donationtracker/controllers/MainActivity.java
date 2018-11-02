@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.DataManagementFacade;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        DataManagementFacade dmf = DataManagementFacade.getInstance();
+        File file;
+
+        file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
+        dmf.loadText(file);
+        file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
+        dmf.loadText(file);
+        file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
+        dmf.loadText(file);
     }
 
     private Activity getActivity(){

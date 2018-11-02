@@ -37,7 +37,7 @@ public class Location extends Application{
     private String type;
     private String phone;
     private String website;
-    private List<Item> items = new ArrayList<>();
+    private static List<Item> items = new ArrayList<>();
 
     public Location(){}
 
