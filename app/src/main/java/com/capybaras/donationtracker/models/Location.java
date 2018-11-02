@@ -38,6 +38,8 @@ public class Location extends Application{
     private String website;
     private List<Item> items = new ArrayList<>();
 
+    public Location(){}
+
     public Location(int key,
                     String name,
                     double latitude,
