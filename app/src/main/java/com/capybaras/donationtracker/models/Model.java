@@ -54,6 +54,9 @@ public class Model extends Application{
         userList.add(user);
         users.put(username, user);
 
+        DataManagementFacade dmf = DataManagementFacade.getInstance();
+        File file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
+        dmf.saveUserText(file);
     }
 
     public boolean isUser(String username){
@@ -95,6 +98,10 @@ public class Model extends Application{
     public void addUser(User newUser) {
         userList.add(newUser);
         users.put(newUser.getUsername(), newUser);
+
+        DataManagementFacade dmf = DataManagementFacade.getInstance();
+        File file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
+        dmf.saveUserText(file);
     }
 
     public Location getLocationByKey(int key) {

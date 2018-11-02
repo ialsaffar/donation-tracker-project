@@ -6,6 +6,7 @@ import android.util.Log;
 import com.capybaras.donationtracker.R;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -81,6 +82,11 @@ public class LocationList {
             e.printStackTrace();
         }
     }
+
+    //Infrastructure for persistance of Locations exists
+    //DataManagementFacade dmf = DataManagementFacade.getInstance();
+    //File file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
+    //dmf.saveUserText(file);
 
     public List<Location> getLocations() {
         return locations;

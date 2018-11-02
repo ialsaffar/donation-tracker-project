@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         File file;
 
         file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
-        dmf.loadText(file);
+        dmf.loadItemText(file);
         file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
-        dmf.loadText(file);
+        dmf.loadUserText(file);
         file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
-        dmf.loadText(file);
+        dmf.loadLocationText(file);
     }
 
     private Activity getActivity(){

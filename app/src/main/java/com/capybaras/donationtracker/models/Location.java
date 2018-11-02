@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -67,7 +68,13 @@ public class Location extends Application{
         this.items = items;
     }
 
-    public void addItem(Item item) {}
+    public void addItem(Item item) {
+        items.add(item);
+
+        DataManagementFacade dmf = DataManagementFacade.getInstance();
+        File file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
+        dmf.saveUserText(file);
+    }
 
     public Item getItemById(int id) {
         for (Item i: items) {
