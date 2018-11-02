@@ -220,20 +220,33 @@ public class Location extends Application{
         try {
             String nextLine = reader.readLine();
             String[] tokens = nextLine.split("\t");
-            if ((tokens[1] != null) && (!tokens[1].equals("null"))) {
-                Location.parseEntry(nextLine);
+//            if ((tokens[1] != null) && (!tokens[1].equals("null"))) {
+//                Location.parseEntry(nextLine);
+//
+//                String countStr = reader.readLine();
+//                assert countStr != null;
+//                int count = Integer.parseInt(countStr);
+//
+//                items.clear();
+//
+//                for (int i = 0; i < count; i++) {
+//                    String line = reader.readLine();
+//                    Item item = Item.parseEntry(line, reader.readLine());
+//                    items.add(item);
+//                }
+//            }
+            Location.parseEntry(nextLine);
 
-                String countStr = reader.readLine();
-                assert countStr != null;
-                int count = Integer.parseInt(countStr);
+            String countStr = reader.readLine();
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
 
-                items.clear();
+            items.clear();
 
-                for (int i = 0; i < count; i++) {
-                    String line = reader.readLine();
-                    Item item = Item.parseEntry(line, reader.readLine());
-                    items.add(item);
-                }
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                Item item = Item.parseEntry(line, reader.readLine());
+                items.add(item);
             }
 
             reader.close();
