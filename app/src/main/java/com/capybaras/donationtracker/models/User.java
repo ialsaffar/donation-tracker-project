@@ -1,6 +1,7 @@
 package com.capybaras.donationtracker.models;
 
 
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -108,6 +109,10 @@ public class User {
     @Override
     public int hashCode() {
         return Model.hash(id, username, email, type);
+    }
+
+    public void saveAsText(PrintWriter writer) {
+        writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + location.getPhone());
     }
 
     public static User parseEntry(String line) {
