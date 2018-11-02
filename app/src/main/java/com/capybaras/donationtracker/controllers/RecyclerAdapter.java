@@ -27,19 +27,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private static final String TAG = "RecyclerAdapter";
     private Location location;
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();;
     private List<String> mItemNames = new ArrayList<>();
     //private List<Image> mImages = new ArrayList<>();
     private Context mContext;
 
     public RecyclerAdapter(Context mContext, Location location) {
         this.location = location;
-        this.items = location.getItems();
-        for (Item i : items) {
-            mItemNames.add(i.getName());
-            //mImages.add(i.getImage());
-        }
         this.mContext = mContext;
+        if (location == null) {
+            this.items = Location.getItems();
+            for (Item i : items) {
+                mItemNames.add(i.getName());
+                //mImages.add(i.getImage());
+            }
+        } else {
+            List<Item> itemList = Location.getItems();
+            for (Item i : itemList) {
+                if (i.getLocation() == location) {
+                    mItemNames.add(i.getName());
+                    items.add(i);
+                    //mImages.add(i.getImage());
+                }
+            }
+        }
     }
 
     @NonNull

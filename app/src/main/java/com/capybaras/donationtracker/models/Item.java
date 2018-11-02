@@ -1,5 +1,7 @@
 package com.capybaras.donationtracker.models;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.FieldPosition;
@@ -29,7 +31,7 @@ public class Item {
         this(++numberOfItems,
                 name,
                 new Date(),
-                location.getPhone(),
+                location,
                 Model.getInstance().getLoggedInUser().getUsername(),
                 "-",
                 null,
@@ -40,7 +42,7 @@ public class Item {
     public Item(int id,
                 String name,
                 Date timeStamp,
-                String locationNumber,
+                Location location,
                 String creator,
                 String shortDescription,
                 String fullDescription,
@@ -54,15 +56,7 @@ public class Item {
         this.fullDescription = fullDescription;
         this.cents = cents;
         this.category = category;
-
-        LocationList locationList = new LocationList();
-        List<Location> listOfLocations = locationList.getLocations();
-        for (int i = 0; i < listOfLocations.size(); i++) {
-            if (locationNumber.equals(listOfLocations.get(i).getPhone())) {
-                this.location = listOfLocations.get(i);
-                i = listOfLocations.size();
-            }
-        }
+        this.location = location;
     }
 
     public static int getNumberOfItems() {
@@ -147,18 +141,19 @@ public class Item {
 
     public void saveAsText (PrintWriter writer) {
         String dateFormatted = "" + timeStamp.getMonth() + "/" + timeStamp.getDay() + "/" + timeStamp.getYear() + ", " + timeStamp.getHours() + ":" + timeStamp.getMinutes();
-        writer.println(id + "\t" + name + "\t" + dateFormatted + "\t" + location.getPhone() + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
+        writer.println(id + "\t" + name + "\t" + dateFormatted + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
+        location.saveAsTextSansItems(writer);
     }
 
-    public static Item parseEntry(String line) {
+    public static Item parseEntry(String line, String locLine) {
         assert line != null;
         String[] tokens = line.split("\t");
         ItemCategory currentCategory = ItemCategory.getCurrentCategories().get(0);
-        if (tokens.length == 9) {
+        if (tokens.length == 8) {
             List<ItemCategory> currentCategories = ItemCategory.getCurrentCategories();
             currentCategory = currentCategories.get(0);
             for (int i = 0; i < currentCategories.size(); i++) {
-                if (tokens[8] == currentCategories.get(i).getCategoryName()) {
+                if (tokens[7] == currentCategories.get(i).getCategoryName()) {
                     currentCategory = currentCategories.get(i);
                     i = currentCategories.size();
                 }
@@ -168,15 +163,17 @@ public class Item {
         Item fromFile = null;
 
         try {
-            fromFile = new Item(parseInt(tokens[0]),
-                    tokens[1],
-                    new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[2]),
-                    tokens[3],
-                    tokens[4],
-                    tokens[5],
-                    tokens[6],
-                    parseInt(tokens[7]),
-                    currentCategory);
+            if (locLine != null) {
+                fromFile = new Item(parseInt(tokens[0]),
+                        tokens[1],
+                        new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[2]),
+                        Location.parseEntry(locLine),
+                        tokens[3],
+                        tokens[4],
+                        tokens[5],
+                        parseInt(tokens[6   ]),
+                        currentCategory);
+            }
         } catch (ParseException e){}
 
         numberOfItems++;

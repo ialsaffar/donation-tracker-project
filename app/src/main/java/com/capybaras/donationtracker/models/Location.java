@@ -54,8 +54,7 @@ public class Location extends Application{
                     int zipCode,
                     String type,
                     String phone,
-                    String website,
-                    List<Item> items) {
+                    String website) {
         this.key = key;
         this.name = name;
         this.latitude = latitude;
@@ -67,7 +66,6 @@ public class Location extends Application{
         this.type = type;
         this.phone = phone;
         this.website = website;
-        this.items = items;
     }
 
     public void addItem(Item item) {
@@ -171,12 +169,12 @@ public class Location extends Application{
         this.website = website;
     }
 
-    public List<Item> getItems() {
+    public static List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public static void setItems(List<Item> items) {
+        Location.items = items;
     }
 
     @Override
@@ -190,8 +188,6 @@ public class Location extends Application{
         System.out.println(tokens.length);
         assert tokens.length == 11;
 
-        List<Item> placeHolder = new ArrayList<>();
-
         Location fromFile = new Location(parseInt(tokens[0]),
                 tokens[1],
                 parseDouble(tokens[2]),
@@ -202,8 +198,7 @@ public class Location extends Application{
                 parseInt(tokens[7]),
                 tokens[8],
                 tokens[9],
-                tokens[10],
-                placeHolder);
+                tokens[10]);
 
         return fromFile;
     }
@@ -214,6 +209,10 @@ public class Location extends Application{
         for (int i = 0; i < items.size(); i++) {
             items.get(i).saveAsText(writer);
         }
+    }
+
+    public void saveAsTextSansItems(PrintWriter writer) {
+        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
     }
 
     public void loadFromText(BufferedReader reader) {
@@ -228,7 +227,7 @@ public class Location extends Application{
 
             for (int i = 0; i < count; i++) {
                 String line = reader.readLine();
-                Item item = Item.parseEntry(line);
+                Item item = Item.parseEntry(line, reader.readLine());
                 items.add(item);
             }
 

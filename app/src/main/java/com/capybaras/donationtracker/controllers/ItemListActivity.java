@@ -59,22 +59,28 @@ public class ItemListActivity extends Activity {
         sortByCategory = findViewById(R.id.itemTypeSpinner);
         List<ItemCategory> sortCategoryList = ItemCategory.getCurrentCategories();
         List<String> categoryNames = new ArrayList<>();
-        categoryNames.add("None");
+        categoryNames.add("Item Type");
         for(int i = 0; i < sortCategoryList.size(); i++) {
             categoryNames.add(sortCategoryList.get(i).getCategoryName());
         }
-//        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this,
-//                android.R.layout.simple_spinner_item, categoryNames);
-//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(categoryAdapter);
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, categoryNames);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortByCategory.setAdapter(categoryAdapter);
     }
 
     private void setUpSpinner() {
         spinner = findViewById(R.id.spinner);
-        final List<Location> locationList = Model.getInstance().getLocations();
+        final List<Location> locationList = new ArrayList<>();
+        locationList.add(null);
+        for (int j = 0; j < Model.getInstance().getLocations().size(); j++) {
+            locationList.add(Model.getInstance().getLocations().get(j));
+        }
         List<String> locationNameList = new LinkedList<>();
-        for (Location l: locationList) {
-            locationNameList.add(l.getName());
+        locationNameList.add("All Items");
+        for (int i = 1; i < locationList.size(); i++) {
+            System.out.println(locationList.get(i).getName());
+            locationNameList.add(locationList.get(i).getName());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, locationNameList);
@@ -91,11 +97,13 @@ public class ItemListActivity extends Activity {
                     Log.d(TAG, locationList.get(0).getName());
                 }
                 selectedLocation = locationList.get(position);
-                if (user.getType() == UserTypes.LOCATION_EMPLOYEE
-                        && selectedLocation.equals(user.getLocation())) {
-                    addItemButton.setVisibility(View.VISIBLE);
-                } else {
-                    addItemButton.setVisibility(View.GONE);
+                if (selectedLocation != null) {
+                    if (user.getType() == UserTypes.LOCATION_EMPLOYEE
+                            && selectedLocation.equals(user.getLocation())) {
+                        addItemButton.setVisibility(View.VISIBLE);
+                    } else {
+                        addItemButton.setVisibility(View.GONE);
+                    }
                 }
                 setUpRecycler();
             }
