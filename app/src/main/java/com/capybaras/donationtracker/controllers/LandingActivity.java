@@ -40,6 +40,15 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+        Button mapButton = (Button) findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private Activity getActivity(){

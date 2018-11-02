@@ -66,7 +66,6 @@ public class RegistrationActivity extends AppCompatActivity {
         if (this.allBoxesFilled()) {
             if (this.passwordsMatch()) {
                 //means password and re entered passwords are equal (may continue)
-                //todo add to the database of user info
                 model.addUser(this.nameTextInputPlainText.getText().toString(), this.passwordInputText.getText().toString());
                 finish();
             } else {
