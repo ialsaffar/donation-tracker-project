@@ -15,13 +15,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by mogedi on 10/11/2018.
  */
 
 public class Location extends Application{
 
-    private static final String FILE_NAME = "LocationData.txt";
     private int key;
     private String name;
     private double latitude;
@@ -35,32 +37,33 @@ public class Location extends Application{
     private String website;
     private List<Item> items = new ArrayList<>();
 
-    public Location() {
-//        try {
-//            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
-//            items = (List<Item>) pleaseOpen.readObject();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
+    public Location(int key,
+                    String name,
+                    double latitude,
+                    double longitude,
+                    String streetAddress,
+                    String city,
+                    String state,
+                    int zipCode,
+                    String type,
+                    String phone,
+                    String website,
+                    List<Item> items) {
+        this.key = key;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.type = type;
+        this.phone = phone;
+        this.website = website;
+        this.items = items;
     }
 
-    public void addItem(Item item) {
-        items.add(item);
-//        try {
-//            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-//            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
-//            pleaseWorkOut.writeObject(items);
-//            pleaseWorkOut.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-    }
+    public void addItem(Item item) {}
 
     public Item getItemById(int id) {
         for (Item i: items) {
@@ -170,6 +173,33 @@ public class Location extends Application{
     @Override
     public String toString() {
         return "";
+    }
+
+    public static Location parseEntry(String line) {
+        assert line != null;
+        String[] tokens = line.split("\t");
+        assert tokens.length >= 11;
+
+        List<Item> placeHolder = new ArrayList<>();
+
+        for(int i = 11; i < tokens.length; i++) {
+            placeHolder.add(Item.parseEntry(tokens[i]));
+        }
+
+        Location fromFile = new Location(parseInt(tokens[0]),
+                tokens[1],
+                parseDouble(tokens[2]),
+                parseDouble(tokens[3]),
+                tokens[4],
+                tokens[5],
+                tokens[6],
+                parseInt(tokens[7]),
+                tokens[8],
+                tokens[9],
+                tokens[10],
+                placeHolder);
+
+        return fromFile;
     }
 
 }
