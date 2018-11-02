@@ -91,8 +91,30 @@ public class LocationList {
     }
 
     public void saveAsText (PrintWriter writer) {
+        writer.println(locations.size());
         for (int i = 0; i < locations.size(); i++) {
             locations.get(i).saveAsText(writer);
+        }
+    }
+
+    void loadFromText(BufferedReader reader) {
+        locations.clear();
+        locationMap.clear();
+        try {
+            String countStr = reader.readLine();
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+
+            for (int i = 0; i < count; ++i) {
+                String line = reader.readLine();
+                Location loc = Location.parseEntry(line);
+                locations.add(loc);
+                locationMap.put(loc.getKey(), loc);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
