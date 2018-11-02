@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -177,7 +178,7 @@ public class Location extends Application{
 
     public static Location parseEntry(String line) {
         assert line != null;
-        String[] tokens = line.split("\t");
+        String[] tokens = line.split("\t\t");
         assert tokens.length >= 11;
 
         List<Item> placeHolder = new ArrayList<>();
@@ -200,6 +201,15 @@ public class Location extends Application{
                 placeHolder);
 
         return fromFile;
+    }
+
+    public void saveAsText (PrintWriter writer) {
+        StringBuilder itemsList = new StringBuilder();
+        for (int i = 0; i < items.size(); i++) {
+            Item cI = items.get(i);
+            itemsList.append(" + \t\t + " + cI.getId() + "\t" + cI.getName() + "\t" + cI.getTimeStamp() + "\t" + cI.getLocation().getPhone() + "\t" + cI.getCreator() + "\t" + cI.getShortDescription() + "\t" + cI.getFullDescription() + "\t" + cI.getCents() + "\t" + cI.getCategory().getCategoryName());
+        }
+        writer.println(key + " + \t\t + " + name + " + \t\t + " + latitude + " + \t\t + " + longitude + " + \t\t + " + streetAddress + " + \t\t + " + city + " + \t\t + " + state + " + \t\t + " + zipCode + " + \t\t + " + type + " + \t\t + " + phone + " + \t\t + " + website + " + \t\t + " + itemsList);
     }
 
 }
