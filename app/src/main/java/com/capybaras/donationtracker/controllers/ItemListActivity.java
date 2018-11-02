@@ -56,17 +56,17 @@ public class ItemListActivity extends Activity {
     }
 
     private void setUpSortSpinnerCategory() {
-        sortByCategory = findViewById(R.id.sortSpinnerCategory);
+        sortByCategory = findViewById(R.id.itemTypeSpinner);
         List<ItemCategory> sortCategoryList = ItemCategory.getCurrentCategories();
         List<String> categoryNames = new ArrayList<>();
         categoryNames.add("None");
         for(int i = 0; i < sortCategoryList.size(); i++) {
             categoryNames.add(sortCategoryList.get(i).getCategoryName());
         }
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, categoryNames);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(categoryAdapter);
+//        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_item, categoryNames);
+//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(categoryAdapter);
     }
 
     private void setUpSpinner() {

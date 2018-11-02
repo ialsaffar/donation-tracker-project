@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(Context mContext, Location location) {
         this.location = location;
         this.items = location.getItems();
-        for (Item i: items) {
+        for (Item i : items) {
             mItemNames.add(i.getName());
             //mImages.add(i.getImage());
         }
