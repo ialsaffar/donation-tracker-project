@@ -1,5 +1,6 @@
 package com.capybaras.donationtracker.models;
 
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParseException;
@@ -142,6 +143,10 @@ public class Item {
 
     public void setCategory(ItemCategory category) {
         this.category = category;
+    }
+
+    public void saveAsText (PrintWriter writer) {
+        writer.println(id + "\t" + name + "\t" + timeStamp + "\t" + location.getPhone() + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
     }
 
     public static Item parseEntry(String line) {
