@@ -3,6 +3,7 @@ package com.capybaras.donationtracker.models;
 import android.app.Application;
 import android.content.Context;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -205,13 +206,23 @@ public class Location extends Application{
         return fromFile;
     }
 
-    public void saveAsText (PrintWriter writer) {
+    public void saveAsText(PrintWriter writer) {
         StringBuilder itemsList = new StringBuilder();
         for (int i = 0; i < items.size(); i++) {
             Item cI = items.get(i);
             itemsList.append(" + \t\t + " + cI.getId() + "\t" + cI.getName() + "\t" + cI.getTimeStamp() + "\t" + cI.getLocation().getPhone() + "\t" + cI.getCreator() + "\t" + cI.getShortDescription() + "\t" + cI.getFullDescription() + "\t" + cI.getCents() + "\t" + cI.getCategory().getCategoryName());
         }
         writer.println(key + " + \t\t + " + name + " + \t\t + " + latitude + " + \t\t + " + longitude + " + \t\t + " + streetAddress + " + \t\t + " + city + " + \t\t + " + state + " + \t\t + " + zipCode + " + \t\t + " + type + " + \t\t + " + phone + " + \t\t + " + website + " + \t\t + " + itemsList);
+    }
+
+    public void loadFromText(BufferedReader reader) {
+        items.clear();
+
+        try {
+            Location.parseEntry(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
