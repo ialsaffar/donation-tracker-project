@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class User {
     private static int numberOfUsers;
+
     private int id;
     private String username;
     private String password;
@@ -16,11 +17,21 @@ public class User {
     private Location location;
 
     public User(String username, String password, String email, UserTypes type) {
-        id = ++numberOfUsers;
+        this(++numberOfUsers, username,password,email,type,null);
+    }
+
+    public User(int id,
+                String username,
+                String password,
+                String email,
+                UserTypes type,
+                Location location) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.type = type;
+        this.location = location;
     }
 
     public Location getLocation() {
@@ -95,5 +106,14 @@ public class User {
     @Override
     public int hashCode() {
         return Model.hash(id, username, email, type);
+    }
+
+    public static User parseEntry(String line) {
+        assert line != null;
+        String[] tokens = line.split("\t");
+        assert tokens.length == 5;
+        User fromFile = new User(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
+
+        return fromFile;
     }
 }
