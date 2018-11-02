@@ -125,7 +125,14 @@ public class Model extends Application{
 
             for (int i = 0; i < count; ++i) {
                 String line = reader.readLine();
-                User use = User.parseEntry(line);
+                String[] lines = line.split("\t");
+                String line2 = null;
+                try {
+                    if (lines[5] != null) {
+                        line2 = reader.readLine();
+                    }
+                } catch (NullPointerException e) {}
+                User use = User.parseEntry(line, line2);
                 userList.add(use);
                 users.put(use.getUsername(), use);
             }

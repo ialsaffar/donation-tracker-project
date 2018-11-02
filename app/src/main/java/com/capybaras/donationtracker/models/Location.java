@@ -185,7 +185,6 @@ public class Location extends Application{
     public static Location parseEntry(String line) {
         assert line != null;
         String[] tokens = line.split("\t");
-        System.out.println(tokens.length);
         assert tokens.length == 11;
 
         Location fromFile = new Location(parseInt(tokens[0]),
@@ -216,19 +215,25 @@ public class Location extends Application{
     }
 
     public void loadFromText(BufferedReader reader) {
-        items.clear();
+//        items.clear();
 
         try {
-            Location.parseEntry(reader.readLine());
+            String nextLine = reader.readLine();
+            String[] tokens = nextLine.split("\t");
+            if ((tokens[1] != null) && (!tokens[1].equals("null"))) {
+                Location.parseEntry(nextLine);
 
-            String countStr = reader.readLine();
-            assert countStr != null;
-            int count = Integer.parseInt(countStr);
+                String countStr = reader.readLine();
+                assert countStr != null;
+                int count = Integer.parseInt(countStr);
 
-            for (int i = 0; i < count; i++) {
-                String line = reader.readLine();
-                Item item = Item.parseEntry(line, reader.readLine());
-                items.add(item);
+                items.clear();
+
+                for (int i = 0; i < count; i++) {
+                    String line = reader.readLine();
+                    Item item = Item.parseEntry(line, reader.readLine());
+                    items.add(item);
+                }
             }
 
             reader.close();

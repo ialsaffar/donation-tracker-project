@@ -68,8 +68,8 @@ public class ItemDetailsActivity extends Activity {
         if (getIntent().hasExtra("item_id") && getIntent().hasExtra("location_key")) {
             itemId = Integer.parseInt(getIntent().getStringExtra("item_id"));
             locationKey = Integer.parseInt(getIntent().getStringExtra("location_key"));
-            //Log.d(TAG, "item id: " + getIntent().getStringExtra("item_id"));
-            //Log.d(TAG, "loc key:" + getIntent().getStringExtra("location_key"));
+            Log.d(TAG, "item id: " + getIntent().getStringExtra("item_id"));
+            Log.d(TAG, "loc key:" + getIntent().getStringExtra("location_key"));
         }
     }
 

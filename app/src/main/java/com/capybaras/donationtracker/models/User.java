@@ -113,16 +113,17 @@ public class User {
 
     public void saveAsText(PrintWriter writer) {
         if (type == UserTypes.LOCATION_EMPLOYEE) {
-            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + location.getPhone());
+            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + "Next Line");
+            location.saveAsTextSansItems(writer);
         } else {
             writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
         }
     }
 
-    public static User parseEntry(String line) {
+    public static User parseEntry(String line, String locLine) {
         assert line != null;
         String[] tokens = line.split("\t");
-        if (tokens.length == 5) {
+        if (locLine == null) {
             User fromFile = new User(parseInt(tokens[0]),
                     tokens[1],
                     tokens[2],
@@ -132,25 +133,13 @@ public class User {
 
             return fromFile;
         }
-        assert tokens.length == 6;
-
-        Location currentLocation = null;
-
-        LocationList locationList = new LocationList();
-        List<Location> listOfLocations = locationList.getLocations();
-        for (int i = 0; i < listOfLocations.size(); i++) {
-            if (tokens[5].equals(listOfLocations.get(i).getPhone())) {
-                currentLocation = listOfLocations.get(i);
-                i = listOfLocations.size();
-            }
-        }
 
         User fromFile = new User(parseInt(tokens[0]),
                                  tokens[1],
                                  tokens[2],
                                  tokens[3],
                                  UserTypes.getByName(tokens[4]),
-                                 currentLocation);
+                                 Location.parseEntry(locLine));
 
         return fromFile;
     }
