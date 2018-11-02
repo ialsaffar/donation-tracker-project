@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +26,7 @@ public class Model extends Application{
     private static final String FILE_NAME = "ModelData.txt";
     private static User loggedInUser;
     private static HashMap<String, User> users;
+    private static List<User> userList;
     private LocationList locationList;
     private List<Location> locations;
     private HashMap<Integer, Location> locationMap;
@@ -33,22 +37,13 @@ public class Model extends Application{
 
     public Model() {
         users = new HashMap<>();
+        userList = new ArrayList<>();
         users.put("user", new User("user", "pass", "abc@example.com", UserTypes.ADMIN));
         loggedInUser = null;
         locationList = new LocationList();
         locations = locationList.getLocations();
         locationMap = locationList.getLocationMap();
 
-//        try {
-//            ObjectInputStream pleaseOpen = new ObjectInputStream(new FileInputStream(FILE_NAME));
-//            users = (HashMap<String, User>) pleaseOpen.readObject();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void addUser(String username, String password, String email, UserTypes type){
@@ -56,22 +51,9 @@ public class Model extends Application{
             throw new IllegalArgumentException("username already exists");
         }
         User user = new User(username, password, email, type);
+        userList.add(user);
         users.put(username, user);
 
-//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-//            File pleaseWork = new File(Environment.getExternalStoragePublicDirectory(
-//                    Environment.DIRECTORY_DOCUMENTS), FILE_NAME);
-//        }
-//        try {
-//            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-//            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
-//            pleaseWorkOut.writeObject(users);
-//            pleaseWorkOut.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public boolean isUser(String username){
@@ -110,16 +92,6 @@ public class Model extends Application{
 
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
-//        try {
-//            FileOutputStream pleaseWork = getApplicationContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-//            ObjectOutputStream pleaseWorkOut = new ObjectOutputStream(pleaseWork);
-//            pleaseWorkOut.writeObject(users);
-//            pleaseWorkOut.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public Location getLocationByKey(int key) {
@@ -129,5 +101,34 @@ public class Model extends Application{
             }
         }
         throw new NoSuchElementException("No location with key: " + key);
+    }
+
+    public void saveAsText(PrintWriter writer) {
+        writer.println(userList.size());
+        for (int i = 0; i < userList.size(); i++) {
+            userList.get(i).saveAsText(writer);
+        }
+    }
+
+    public void loadFromText(BufferedReader reader) {
+        userList.clear();
+        users.clear();
+
+        try {
+            String countStr = reader.readLine();
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+
+            for (int i = 0; i < count; ++i) {
+                String line = reader.readLine();
+                User use = User.parseEntry(line);
+                userList.add(use);
+                users.put(use.getUsername(), use);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
