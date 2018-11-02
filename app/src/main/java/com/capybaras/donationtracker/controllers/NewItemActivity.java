@@ -11,11 +11,13 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.DataManagementFacade;
 import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +45,7 @@ public class NewItemActivity extends Activity {
         location = Model.getInstance().getLoggedInUser().getLocation(); // TODO: what if not a location employee?
         guiObjects();
         setUpCancelButton();
-        setUpSubmitButton();
+//        setUpSubmitButton();
         setUpSpinner();
         Log.d(TAG, "Set up done");
     }
@@ -71,32 +73,6 @@ public class NewItemActivity extends Activity {
         });
     }
 
-    private void setUpSubmitButton() {
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!itemNameField.getText().toString().isEmpty()) {
-                    Item item = new Item(itemNameField.getText().toString(), location);
-                    if (!valueField.getText().toString().isEmpty()) {
-                        item.setCents((int) (Double.parseDouble(valueField.getText().toString()) * 100));
-                    } else {
-                        item.setCents(0);
-                    }
-                    item.setCreator(Model.getInstance().getLoggedInUser().getUsername());
-                    item.setTimeStamp(new Date());
-                    item.setFullDescription(fullDescriptionField.getText().toString());
-                    item.setShortDescription(shortDescriptionField.getText().toString());
-                    String cat = categorySpinner.getSelectedItem().toString();
-                    item.setCategory(ItemCategory.getCategoryByName(cat));
-                    location.addItem(item);
-                    finish();
-                } else {
-                    throw new IllegalArgumentException("must fill in name");
-                }
-            }
-        });
-    }
-
     private void guiObjects() {
         cancelButton = findViewById(R.id.new_item_cancel_button);
         submitButton = findViewById(R.id.new_item_submit_button);
@@ -107,4 +83,28 @@ public class NewItemActivity extends Activity {
         categorySpinner = findViewById(R.id.new_item_spinner);
     }
 
+    public void onAddItemPressed(View view) {
+        if (!itemNameField.getText().toString().isEmpty()) {
+            Item item = new Item(itemNameField.getText().toString(), location);
+            if (!valueField.getText().toString().isEmpty()) {
+                item.setCents((int) (Double.parseDouble(valueField.getText().toString()) * 100));
+            } else {
+                item.setCents(0);
+            }
+            item.setCreator(Model.getInstance().getLoggedInUser().getUsername());
+            item.setTimeStamp(new Date());
+            item.setFullDescription(fullDescriptionField.getText().toString());
+            item.setShortDescription(shortDescriptionField.getText().toString());
+            String cat = categorySpinner.getSelectedItem().toString();
+            item.setCategory(ItemCategory.getCategoryByName(cat));
+            location.addItem(item);
+
+            DataManagementFacade dmf = DataManagementFacade.getInstance();
+            File file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
+            dmf.saveItemText(file);
+            finish();
+        } else {
+            throw new IllegalArgumentException("must fill in name");
+        }
+    }
 }

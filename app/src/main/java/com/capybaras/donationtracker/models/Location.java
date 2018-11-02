@@ -3,6 +3,8 @@ package com.capybaras.donationtracker.models;
 import android.app.Application;
 import android.content.Context;
 
+import com.capybaras.donationtracker.controllers.MainActivity;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,10 +72,6 @@ public class Location extends Application{
 
     public void addItem(Item item) {
         items.add(item);
-
-        DataManagementFacade dmf = DataManagementFacade.getInstance();
-        File file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
-        dmf.saveUserText(file);
     }
 
     public Item getItemById(int id) {
@@ -188,14 +186,11 @@ public class Location extends Application{
 
     public static Location parseEntry(String line) {
         assert line != null;
-        String[] tokens = line.split("\t\t");
-        assert tokens.length >= 11;
+        String[] tokens = line.split("\t");
+        System.out.println(tokens.length);
+        assert tokens.length == 11;
 
         List<Item> placeHolder = new ArrayList<>();
-
-        for(int i = 11; i < tokens.length; i++) {
-            placeHolder.add(Item.parseEntry(tokens[i]));
-        }
 
         Location fromFile = new Location(parseInt(tokens[0]),
                 tokens[1],
@@ -214,12 +209,11 @@ public class Location extends Application{
     }
 
     public void saveAsText(PrintWriter writer) {
-        StringBuilder itemsList = new StringBuilder();
+        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
+        writer.println(items.size());
         for (int i = 0; i < items.size(); i++) {
-            Item cI = items.get(i);
-            itemsList.append(" + \t\t + " + cI.getId() + "\t" + cI.getName() + "\t" + cI.getTimeStamp() + "\t" + cI.getLocation().getPhone() + "\t" + cI.getCreator() + "\t" + cI.getShortDescription() + "\t" + cI.getFullDescription() + "\t" + cI.getCents() + "\t" + cI.getCategory().getCategoryName());
+            items.get(i).saveAsText(writer);
         }
-        writer.println(key + " + \t\t + " + name + " + \t\t + " + latitude + " + \t\t + " + longitude + " + \t\t + " + streetAddress + " + \t\t + " + city + " + \t\t + " + state + " + \t\t + " + zipCode + " + \t\t + " + type + " + \t\t + " + phone + " + \t\t + " + website + " + \t\t + " + itemsList);
     }
 
     public void loadFromText(BufferedReader reader) {
@@ -227,6 +221,18 @@ public class Location extends Application{
 
         try {
             Location.parseEntry(reader.readLine());
+
+            String countStr = reader.readLine();
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                Item item = Item.parseEntry(line);
+                items.add(item);
+            }
+
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

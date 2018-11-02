@@ -15,11 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.DataManagementFacade;
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
 import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +104,9 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                     newUser.setLocation(loc);
                 }
                 model.addUser(newUser);
+                DataManagementFacade dmf = DataManagementFacade.getInstance();
+                File file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
+                dmf.saveUserText(file);
                 finish();
             } else {
                 Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)

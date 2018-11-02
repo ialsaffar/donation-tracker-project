@@ -28,7 +28,7 @@ public class Item {
     public Item(String name, Location location) {
         this(++numberOfItems,
                 name,
-                new Date("EEE, MMM dd, yyyy, HH:mm:ss z"),
+                new Date(),
                 location.getPhone(),
                 Model.getInstance().getLoggedInUser().getUsername(),
                 "-",
@@ -146,20 +146,22 @@ public class Item {
     }
 
     public void saveAsText (PrintWriter writer) {
-        writer.println(id + "\t" + name + "\t" + timeStamp + "\t" + location.getPhone() + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
+        String dateFormatted = "" + timeStamp.getMonth() + "/" + timeStamp.getDay() + "/" + timeStamp.getYear() + ", " + timeStamp.getHours() + ":" + timeStamp.getMinutes();
+        writer.println(id + "\t" + name + "\t" + dateFormatted + "\t" + location.getPhone() + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
     }
 
     public static Item parseEntry(String line) {
         assert line != null;
         String[] tokens = line.split("\t");
-        assert tokens.length == 9;
-
-        List<ItemCategory> currentCategories = ItemCategory.getCurrentCategories();
-        ItemCategory currentCategory = currentCategories.get(0);
-        for (int i = 0; i < currentCategories.size(); i++) {
-            if (tokens[8] == currentCategories.get(i).getCategoryName()) {
-                currentCategory = currentCategories.get(i);
-                i = currentCategories.size();
+        ItemCategory currentCategory = ItemCategory.getCurrentCategories().get(0);
+        if (tokens.length == 9) {
+            List<ItemCategory> currentCategories = ItemCategory.getCurrentCategories();
+            currentCategory = currentCategories.get(0);
+            for (int i = 0; i < currentCategories.size(); i++) {
+                if (tokens[8] == currentCategories.get(i).getCategoryName()) {
+                    currentCategory = currentCategories.get(i);
+                    i = currentCategories.size();
+                }
             }
         }
 
@@ -168,7 +170,7 @@ public class Item {
         try {
             fromFile = new Item(parseInt(tokens[0]),
                     tokens[1],
-                    new SimpleDateFormat("EEE, MMM dd, yyyy, HH:mm:ss z").parse(tokens[2]),
+                    new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[2]),
                     tokens[3],
                     tokens[4],
                     tokens[5],

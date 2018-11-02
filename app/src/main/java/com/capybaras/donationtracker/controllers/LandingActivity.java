@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.DataManagementFacade;
+
+import java.io.File;
 
 public class LandingActivity extends AppCompatActivity {
 
@@ -40,6 +43,10 @@ public class LandingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        DataManagementFacade dmf = DataManagementFacade.getInstance();
+        File file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
+        dmf.saveLocationText(file);
     }
 
     private Activity getActivity(){

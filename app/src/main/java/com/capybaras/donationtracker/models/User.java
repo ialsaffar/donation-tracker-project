@@ -112,12 +112,26 @@ public class User {
     }
 
     public void saveAsText(PrintWriter writer) {
-        writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + location.getPhone());
+        if (type == UserTypes.LOCATION_EMPLOYEE) {
+            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + location.getPhone());
+        } else {
+            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
+        }
     }
 
     public static User parseEntry(String line) {
         assert line != null;
         String[] tokens = line.split("\t");
+        if (tokens.length == 5) {
+            User fromFile = new User(parseInt(tokens[0]),
+                    tokens[1],
+                    tokens[2],
+                    tokens[3],
+                    UserTypes.getByName(tokens[4]),
+                    null);
+
+            return fromFile;
+        }
         assert tokens.length == 6;
 
         Location currentLocation = null;

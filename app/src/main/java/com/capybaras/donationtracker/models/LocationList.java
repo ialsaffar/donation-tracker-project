@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.controllers.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -82,11 +83,6 @@ public class LocationList {
             e.printStackTrace();
         }
     }
-
-    //Infrastructure for persistance of Locations exists
-    //DataManagementFacade dmf = DataManagementFacade.getInstance();
-    //File file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
-    //dmf.saveUserText(file);
 
     public List<Location> getLocations() {
         return locations;
