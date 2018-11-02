@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Item;
+import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //private List<Image> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerAdapter(Context mContext, Location location) {
+    public RecyclerAdapter(Context mContext, Location location, ItemCategory category, String itemName) {
         this.location = location;
         this.mContext = mContext;
         if (location == null) {
@@ -48,6 +49,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     mItemNames.add(i.getName());
                     items.add(i);
                     //mImages.add(i.getImage());
+                }
+            }
+        }
+        if (category != null) {
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).getCategory() != category) {
+                    mItemNames.remove(i);
+                    items.remove(i);
+                    //mImages.remove(i);
+                }
+            }
+        }
+        if ((itemName != null) && (itemName != "")) {
+            for (int i = 0; i < mItemNames.size(); i++) {
+                if (!(mItemNames.get(i).equals(itemName))){
+                    mItemNames.remove(i);
+                    items.remove(i);
+                    //mImages.remove(i);
                 }
             }
         }

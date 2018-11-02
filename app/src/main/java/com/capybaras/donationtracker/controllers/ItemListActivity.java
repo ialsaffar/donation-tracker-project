@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
@@ -29,7 +32,10 @@ public class ItemListActivity extends Activity {
     private static final String TAG = "ItemListActivity";
     private Spinner spinner;
     private Spinner sortByCategory;
+    private EditText searchItemName;
+    private ItemCategory selectedCategory;
     private Location selectedLocation;
+    private String itemSearch;
     private RecyclerView recyclerView;
     private Button addItemButton;
     private User user;
@@ -42,6 +48,7 @@ public class ItemListActivity extends Activity {
         setUpSpinner();
         setUpButton();
         setUpSortSpinnerCategory();
+        setUpItemSearch();
     }
 
     @Override
@@ -55,18 +62,61 @@ public class ItemListActivity extends Activity {
         return selectedLocation.getName();
     }
 
+    private void setUpItemSearch() {
+        searchItemName = findViewById(R.id.editText);
+
+        searchItemName.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                itemSearch = s.toString();
+                setUpRecycler();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                itemSearch = s.toString();
+                setUpRecycler();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                itemSearch = s.toString();
+                setUpRecycler();
+            }
+        });
+    }
+
     private void setUpSortSpinnerCategory() {
         sortByCategory = findViewById(R.id.itemTypeSpinner);
-        List<ItemCategory> sortCategoryList = ItemCategory.getCurrentCategories();
+        final List<ItemCategory> sortCategoryList = new ArrayList<>();
+        sortCategoryList.add(null);
+        for (int j = 0; j < ItemCategory.getCurrentCategories().size(); j++) {
+            sortCategoryList.add(ItemCategory.getCurrentCategories().get(j));
+        }
         List<String> categoryNames = new ArrayList<>();
         categoryNames.add("Item Type");
-        for(int i = 0; i < sortCategoryList.size(); i++) {
+        for(int i = 1; i < sortCategoryList.size(); i++) {
             categoryNames.add(sortCategoryList.get(i).getCategoryName());
         }
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, categoryNames);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortByCategory.setAdapter(categoryAdapter);
+
+        sortByCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = sortCategoryList.get(position);
+                setUpRecycler();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                addItemButton.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void setUpSpinner() {
@@ -117,7 +167,7 @@ public class ItemListActivity extends Activity {
 
     private void setUpRecycler() {
         recyclerView = findViewById(R.id.recycler);
-        RecyclerAdapter adapter = new RecyclerAdapter(this, selectedLocation);
+        RecyclerAdapter adapter = new RecyclerAdapter(this, selectedLocation, selectedCategory, itemSearch);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
