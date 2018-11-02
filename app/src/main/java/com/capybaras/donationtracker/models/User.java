@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import static java.lang.Integer.parseInt;
+
 public class User {
     private static int numberOfUsers;
 
@@ -111,8 +113,25 @@ public class User {
     public static User parseEntry(String line) {
         assert line != null;
         String[] tokens = line.split("\t");
-        assert tokens.length == 5;
-        User fromFile = new User(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4]);
+        assert tokens.length == 6;
+
+        Location currentLocation = null;
+
+        LocationList locationList = new LocationList();
+        List<Location> listOfLocations = locationList.getLocations();
+        for (int i = 0; i < listOfLocations.size(); i++) {
+            if (tokens[5].equals(listOfLocations.get(i).getPhone())) {
+                currentLocation = listOfLocations.get(i);
+                i = listOfLocations.size();
+            }
+        }
+
+        User fromFile = new User(parseInt(tokens[0]),
+                                 tokens[1],
+                                 tokens[2],
+                                 tokens[3],
+                                 UserTypes.getByName(tokens[4]),
+                                 currentLocation);
 
         return fromFile;
     }
