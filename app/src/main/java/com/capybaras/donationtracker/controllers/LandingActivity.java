@@ -16,6 +16,7 @@ import com.capybaras.donationtracker.models.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LandingActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class LandingActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         Button mLocationsButton = (Button) findViewById(R.id.locations_button);
         mLocationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +45,7 @@ public class LandingActivity extends AppCompatActivity {
         Button mapButton = (Button) findViewById(R.id.mapButton);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
                 startActivity(intent);
             }
