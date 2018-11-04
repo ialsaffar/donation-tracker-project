@@ -1,19 +1,16 @@
 package com.capybaras.donationtracker.controllers;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.models.Location;
-import com.capybaras.donationtracker.models.LocationList;
-import com.capybaras.donationtracker.models.Model;
+import com.capybaras.donationtracker.models.DataManagementFacade;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +48,18 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+        Button itemButton = findViewById(R.id.item_button);
+        itemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ItemListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        DataManagementFacade dmf = DataManagementFacade.getInstance();
+        File file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
+        dmf.saveLocationText(file);
     }
 
     private Activity getActivity(){

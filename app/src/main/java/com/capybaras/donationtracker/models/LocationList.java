@@ -4,14 +4,18 @@ import android.content.Context;
 import android.util.Log;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.controllers.MainActivity;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -61,6 +65,7 @@ public class LocationList {
                 location.setType(tokens[8]);
                 location.setPhone(tokens[9]);
                 location.setWebsite(tokens[10]);
+                location.setItems(new LinkedList<Item>());
 
                 // Adding object to a class
                 locations.add(location);
@@ -85,5 +90,33 @@ public class LocationList {
 
     public HashMap<Integer, Location> getLocationMap() {
         return locationMap;
+    }
+
+    public void saveAsText (PrintWriter writer) {
+        writer.println(locations.size());
+        for (int i = 0; i < locations.size(); i++) {
+            locations.get(i).saveAsText(writer);
+        }
+    }
+
+    void loadFromText(BufferedReader reader) {
+        locations.clear();
+        locationMap.clear();
+        try {
+            String countStr = reader.readLine();
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+
+            for (int i = 0; i < count; ++i) {
+                String line = reader.readLine();
+                Location loc = Location.parseEntry(line);
+                locations.add(loc);
+                locationMap.put(loc.getKey(), loc);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

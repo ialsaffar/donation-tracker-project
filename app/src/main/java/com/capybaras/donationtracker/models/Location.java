@@ -1,10 +1,33 @@
 package com.capybaras.donationtracker.models;
 
+import android.app.Application;
+import android.content.Context;
+
+import com.capybaras.donationtracker.controllers.MainActivity;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by mogedi on 10/11/2018.
  */
 
-public class Location {
+public class Location extends Application{
 
     private int key;
     private String name;
@@ -17,6 +40,46 @@ public class Location {
     private String type;
     private String phone;
     private String website;
+    private static List<Item> items = new ArrayList<>();
+
+    public Location(){}
+
+    public Location(int key,
+                    String name,
+                    double latitude,
+                    double longitude,
+                    String streetAddress,
+                    String city,
+                    String state,
+                    int zipCode,
+                    String type,
+                    String phone,
+                    String website) {
+        this.key = key;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.type = type;
+        this.phone = phone;
+        this.website = website;
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public Item getItemById(int id) {
+        for (Item i: items) {
+            if (i.getId() == id) {
+                return i;
+            }
+        }
+        throw new NoSuchElementException("No item with ID: " + id + "in location: " + this.name);
+    }
 
     public int getKey() {
         return key;
@@ -106,9 +169,90 @@ public class Location {
         this.website = website;
     }
 
+    public static List<Item> getItems() {
+        return items;
+    }
+
+    public static void setItems(List<Item> items) {
+        Location.items = items;
+    }
+
     @Override
     public String toString() {
         return "";
+    }
+
+    public static Location parseEntry(String line) {
+        assert line != null;
+        String[] tokens = line.split("\t");
+        assert tokens.length == 11;
+
+        Location fromFile = new Location(parseInt(tokens[0]),
+                tokens[1],
+                parseDouble(tokens[2]),
+                parseDouble(tokens[3]),
+                tokens[4],
+                tokens[5],
+                tokens[6],
+                parseInt(tokens[7]),
+                tokens[8],
+                tokens[9],
+                tokens[10]);
+
+        return fromFile;
+    }
+
+    public void saveAsText(PrintWriter writer) {
+        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
+        writer.println(items.size());
+        for (int i = 0; i < items.size(); i++) {
+            items.get(i).saveAsText(writer);
+        }
+    }
+
+    public void saveAsTextSansItems(PrintWriter writer) {
+        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
+    }
+
+    public void loadFromText(BufferedReader reader) {
+//        items.clear();
+
+        try {
+            String nextLine = reader.readLine();
+            String[] tokens = nextLine.split("\t");
+//            if ((tokens[1] != null) && (!tokens[1].equals("null"))) {
+//                Location.parseEntry(nextLine);
+//
+//                String countStr = reader.readLine();
+//                assert countStr != null;
+//                int count = Integer.parseInt(countStr);
+//
+//                items.clear();
+//
+//                for (int i = 0; i < count; i++) {
+//                    String line = reader.readLine();
+//                    Item item = Item.parseEntry(line, reader.readLine());
+//                    items.add(item);
+//                }
+//            }
+            Location.parseEntry(nextLine);
+
+            String countStr = reader.readLine();
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+
+            items.clear();
+
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                Item item = Item.parseEntry(line, reader.readLine());
+                items.add(item);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

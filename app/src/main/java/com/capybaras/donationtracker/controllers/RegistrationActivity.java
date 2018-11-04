@@ -1,10 +1,12 @@
 package com.capybaras.donationtracker.controllers;
 
+import android.app.Dialog;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.DataManagementFacade;
+import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
+import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
 
-public class RegistrationActivity extends AppCompatActivity {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //UI Widgets
     private Button registerButton;
@@ -28,7 +37,10 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText emailInputText;
     private LinearLayout linearLayout;
     private Model model;
+    private Spinner locationSpinner;
 
+    // Log tag
+    private static final String TAG = "RegistrationActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,19 @@ public class RegistrationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.userTypeSpinner.setAdapter(adapter);
         model = Model.getInstance();
+
+        // location spinner
+        locationSpinner = findViewById(R.id.spinner2);
+        List<String> locationNames = new ArrayList<>();
+        for (Location l: model.getLocations()) {
+            locationNames.add(l.getName());
+        }
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationNames);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(adapter2);
+        locationSpinner.setVisibility(View.GONE);
+
+        userTypeSpinner.setOnItemSelectedListener(this);
     }
 
 
@@ -66,7 +91,22 @@ public class RegistrationActivity extends AppCompatActivity {
         if (this.allBoxesFilled()) {
             if (this.passwordsMatch()) {
                 //means password and re entered passwords are equal (may continue)
-                model.addUser(this.nameTextInputPlainText.getText().toString(), this.passwordInputText.getText().toString());
+                //todo add to the database of user info
+
+                User newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                        this.passwordInputText.getText().toString(),
+                        this.emailInputText.toString(),
+                        UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()));
+                if (newUser.getType() == UserTypes.LOCATION_EMPLOYEE) {
+                    Log.d(TAG, "new user is a location employee");
+                    Location loc = model.getLocations().get(locationSpinner.getSelectedItemPosition());
+                    Log.d(TAG, loc.getName());
+                    newUser.setLocation(loc);
+                }
+                model.addUser(newUser);
+                DataManagementFacade dmf = DataManagementFacade.getInstance();
+                File file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
+                dmf.saveUserText(file);
                 finish();
             } else {
                 Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)
@@ -106,4 +146,17 @@ public class RegistrationActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 1) {
+            locationSpinner.setVisibility(View.VISIBLE);
+        } else {
+            locationSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        locationSpinner.setVisibility(View.GONE);
+    }
 }
