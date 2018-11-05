@@ -68,6 +68,11 @@ public class Location extends Application{
         this.website = website;
     }
 
+    public Location(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public void addItem(Item item) {
         items.add(item);
     }
@@ -175,6 +180,10 @@ public class Location extends Application{
 
     public static void setItems(List<Item> items) {
         Location.items = items;
+    }
+
+    public String getDescription() {
+        return getPhone() + "\n" + getWebsite();
     }
 
     @Override
