@@ -8,8 +8,13 @@ import android.widget.Button;
 import android.content.Intent;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.DataManagementFacade;
+import com.capybaras.donationtracker.models.Item;
+import com.capybaras.donationtracker.models.Location;
+import com.capybaras.donationtracker.models.Model;
+import com.capybaras.donationtracker.models.User;
 
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
 //        file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
 //        dmf.loadLocationText(file);
         getFilesDir = getFilesDir().getAbsoluteFile();
+
+        List<Item> items = Location.getItems();
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println(items.get(i).getName());
+            System.out.println("Location: " + items.get(i).getLocation());
+        }
     }
 
     private Activity getActivity(){

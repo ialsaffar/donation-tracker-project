@@ -177,10 +177,10 @@ public class Location extends Application{
         Location.items = items;
     }
 
-    @Override
-    public String toString() {
-        return "";
-    }
+//    @Override
+//    public String toString() {
+//        return "";
+//    }
 
     public static Location parseEntry(String line) {
         assert line != null;
@@ -203,6 +203,7 @@ public class Location extends Application{
     }
 
     public void saveAsText(PrintWriter writer) {
+        writer.println("With");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
         writer.println(items.size());
         for (int i = 0; i < items.size(); i++) {
@@ -211,42 +212,31 @@ public class Location extends Application{
     }
 
     public void saveAsTextSansItems(PrintWriter writer) {
+        writer.println("Without");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
     }
 
     public void loadFromText(BufferedReader reader) {
-//        items.clear();
+        System.out.println("I'm here!");
 
         try {
             String nextLine = reader.readLine();
-            String[] tokens = nextLine.split("\t");
-//            if ((tokens[1] != null) && (!tokens[1].equals("null"))) {
-//                Location.parseEntry(nextLine);
-//
-//                String countStr = reader.readLine();
-//                assert countStr != null;
-//                int count = Integer.parseInt(countStr);
-//
-//                items.clear();
-//
-//                for (int i = 0; i < count; i++) {
-//                    String line = reader.readLine();
-//                    Item item = Item.parseEntry(line, reader.readLine());
-//                    items.add(item);
-//                }
-//            }
-            Location.parseEntry(nextLine);
+            String locLine = reader.readLine();
+            Location.parseEntry(locLine);
 
-            String countStr = reader.readLine();
-            assert countStr != null;
-            int count = Integer.parseInt(countStr);
+            if (nextLine.equals("With")) {
+                String countStr = reader.readLine();
+                assert countStr != null;
+                int count = Integer.parseInt(countStr);
 
-            items.clear();
+                items.clear();
 
-            for (int i = 0; i < count; i++) {
-                String line = reader.readLine();
-                Item item = Item.parseEntry(line, reader.readLine());
-                items.add(item);
+                for (int i = 0; i < count; i++) {
+                    String line = reader.readLine();
+                    reader.readLine();
+                    Item item = Item.parseEntry(line, reader.readLine());
+                    items.add(item);
+                }
             }
 
             reader.close();

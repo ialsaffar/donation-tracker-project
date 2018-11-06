@@ -20,7 +20,15 @@ public class User {
     private Location location;
 
     public User(String username, String password, String email, UserTypes type) {
-        this(++numberOfUsers, username,password,email,type,null);
+        this(username,password,email,type,null);
+    }
+
+    public User(String username,
+                String password,
+                String email,
+                UserTypes type,
+                Location location) {
+        this(++numberOfUsers, username,password,email,type,location);
     }
 
     public User(int id,
@@ -36,7 +44,6 @@ public class User {
         this.type = type;
         this.location = location;
     }
-
     public Location getLocation() {
         return location;
     }
@@ -112,12 +119,8 @@ public class User {
     }
 
     public void saveAsText(PrintWriter writer) {
-        if (type == UserTypes.LOCATION_EMPLOYEE) {
-            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + "Next Line");
-            location.saveAsTextSansItems(writer);
-        } else {
-            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
-        }
+        writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
+        location.saveAsTextSansItems(writer);
     }
 
     public static User parseEntry(String line, String locLine) {

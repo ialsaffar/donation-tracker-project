@@ -43,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     private static final String TAG = "RegistrationActivity";
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
@@ -93,20 +94,33 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                 //means password and re entered passwords are equal (may continue)
                 //todo add to the database of user info
 
-                User newUser = new User(this.nameTextInputPlainText.getText().toString(),
-                        this.passwordInputText.getText().toString(),
-                        this.emailInputText.toString(),
-                        UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()));
-                if (newUser.getType() == UserTypes.LOCATION_EMPLOYEE) {
+                User newUser;
+                if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
+                        == UserTypes.LOCATION_EMPLOYEE) {
                     Log.d(TAG, "new user is a location employee");
                     Location loc = model.getLocations().get(locationSpinner.getSelectedItemPosition());
+                    System.out.println("Location: loc is " + locationSpinner.getSelectedItemPosition());
+                    System.out.println("User Location: " + loc);
                     Log.d(TAG, loc.getName());
-                    newUser.setLocation(loc);
+                    newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                            this.passwordInputText.getText().toString(),
+                            this.emailInputText.toString(),
+                            UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()),
+                            model.getLocations().get(locationSpinner.getSelectedItemPosition()));
+                } else {
+                    System.out.println("Location: null");
+                    newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                            this.passwordInputText.getText().toString(),
+                            this.emailInputText.toString(),
+                            UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()));
                 }
                 model.addUser(newUser);
                 DataManagementFacade dmf = DataManagementFacade.getInstance();
                 File file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
                 dmf.saveUserText(file);
+                System.out.println(newUser.getUsername());
+                System.out.println("Location: " + newUser.getLocation());
+                System.out.println("User Type: " + newUser.getType());
                 finish();
             } else {
                 Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)

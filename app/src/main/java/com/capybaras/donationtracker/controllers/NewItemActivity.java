@@ -102,6 +102,8 @@ public class NewItemActivity extends Activity {
             DataManagementFacade dmf = DataManagementFacade.getInstance();
             File file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
             dmf.saveItemText(file);
+            System.out.println(item.getName());
+            System.out.println("Location: " + item.getLocation());
             finish();
         } else {
             throw new IllegalArgumentException("must fill in name");
