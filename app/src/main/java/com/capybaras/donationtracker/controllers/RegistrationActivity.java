@@ -69,7 +69,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         model = Model.getInstance();
 
         // location spinner
-        locationSpinner = findViewById(R.id.spinner2);
+        locationSpinner = findViewById(R.id.location_spinner);
         List<String> locationNames = new ArrayList<>();
         for (Location l: model.getLocations()) {
             locationNames.add(l.getName());
