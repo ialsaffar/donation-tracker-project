@@ -1,5 +1,6 @@
 package com.capybaras.donationtracker.controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Location;
@@ -45,15 +47,6 @@ public class LocationListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         if (findViewById(R.id.location_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -65,6 +58,15 @@ public class LocationListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.location_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
+        Button mMapButton = (Button) findViewById(R.id.map_button);
+        mMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -138,5 +140,9 @@ public class LocationListActivity extends AppCompatActivity {
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
         }
+    }
+
+    private Activity getActivity(){
+        return this;
     }
 }
