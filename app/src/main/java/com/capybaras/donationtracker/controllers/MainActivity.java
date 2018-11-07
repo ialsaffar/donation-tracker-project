@@ -53,16 +53,6 @@ public class MainActivity extends AppCompatActivity {
 //        file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
 //        dmf.loadLocationText(file);
         getFilesDir = getFilesDir().getAbsoluteFile();
-
-        List<Item> items = Location.getItems();
-        for (int i = 0; i < items.size(); i++) {
-            System.out.println(items.get(i).getName());
-            System.out.println("User Location: " + items.get(i).getLocation());
-        }
-        List<Location> locs = LocationList.getLocations();
-        for (int j = 0; j < locs.size(); j++) {
-            System.out.println(locs.get(j));
-        }
     }
 
     private Activity getActivity(){

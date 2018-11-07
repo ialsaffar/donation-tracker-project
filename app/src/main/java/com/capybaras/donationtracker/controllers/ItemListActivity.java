@@ -156,6 +156,8 @@ public class ItemListActivity extends Activity {
                     } else {
                         addItemButton.setVisibility(View.GONE);
                     }
+                } else {
+                    addItemButton.setVisibility(View.GONE);
                 }
                 setUpRecycler();
             }
