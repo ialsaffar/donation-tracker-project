@@ -137,12 +137,21 @@ public class User {
             return fromFile;
         }
 
+        Location loc = Location.parseEntry(locLine);
+        List<Location> locList = LocationList.getLocations();
+        for (int i = 0; i < locList.size(); i++) {
+            if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
+                loc = locList.get(i);
+                i = locList.size();
+            }
+        }
+
         User fromFile = new User(parseInt(tokens[0]),
                                  tokens[1],
                                  tokens[2],
                                  tokens[3],
                                  UserTypes.getByName(tokens[4]),
-                                 Location.parseEntry(locLine));
+                                 loc);
 
         return fromFile;
     }

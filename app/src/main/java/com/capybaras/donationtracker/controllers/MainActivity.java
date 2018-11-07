@@ -10,6 +10,7 @@ import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.DataManagementFacade;
 import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.Location;
+import com.capybaras.donationtracker.models.LocationList;
 import com.capybaras.donationtracker.models.Model;
 import com.capybaras.donationtracker.models.User;
 
@@ -56,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
         List<Item> items = Location.getItems();
         for (int i = 0; i < items.size(); i++) {
             System.out.println(items.get(i).getName());
-            System.out.println("Location: " + items.get(i).getLocation());
+            System.out.println("User Location: " + items.get(i).getLocation());
+        }
+        List<Location> locs = LocationList.getLocations();
+        for (int j = 0; j < locs.size(); j++) {
+            System.out.println(locs.get(j));
         }
     }
 
