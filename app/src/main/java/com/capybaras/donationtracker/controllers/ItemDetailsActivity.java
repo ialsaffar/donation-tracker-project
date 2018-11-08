@@ -50,10 +50,10 @@ public class ItemDetailsActivity extends Activity {
 
         timestampView = findViewById(R.id.details_date);
         String timestamp = "Timestamp: ";
-        timestamp += item.getTimeStamp().getMonth() + "/";
-        timestamp += item.getTimeStamp().getDay() + "/";
-        timestamp += item.getTimeStamp().getYear() + ", ";
-        timestamp += item.getTimeStamp().getHours() + ":";
+        timestamp += (item.getTimeStamp().getMonth() + 1) + "/";
+        timestamp += item.getTimeStamp().getDate() + "/";
+        timestamp += (item.getTimeStamp().getYear() + 1900) + ", ";
+        timestamp += item.getTimeStamp().getHours() + "-";
         timestamp += item.getTimeStamp().getMinutes();
         timestampView.setText(timestamp);
 
