@@ -18,14 +18,14 @@ public class ModelTest {
 
     @Before
     public void setUp() {
-        model = Model.getInstance();
+        model = new Model();
         user = new User("username", "password", "email", UserTypes.ADMIN);
     }
 
 
     @Test
     public void addUserTest() {
-        User user1 = this.user;
+        User user1 = user;
 
         model.addUser(user1);
 

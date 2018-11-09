@@ -31,8 +31,25 @@ public class Location extends Application{
     private String website;
     private static List<Item> items = new ArrayList<>();
 
+    /**
+     * Default constructor
+     */
     public Location(){}
 
+    /**
+     * Default constructor with params
+     * @param key the key of the location
+     * @param name the name of the location
+     * @param latitude the latitude of location
+     * @param longitude the longitude of the location
+     * @param streetAddress the street address of the location
+     * @param city the city of the location
+     * @param state the state of the location
+     * @param zipCode the zip code of the location
+     * @param type the type of the location
+     * @param phone the phone of the location
+     * @param website the website of the location
+     */
     public Location(int key,
                     String name,
                     double latitude,
@@ -57,10 +74,19 @@ public class Location extends Application{
         this.website = website;
     }
 
+    /**
+     * Adds an item
+     * @param item the specified item
+     */
     public void addItem(Item item) {
         items.add(item);
     }
 
+    /**
+     * Gets the item by the specified ID
+     * @param id the ID of the desired item
+     * @return the item
+     */
     public Item getItemById(int id) {
         for (Item i: items) {
             if (i.getId() == id) {
@@ -70,98 +96,194 @@ public class Location extends Application{
         throw new NoSuchElementException("No item with ID: " + id + "in location: " + this.name);
     }
 
+    /**
+     * Gets the key of the location
+     * @return the key
+     */
     public int getKey() {
         return key;
     }
 
+    /**
+     * Sets the key of the location
+     * @param key the new key
+     */
     public void setKey(int key) {
         this.key = key;
     }
 
+    /**
+     * Gets the name of the location
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the location
+     * @param name the new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the latitude of the location
+     * @return the latitude
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Sets the latitude of the location
+     * @param latitude the new latitude
+     */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * Gets the longitude of the location
+     * @return the longitude
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Sets the longitude of the location
+     * @param longitude the new longitude
+     */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
+    /**
+     * Gets the street address of the location
+     * @return the street address
+     */
     public String getStreetAddress() {
         return streetAddress;
     }
 
+    /**
+     * Sets a new street address for the location
+     * @param streetAddress the new street address
+     */
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
 
+    /**
+     * Gets the city of the location
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets the city of the location
+     * @param city the new city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Gets the state of the location
+     * @return the state
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     * Sets the state of the location
+     * @param state the new state
+     */
     public void setState(String state) {
         this.state = state;
     }
 
+    /**
+     * Gets the zip code of the location
+     * @return the zip code
+     */
     public int getZipCode() {
         return zipCode;
     }
 
+    /**
+     * sets the zip code of the location
+     * @param zipCode the new zip code
+     */
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
 
+    /**
+     * Gets the type of the location
+     * @return the type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Sets the type of the location
+     * @param type the new type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * gets the phone number of the location
+     * @return the phone number
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Sets the phone number of the location
+     * @param phone the new phone number
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * Gets the website of the location
+     * @return the website
+     */
     public String getWebsite() {
         return website;
     }
 
+    /**
+     * sets the website of the location
+     * @param website the new website
+     */
     public void setWebsite(String website) {
         this.website = website;
     }
 
+    /**
+     * Gets the items at the location
+     * @return the list of items
+     */
     public static List<Item> getItems() {
         return items;
     }
 
+    /**
+     * Sets/updates the list of items at the location
+     * @param items the new list of items
+     */
     public static void setItems(List<Item> items) {
         Location.items = items;
     }
@@ -171,6 +293,12 @@ public class Location extends Application{
 //        return "";
 //    }
 
+    /**
+     * Parses through a line and returns the location with
+     * all the information
+     * @param line the line to parse through
+     * @return the Location object
+     */
     public static Location parseEntry(String line) {
         assert line != null;
         String[] tokens = line.split("\t");
@@ -191,6 +319,11 @@ public class Location extends Application{
         return fromFile;
     }
 
+    /**
+     * Saves a location with all its information
+     * as a text
+     * @param writer the print writer
+     */
     public void saveAsText(PrintWriter writer) {
         writer.println("With");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
@@ -200,11 +333,19 @@ public class Location extends Application{
         }
     }
 
+    /**
+     * Saves the Location without items
+     * @param writer the print writer
+     */
     public void saveAsTextSansItems(PrintWriter writer) {
         writer.println("Without");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
     }
 
+    /**
+     * Loads the location from a text
+     * @param reader the reader to take in the info
+     */
     public void loadFromText(BufferedReader reader) {
         System.out.println("I'm here!");
 

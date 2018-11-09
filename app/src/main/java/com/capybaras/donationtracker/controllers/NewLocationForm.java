@@ -9,6 +9,12 @@ import android.widget.EditText;
 
 import com.capybaras.donationtracker.R;
 
+/**
+ * Extra Credit
+ * New Location Form Class
+ * When tapping on the map, taken to this form to
+ * add a new location
+ */
 public class NewLocationForm extends Activity {
 
     private EditText nameLocation;
@@ -33,18 +39,34 @@ public class NewLocationForm extends Activity {
 
     }
 
+    /**
+     * Gets the location's name from what was typed in
+     * @return the Location's name
+     */
     public String getLocationName() {
         return this.nameLocation.getText().toString();
     }
 
+    /**
+     * Gets the location's website from what was typed in
+     * @return the location's website
+     */
     public String getWebsite() {
         return this.website.getText().toString();
     }
 
+    /**
+     * Gets the location's phone number from  what was typed in
+     * @return the location's phone number
+     */
     public String getPhoneNumber() {
         return this.phoneNumber.getText().toString();
     }
 
+    /**
+     * On click listener for the enter button
+     * @param view the view
+     */
     public void onEnterPressed(View view) {
         Intent intent = new Intent();
         intent.putExtra(NAME_CODE, this.getLocationName());
