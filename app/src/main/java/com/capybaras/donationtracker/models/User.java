@@ -145,11 +145,11 @@ public class User {
         }
 
         User fromFile = new User(parseInt(tokens[0]),
-                                 tokens[1],
-                                 tokens[2],
-                                 tokens[3],
-                                 UserTypes.getByName(tokens[4]),
-                                 loc);
+                tokens[1],
+                tokens[2],
+                tokens[3],
+                UserTypes.getByName(tokens[4]),
+                loc);
 
         return fromFile;
     }
