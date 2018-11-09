@@ -24,6 +24,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RegistrationActivity class
+ */
 public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //UI Widgets

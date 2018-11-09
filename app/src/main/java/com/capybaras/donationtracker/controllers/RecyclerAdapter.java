@@ -21,6 +21,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * RecyclerAdapter class
+ */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
@@ -30,6 +33,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //private List<Image> mImages = new ArrayList<>();
     private Context mContext;
 
+    /**
+     * RecyclerAdapter constructor
+     * @param mContext the context
+     * @param location the location
+     * @param category the item category
+     * @param itemName the name of the item
+     */
     public RecyclerAdapter(Context mContext, Location location, ItemCategory category, String itemName) {
         this.location = location;
         this.mContext = mContext;
@@ -94,6 +104,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView textView;
         RelativeLayout relativeLayout;
 
+        /**
+         * ViewHolder constructor
+         * @param itemView the specific view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
