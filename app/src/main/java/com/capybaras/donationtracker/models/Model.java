@@ -25,7 +25,6 @@ import java.util.NoSuchElementException;
 public class Model extends Application{
     /** Singleton instance */
     private static final Model instance = new Model();
-    private static final String FILE_NAME = "ModelData.txt";
     private static User loggedInUser;
     private static HashMap<String, User> users;
     private static List<User> userList;
@@ -125,13 +124,8 @@ public class Model extends Application{
 
             for (int i = 0; i < count; ++i) {
                 String line = reader.readLine();
-                String[] lines = line.split("\t");
-                String line2 = null;
-                try {
-                    if (lines[5] != null) {
-                        line2 = reader.readLine();
-                    }
-                } catch (NullPointerException e) {}
+                reader.readLine();
+                String line2 = reader.readLine();
                 User use = User.parseEntry(line, line2);
                 userList.add(use);
                 users.put(use.getUsername(), use);

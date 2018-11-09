@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        model = Model.getInstance();
+        //reset logged in user
+        Model.getInstance().setLoggedInUser(null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -71,10 +74,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        model = Model.getInstance();
-
-        //reset logged in user
-        Model.getInstance().setLoggedInUser(null);
     }
 
 

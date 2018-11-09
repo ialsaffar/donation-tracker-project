@@ -28,7 +28,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private static final String TAG = "RecyclerAdapter";
     private Location location;
-    private List<Item> items = new ArrayList<>();;
+    private List<Item> items;
     private List<String> mItemNames = new ArrayList<>();
     //private List<Image> mImages = new ArrayList<>();
     private Context mContext;
@@ -36,21 +36,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(Context mContext, Location location, ItemCategory category, String itemName) {
         this.location = location;
         this.mContext = mContext;
-        if (location == null) {
-            this.items = Location.getItems();
-            for (Item i : items) {
-                mItemNames.add(i.getName());
-                //mImages.add(i.getImage());
-            }
-        } else {
-            List<Item> itemList = Location.getItems();
-            for (Item i : itemList) {
-                if (i.getLocation() == location) {
-                    mItemNames.add(i.getName());
-                    items.add(i);
-                    //mImages.add(i.getImage());
-                }
-            }
+        this.items = Location.getItems();
+        for (Item i : items) {
+            mItemNames.add(i.getName());
+            //mImages.add(i.getImage());
         }
         if (category != null) {
             for (int i = 0; i < items.size(); i++) {
@@ -61,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 }
             }
         }
-        if ((itemName != null) && (itemName != "")) {
+        if ((itemName != null) && (!itemName.equals(""))) {
             for (int i = 0; i < mItemNames.size(); i++) {
                 if (!(mItemNames.get(i).equals(itemName))){
                     mItemNames.remove(i);

@@ -162,18 +162,25 @@ public class Item {
 
         Item fromFile = null;
 
-        try {
-            if (locLine != null) {
-                fromFile = new Item(parseInt(tokens[0]),
-                        tokens[1],
-                        new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[2]),
-                        Location.parseEntry(locLine),
-                        tokens[3],
-                        tokens[4],
-                        tokens[5],
-                        parseInt(tokens[6   ]),
-                        currentCategory);
+        Location loc = Location.parseEntry(locLine);
+        List<Location> locList = LocationList.getLocations();
+        for (int i = 0; i < locList.size(); i++) {
+            if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
+                loc = locList.get(i);
+                i = locList.size();
             }
+        }
+
+        try {
+            fromFile = new Item(parseInt(tokens[0]),
+                    tokens[1],
+                    new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[2]),
+                    loc,
+                    tokens[3],
+                    tokens[4],
+                    tokens[5],
+                    parseInt(tokens[6]),
+                    currentCategory);
         } catch (ParseException e){}
 
         numberOfItems++;

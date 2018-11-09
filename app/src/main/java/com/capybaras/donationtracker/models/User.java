@@ -20,7 +20,15 @@ public class User {
     private Location location;
 
     public User(String username, String password, String email, UserTypes type) {
-        this(++numberOfUsers, username,password,email,type,null);
+        this(username,password,email,type,null);
+    }
+
+    public User(String username,
+                String password,
+                String email,
+                UserTypes type,
+                Location location) {
+        this(++numberOfUsers, username,password,email,type,location);
     }
 
     public User(int id,
@@ -36,7 +44,6 @@ public class User {
         this.type = type;
         this.location = location;
     }
-
     public Location getLocation() {
         return location;
     }
@@ -112,11 +119,9 @@ public class User {
     }
 
     public void saveAsText(PrintWriter writer) {
-        if (type == UserTypes.LOCATION_EMPLOYEE) {
-            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps() + "\t" + "Next Line");
+        writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
+        if(location != null) {
             location.saveAsTextSansItems(writer);
-        } else {
-            writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
         }
     }
 
@@ -134,12 +139,21 @@ public class User {
             return fromFile;
         }
 
+        Location loc = Location.parseEntry(locLine);
+        List<Location> locList = LocationList.getLocations();
+        for (int i = 0; i < locList.size(); i++) {
+            if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
+                loc = locList.get(i);
+                i = locList.size();
+            }
+        }
+
         User fromFile = new User(parseInt(tokens[0]),
                                  tokens[1],
                                  tokens[2],
                                  tokens[3],
                                  UserTypes.getByName(tokens[4]),
-                                 Location.parseEntry(locLine));
+                                 loc);
 
         return fromFile;
     }

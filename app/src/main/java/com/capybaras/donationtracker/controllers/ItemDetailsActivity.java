@@ -1,6 +1,5 @@
 package com.capybaras.donationtracker.controllers;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;

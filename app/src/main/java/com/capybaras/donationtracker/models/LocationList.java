@@ -26,67 +26,70 @@ public class LocationList {
     private static LocationList INSTANCE = new LocationList();
     public static LocationList getInstance() { return INSTANCE; }
 
-    private List<Location> locations = new ArrayList<>();
+    private static List<Location> locations = new ArrayList<>();
     private HashMap<Integer, Location> locationMap = new HashMap<>();
 
     public LocationList() {
 
-        // Read the raw csv file
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream("res/raw/locationdata.csv");
+        if (locations.size() == 0) {
 
-        // Reads text from character-input stream, buffering characters for efficient reading
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8"))
-        );
+            // Read the raw csv file
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream("res/raw/locationdata.csv");
 
-        // Initialization
-        String line = "";
+            // Reads text from character-input stream, buffering characters for efficient reading
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(is, Charset.forName("UTF-8"))
+            );
 
-        // Initialization
-        try {
-            // Step over headers
-            reader.readLine();
+            // Initialization
+            String line = "";
 
-            // If buffer is not empty
-            while ((line = reader.readLine()) != null) {
-                Log.d("MyActivity","Lines: " + line);
-                // use comma as separator columns of CSV
-                String[] tokens = line.split(",");
-                // Read the data
-                Location location = new Location();
+            // Initialization
+            try {
+                // Step over headers
+                reader.readLine();
 
-                // Setters
-                location.setKey(Integer.parseInt(tokens[0]));
-                location.setName(tokens[1]);
-                location.setLatitude(Double.parseDouble(tokens[2].trim()));
-                location.setLongitude(Double.parseDouble(tokens[3].trim()));
-                location.setStreetAddress(tokens[4]);
-                location.setCity(tokens[5]);
-                location.setState(tokens[6]);
-                location.setZipCode(Integer.parseInt(tokens[7]));
-                location.setType(tokens[8]);
-                location.setPhone(tokens[9]);
-                location.setWebsite(tokens[10]);
-                location.setItems(new LinkedList<Item>());
+                // If buffer is not empty
+                while ((line = reader.readLine()) != null) {
+                    Log.d("MyActivity", "Lines: " + line);
+                    // use comma as separator columns of CSV
+                    String[] tokens = line.split(",");
+                    // Read the data
+                    Location location = new Location();
 
-                // Adding object to a class
-                locations.add(location);
-                locationMap.put(location.getKey(), location);
+                    // Setters
+                    location.setKey(Integer.parseInt(tokens[0]));
+                    location.setName(tokens[1]);
+                    location.setLatitude(Double.parseDouble(tokens[2].trim()));
+                    location.setLongitude(Double.parseDouble(tokens[3].trim()));
+                    location.setStreetAddress(tokens[4]);
+                    location.setCity(tokens[5]);
+                    location.setState(tokens[6]);
+                    location.setZipCode(Integer.parseInt(tokens[7]));
+                    location.setType(tokens[8]);
+                    location.setPhone(tokens[9]);
+                    location.setWebsite(tokens[10]);
+                    Location.setItems(new LinkedList<Item>());
 
-                // Log the object
-                Log.d("My Activity", "Just created: " + locations);
+                    // Adding object to a class
+                    locations.add(location);
+                    locationMap.put(location.getKey(), location);
+
+                    // Log the object
+                    Log.d("My Activity", "Just created: " + locations);
+                }
+
+            } catch (IOException e) {
+                // Logs error with priority level
+                Log.wtf("MyActivity", "Error reading data file on line" + line, e);
+
+                // Prints throwable details
+                e.printStackTrace();
             }
-
-        } catch (IOException e) {
-            // Logs error with priority level
-            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
-
-            // Prints throwable details
-            e.printStackTrace();
         }
     }
 
-    public List<Location> getLocations() {
+    public static List<Location> getLocations() {
         return locations;
     }
 

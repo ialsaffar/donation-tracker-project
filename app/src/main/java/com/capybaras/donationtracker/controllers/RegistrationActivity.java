@@ -43,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     private static final String TAG = "RegistrationActivity";
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
@@ -68,7 +69,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         model = Model.getInstance();
 
         // location spinner
-        locationSpinner = findViewById(R.id.spinner2);
+        locationSpinner = findViewById(R.id.location_spinner);
         List<String> locationNames = new ArrayList<>();
         for (Location l: model.getLocations()) {
             locationNames.add(l.getName());
@@ -93,15 +94,22 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                 //means password and re entered passwords are equal (may continue)
                 //todo add to the database of user info
 
-                User newUser = new User(this.nameTextInputPlainText.getText().toString(),
-                        this.passwordInputText.getText().toString(),
-                        this.emailInputText.toString(),
-                        UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()));
-                if (newUser.getType() == UserTypes.LOCATION_EMPLOYEE) {
+                User newUser;
+                if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
+                        == UserTypes.LOCATION_EMPLOYEE) {
                     Log.d(TAG, "new user is a location employee");
                     Location loc = model.getLocations().get(locationSpinner.getSelectedItemPosition());
                     Log.d(TAG, loc.getName());
-                    newUser.setLocation(loc);
+                    newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                            this.passwordInputText.getText().toString(),
+                            this.emailInputText.toString(),
+                            UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()),
+                            model.getLocations().get(locationSpinner.getSelectedItemPosition()));
+                } else {
+                    newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                            this.passwordInputText.getText().toString(),
+                            this.emailInputText.toString(),
+                            UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()));
                 }
                 model.addUser(newUser);
                 DataManagementFacade dmf = DataManagementFacade.getInstance();

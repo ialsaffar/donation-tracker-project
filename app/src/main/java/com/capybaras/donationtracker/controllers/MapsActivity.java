@@ -1,31 +1,33 @@
 package com.capybaras.donationtracker.controllers;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.capybaras.donationtracker.models.Location;
-import com.capybaras.donationtracker.models.LocationList;
-import com.capybaras.donationtracker.models.MapDataService;
+import com.capybaras.donationtracker.models.Model;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import com.capybaras.donationtracker.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Model model;
+    //Longitude and Latitue of the default zoom location of the map.
+    //Currently the center of Atlanta.
+    private final LatLng DEFAULT_MAP_POSITION = new LatLng(33.7490, -84.3880);
 
-    private static final int REQUEST_CODE = 1001;
-    private LatLng currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        model = Model.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -47,56 +49,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                currentLocation = latLng;
-
-                Intent intent = new Intent(getApplicationContext(), NewLocationForm.class);
-                startActivityForResult(intent, REQUEST_CODE);
-
-            }
-        });
-
-        //Get the list of locations and add a marker for each
-        LocationList locations = new LocationList();
-
-        for (Location curr : locations.getLocations()) {
-            LatLng newlatlng = new LatLng(curr.getLatitude(), curr.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(newlatlng).title(curr.getName()).snippet(curr.getDescription()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(newlatlng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_MAP_POSITION, 12.0f));
+        for(Location location : model.getLocations()){
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(location.getLatitude(), location.getLongitude()));
+            markerOptions.title(location.getName());
+            markerOptions.snippet(location.getPhone() + "\n" + location.getType());
+            mMap.addMarker(markerOptions);
         }
-
+        //Use a custom layout for the pin data
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    /**
+     * This class implements a custom layout for the pin
+     */
+    class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-        final MapDataService mapDataService = MapDataService.getInstance().getInstance();
+        private final View myContentsView;
 
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (resultCode == Activity.RESULT_OK) {
-                    String nameOfLocation = data.getStringExtra(NewLocationForm.NAME_CODE);
-                    String website = data.getStringExtra(NewLocationForm.WEBSITE_CODE);
-                    String phone = data.getStringExtra(NewLocationForm.PHONE_CODE);
-
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(currentLocation);
-
-                    mapDataService.addMapDataElement(nameOfLocation, website + "\n" + phone, new Location(currentLocation.latitude, currentLocation.longitude));
-
-                    markerOptions.title(mapDataService.getLastElementAdded().getName());
-                    markerOptions.snippet(mapDataService.getLastElementAdded().getDescription());
-
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
-
-                    mMap.addMarker(markerOptions);
-                }
+        /**
+         * Make the adapter
+         */
+        CustomInfoWindowAdapter(){
+            // hook up the custom layout view in res/custom_map_pin_layout.xml
+            myContentsView = getLayoutInflater().inflate(R.layout.custom_map_pin_layout, null);
         }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+            tvTitle.setText(marker.getTitle());
+            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+            tvSnippet.setText(marker.getSnippet());
+
+            return myContentsView;
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
     }
 }

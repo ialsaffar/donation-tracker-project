@@ -54,10 +54,6 @@ public class LandingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        DataManagementFacade dmf = DataManagementFacade.getInstance();
-        File file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
-        dmf.saveLocationText(file);
     }
 
     private Activity getActivity(){

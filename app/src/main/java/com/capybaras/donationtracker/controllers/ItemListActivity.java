@@ -149,12 +149,15 @@ public class ItemListActivity extends Activity {
                 }
                 selectedLocation = locationList.get(position);
                 if (selectedLocation != null) {
+                    System.out.println("User Location: " + user.getLocation().getName());
                     if (user.getType() == UserTypes.LOCATION_EMPLOYEE
                             && selectedLocation.equals(user.getLocation())) {
                         addItemButton.setVisibility(View.VISIBLE);
                     } else {
                         addItemButton.setVisibility(View.GONE);
                     }
+                } else {
+                    addItemButton.setVisibility(View.GONE);
                 }
                 setUpRecycler();
             }
