@@ -120,7 +120,9 @@ public class User {
 
     public void saveAsText(PrintWriter writer) {
         writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
-        location.saveAsTextSansItems(writer);
+        if(location != null) {
+            location.saveAsTextSansItems(writer);
+        }
     }
 
     public static User parseEntry(String line, String locLine) {

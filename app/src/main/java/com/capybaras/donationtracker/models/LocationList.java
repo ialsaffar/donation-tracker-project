@@ -102,7 +102,7 @@ public class LocationList {
         }
     }
 
-    void loadFromText(BufferedReader reader) {
+    public void loadFromText(BufferedReader reader) {
         locations.clear();
         locationMap.clear();
         try {
