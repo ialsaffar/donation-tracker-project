@@ -286,7 +286,10 @@ public class Item {
                     tokens[5],
                     parseInt(tokens[6]),
                     currentCategory);
-        } catch (ParseException e){}
+        } catch (ParseException e){
+            //TODO add a better catch block
+            e.getMessage();
+        }
 
         numberOfItems++;
 

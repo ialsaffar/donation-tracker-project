@@ -61,7 +61,6 @@ public class Model extends Application{
         return locationMap;
     }
 
-
     public void setLoggedInUser(User user) {
         loggedInUser = user;
     }
