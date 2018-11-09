@@ -9,6 +9,9 @@ import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.Model;
 
+/**
+ * ItemDetailsActivity class
+ */
 public class ItemDetailsActivity extends Activity {
 
     private TextView nameView;

@@ -1,8 +1,5 @@
 package com.capybaras.donationtracker.models;
 
-
-import android.provider.ContactsContract;
-
 import java.util.ArrayList;
 import java.util.List;
 

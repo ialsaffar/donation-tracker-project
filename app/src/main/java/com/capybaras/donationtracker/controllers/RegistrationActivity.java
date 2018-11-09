@@ -85,7 +85,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     /**
      * Event handler for the Register button
      *
-     * @param view
+     * @param view the view
      */
     public void onRegisterPressed(View view) {
         if (this.allBoxesFilled()) {
@@ -129,7 +129,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
      * Event handler for the Cancel Button
      *
      * Nothing is saved
-     * @param view
+     * @param view the view
      */
     public void onCancelPressed(View view) {
         Log.d("Donation Tracker App", "Cancel Button Pressed");
