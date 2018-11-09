@@ -18,8 +18,6 @@ import java.util.List;
  */
 
 public class LocationList {
-    private static LocationList INSTANCE = new LocationList();
-    public static LocationList getInstance() { return INSTANCE; }
 
     private static List<Location> locations = new ArrayList<>();
     private HashMap<Integer, Location> locationMap = new HashMap<>();
