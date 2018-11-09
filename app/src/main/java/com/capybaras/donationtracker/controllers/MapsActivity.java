@@ -16,6 +16,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.capybaras.donationtracker.R;
 
+/**
+ * MapsActivity class: Creates a google map with current locations
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     public static final float ZOOM = 12.0f;

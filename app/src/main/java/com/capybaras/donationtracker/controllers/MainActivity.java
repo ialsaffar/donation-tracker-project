@@ -11,6 +11,9 @@ import com.capybaras.donationtracker.models.DataManagementFacade;
 
 import java.io.File;
 
+/**
+ * MainActivity class
+ */
 public class MainActivity extends AppCompatActivity {
 
     File getFilesDir = null;
@@ -53,5 +56,9 @@ public class MainActivity extends AppCompatActivity {
         return this;
     }
 
+    /**
+     * Gets the file Directory
+     * @return the File
+     */
     public  File getFileDirectory() {return getFilesDir; }
 }

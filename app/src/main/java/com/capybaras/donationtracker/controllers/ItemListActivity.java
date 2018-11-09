@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * ItemListActivity
+ */
 public class ItemListActivity extends Activity {
 
     private static final String TAG = "ItemListActivity";
@@ -57,6 +60,10 @@ public class ItemListActivity extends Activity {
 
     }
 
+    /**
+     * Gets the location name
+     * @return the name
+     */
     public String getLocationName() {
         return selectedLocation.getName();
     }
@@ -193,6 +200,10 @@ public class ItemListActivity extends Activity {
         return this;
     }
 
+    /**
+     * Gets the selected location
+     * @return the location
+     */
     public Location getSelectedLocation() {
         return selectedLocation;
     }

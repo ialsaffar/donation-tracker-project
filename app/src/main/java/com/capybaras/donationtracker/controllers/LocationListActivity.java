@@ -99,6 +99,12 @@ public class LocationListActivity extends AppCompatActivity {
             }
         };
 
+        /**
+         * Constructor
+         * @param parent the location list activity
+         * @param locations list of all locations
+         * @param twoPane true if twoPane, false if otherwise
+         */
         public SimpleItemRecyclerViewAdapter(LocationListActivity parent,
                                              List<Location> locations,
                                              boolean twoPane) {

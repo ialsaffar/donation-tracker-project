@@ -9,6 +9,9 @@ import android.widget.Button;
 
 import com.capybaras.donationtracker.R;
 
+/**
+ * LandingActivity class
+ */
 public class LandingActivity extends AppCompatActivity {
 
     @Override
