@@ -182,6 +182,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        public static final int MILLIS = 2000;
         private final String mUsername;
         private final String mPassword;
 
@@ -196,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(MILLIS);
             } catch (InterruptedException e) {
                 return false;
             }

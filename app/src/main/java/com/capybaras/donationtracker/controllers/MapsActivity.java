@@ -18,6 +18,7 @@ import com.capybaras.donationtracker.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    public static final float ZOOM = 12.0f;
     private GoogleMap mMap;
     private Model model;
     //Longitude and Latitude of the default zoom location of the map.
@@ -50,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_MAP_POSITION, 12.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_MAP_POSITION, ZOOM));
         for(Location location : model.getLocations()){
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(location.getLatitude(), location.getLongitude()));

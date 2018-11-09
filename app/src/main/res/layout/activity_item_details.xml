@@ -39,7 +39,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
-        android:text="This is a short discription of the item in question"
+        android:text="This is a short description of the item in question"
         android:textColor="@color/primaryText"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

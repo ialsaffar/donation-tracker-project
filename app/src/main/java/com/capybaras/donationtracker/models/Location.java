@@ -17,6 +17,7 @@ import static java.lang.Integer.parseInt;
 
 public class Location extends Application{
 
+    public static final int TOKENS_LENGTH = 11;
     private int key;
     private String name;
     private double latitude;
@@ -173,7 +174,7 @@ public class Location extends Application{
     public static Location parseEntry(String line) {
         assert line != null;
         String[] tokens = line.split("\t");
-        assert tokens.length == 11;
+        assert tokens.length == TOKENS_LENGTH;
 
         Location fromFile = new Location(parseInt(tokens[0]),
                 tokens[1],

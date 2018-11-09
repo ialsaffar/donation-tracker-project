@@ -24,6 +24,7 @@ public class ItemDetailsActivity extends Activity {
     private int itemId;
     private int locationKey;
     private static final String TAG = "ItemDetailsActivity";
+    private static final double CENTS_IN_DOLLAR = 100.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class ItemDetailsActivity extends Activity {
         categoryView.setText("Category: " + item.getCategory().getCategoryName());
 
         valueView = findViewById(R.id.details_value);
-        valueView.setText("Value: $" + String.format("%.2f", item.getCents()/100.0));
+        valueView.setText("Value: $" + String.format("%.2f", item.getCents()/CENTS_IN_DOLLAR));
 
         timestampView = findViewById(R.id.details_date);
         String timestamp = "Timestamp: ";
