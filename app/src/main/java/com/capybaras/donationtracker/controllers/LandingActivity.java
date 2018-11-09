@@ -7,11 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.capybaras.donationtracker.models.DataManagementFacade;
 import com.capybaras.donationtracker.R;
-
-
-import java.io.File;
 
 public class LandingActivity extends AppCompatActivity {
 
@@ -27,21 +23,11 @@ public class LandingActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         Button mLocationsButton = (Button) findViewById(R.id.locations_button);
         mLocationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LocationListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button mapButton = (Button) findViewById(R.id.mapButton);
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
                 startActivity(intent);
             }
         });
