@@ -8,14 +8,8 @@ import android.widget.Button;
 import android.content.Intent;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.DataManagementFacade;
-import com.capybaras.donationtracker.models.Item;
-import com.capybaras.donationtracker.models.Location;
-import com.capybaras.donationtracker.models.LocationList;
-import com.capybaras.donationtracker.models.Model;
-import com.capybaras.donationtracker.models.User;
 
 import java.io.File;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -2,11 +2,7 @@ package com.capybaras.donationtracker.models;
 
 
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
-
 import static java.lang.Integer.parseInt;
 
 public class User {

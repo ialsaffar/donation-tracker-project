@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;

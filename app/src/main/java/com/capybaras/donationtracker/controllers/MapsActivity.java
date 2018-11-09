@@ -20,7 +20,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private Model model;
-    //Longitude and Latitue of the default zoom location of the map.
+    //Longitude and Latitude of the default zoom location of the map.
     //Currently the center of Atlanta.
     private final LatLng DEFAULT_MAP_POSITION = new LatLng(33.7490, -84.3880);
 

@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.DataManagementFacade;
