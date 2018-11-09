@@ -137,10 +137,10 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     }
 
     private boolean allBoxesFilled() {
-       return !(this.nameTextInputPlainText.getText().toString().isEmpty()
-       || this.emailInputText.getText().toString().isEmpty()
-       || this.passwordInputText.getText().toString().isEmpty()
-       || this.reenterPasswordInputText.getText().toString().isEmpty());
+        return !(this.nameTextInputPlainText.getText().toString().isEmpty()
+                || this.emailInputText.getText().toString().isEmpty()
+                || this.passwordInputText.getText().toString().isEmpty()
+                || this.reenterPasswordInputText.getText().toString().isEmpty());
     }
 
     private boolean passwordsMatch() {
