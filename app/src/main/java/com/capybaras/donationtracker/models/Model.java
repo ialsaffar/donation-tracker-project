@@ -35,7 +35,7 @@ public class Model extends Application{
     /**
      * Default Constructor for the Model
      */
-    public Model() {
+    private Model() {
         users = new HashMap<>();
         userList = new ArrayList<>();
         users.put("user", new User("user", "pass", "abc@example.com", UserTypes.ADMIN));

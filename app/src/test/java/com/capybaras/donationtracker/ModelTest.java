@@ -1,11 +1,8 @@
 package com.capybaras.donationtracker;
 
-import com.capybaras.donationtracker.models.Location;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
 import com.capybaras.donationtracker.models.Model;
 import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
@@ -18,7 +15,7 @@ public class ModelTest {
 
     @Before
     public void setUp() {
-        model = new Model();
+        model = Model.getInstance();
         user = new User("username", "password", "email", UserTypes.ADMIN);
     }
 
@@ -31,6 +28,11 @@ public class ModelTest {
 
         assertTrue(model.isUser(user1.getUsername()));
 
+
+    }
+
+    @Test
+    public void getLocationByKeyTest() {
 
     }
 

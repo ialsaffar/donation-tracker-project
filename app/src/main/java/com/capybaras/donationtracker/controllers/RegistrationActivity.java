@@ -49,20 +49,20 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        this.linearLayout = findViewById(R.id.linearLayout);
 
-        this.passwordInputText = (EditText) findViewById(R.id.passwordInputText);
-        this.reenterPasswordInputText = (EditText) findViewById(R.id.reenterPasswordInputText);
-        this.nameTextInputPlainText = (EditText) findViewById(R.id.nameTextInputPlainText);
-        this.emailInputText = (EditText) findViewById(R.id.emailInputText);
+        this.passwordInputText = findViewById(R.id.passwordInputText);
+        this.reenterPasswordInputText = findViewById(R.id.reenterPasswordInputText);
+        this.nameTextInputPlainText = findViewById(R.id.nameTextInputPlainText);
+        this.emailInputText = findViewById(R.id.emailInputText);
 
-        this.registerButton = (Button) findViewById(R.id.registerButton);
-        this.cancelButton = (Button) findViewById(R.id.cancelButton);
+        this.registerButton = findViewById(R.id.registerButton);
+        this.cancelButton = findViewById(R.id.cancelButton);
 
-        this.userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
+        this.userTypeSpinner = findViewById(R.id.userTypeSpinner);
 
         //Sets the adapter to display the user types
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());

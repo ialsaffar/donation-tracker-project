@@ -31,11 +31,11 @@ public class NewLocationForm extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_location_form);
 
-        this.nameLocation = (EditText) findViewById(R.id.nameNewLocation);
-        this.website = (EditText) findViewById(R.id.websiteNewLocation);
-        this.phoneNumber = (EditText) findViewById(R.id.phoneNumberNewLocation);
+        this.nameLocation = findViewById(R.id.nameNewLocation);
+        this.website = findViewById(R.id.websiteNewLocation);
+        this.phoneNumber = findViewById(R.id.phoneNumberNewLocation);
 
-        this.enterButton = (Button) findViewById(R.id.enterButton);
+        this.enterButton = findViewById(R.id.enterButton);
 
     }
 
