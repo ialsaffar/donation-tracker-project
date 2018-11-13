@@ -2,7 +2,6 @@ package com.capybaras.donationtracker.controllers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.ItemCategory;
@@ -24,6 +21,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * RecyclerAdapter class
+ */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
@@ -33,6 +33,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //private List<Image> mImages = new ArrayList<>();
     private Context mContext;
 
+    /**
+     * RecyclerAdapter constructor
+     * @param mContext the context
+     * @param location the location
+     * @param category the item category
+     * @param itemName the name of the item
+     */
     public RecyclerAdapter(Context mContext, Location location, ItemCategory category, String itemName) {
         this.location = location;
         this.mContext = mContext;
@@ -97,6 +104,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView textView;
         RelativeLayout relativeLayout;
 
+        /**
+         * ViewHolder constructor
+         * @param itemView the specific view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);

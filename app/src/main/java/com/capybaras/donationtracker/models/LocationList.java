@@ -1,13 +1,8 @@
 package com.capybaras.donationtracker.models;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.controllers.MainActivity;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,9 +22,12 @@ public class LocationList {
     private static List<Location> locations = new ArrayList<>();
     private HashMap<Integer, Location> locationMap = new HashMap<>();
 
+    /**
+     * Location List constructor
+     */
     public LocationList() {
 
-        if (locations.size() == 0) {
+        if (locations.isEmpty()) {
 
             // Read the raw csv file
             InputStream is = this.getClass().getClassLoader().getResourceAsStream("res/raw/locationdata.csv");
@@ -87,14 +85,26 @@ public class LocationList {
         }
     }
 
+    /**
+     * Gets the list of locations
+     * @return the locations
+     */
     public static List<Location> getLocations() {
         return locations;
     }
 
+    /**
+     * Gets the locations map
+     * @return the set of key value pairs for Locations
+     */
     public HashMap<Integer, Location> getLocationMap() {
         return locationMap;
     }
 
+    /**
+     * Saves location's info/list as a file
+     * @param writer the print writer
+     */
     public void saveAsText (PrintWriter writer) {
         writer.println(locations.size());
         for (int i = 0; i < locations.size(); i++) {

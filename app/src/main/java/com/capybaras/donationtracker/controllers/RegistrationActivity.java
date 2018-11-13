@@ -1,6 +1,5 @@
 package com.capybaras.donationtracker.controllers;
 
-import android.app.Dialog;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +24,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RegistrationActivity class
+ */
 public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //UI Widgets
@@ -47,20 +49,20 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        this.linearLayout = findViewById(R.id.linearLayout);
 
-        this.passwordInputText = (EditText) findViewById(R.id.passwordInputText);
-        this.reenterPasswordInputText = (EditText) findViewById(R.id.reenterPasswordInputText);
-        this.nameTextInputPlainText = (EditText) findViewById(R.id.nameTextInputPlainText);
-        this.emailInputText = (EditText) findViewById(R.id.emailInputText);
+        this.passwordInputText = findViewById(R.id.passwordInputText);
+        this.reenterPasswordInputText = findViewById(R.id.reenterPasswordInputText);
+        this.nameTextInputPlainText = findViewById(R.id.nameTextInputPlainText);
+        this.emailInputText = findViewById(R.id.emailInputText);
 
-        this.registerButton = (Button) findViewById(R.id.registerButton);
-        this.cancelButton = (Button) findViewById(R.id.cancelButton);
+        this.registerButton = findViewById(R.id.registerButton);
+        this.cancelButton = findViewById(R.id.cancelButton);
 
-        this.userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
+        this.userTypeSpinner = findViewById(R.id.userTypeSpinner);
 
         //Sets the adapter to display the user types
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
@@ -86,14 +88,12 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     /**
      * Event handler for the Register button
      *
-     * @param view
+     * @param view the view
      */
     public void onRegisterPressed(View view) {
         if (this.allBoxesFilled()) {
             if (this.passwordsMatch()) {
                 //means password and re entered passwords are equal (may continue)
-                //todo add to the database of user info
-
                 User newUser;
                 if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
                         == UserTypes.LOCATION_EMPLOYEE) {
@@ -130,7 +130,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
      * Event handler for the Cancel Button
      *
      * Nothing is saved
-     * @param view
+     * @param view the view
      */
     public void onCancelPressed(View view) {
         Log.d("Donation Tracker App", "Cancel Button Pressed");
@@ -138,10 +138,10 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     }
 
     private boolean allBoxesFilled() {
-       return !(this.nameTextInputPlainText.getText().toString().isEmpty()
-       || this.emailInputText.getText().toString().isEmpty()
-       || this.passwordInputText.getText().toString().isEmpty()
-       || this.reenterPasswordInputText.getText().toString().isEmpty());
+        return !(this.nameTextInputPlainText.getText().toString().isEmpty()
+                || this.emailInputText.getText().toString().isEmpty()
+                || this.passwordInputText.getText().toString().isEmpty()
+                || this.reenterPasswordInputText.getText().toString().isEmpty());
     }
 
     private boolean passwordsMatch() {

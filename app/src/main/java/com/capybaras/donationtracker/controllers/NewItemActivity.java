@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.DataManagementFacade;
@@ -22,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * NewItemActivity class
+ */
 public class NewItemActivity extends Activity {
 
     // GUI Objects:
@@ -83,6 +85,10 @@ public class NewItemActivity extends Activity {
         categorySpinner = findViewById(R.id.new_item_spinner);
     }
 
+    /**
+     * On click listener for the add button
+     * @param view the view
+     */
     public void onAddItemPressed(View view) {
         if (!itemNameField.getText().toString().isEmpty()) {
             Item item = new Item(itemNameField.getText().toString(), location);

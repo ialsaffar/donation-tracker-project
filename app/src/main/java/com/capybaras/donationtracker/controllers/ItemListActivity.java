@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
@@ -27,6 +26,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * ItemListActivity
+ */
 public class ItemListActivity extends Activity {
 
     private static final String TAG = "ItemListActivity";
@@ -58,6 +60,10 @@ public class ItemListActivity extends Activity {
 
     }
 
+    /**
+     * Gets the location name
+     * @return the name
+     */
     public String getLocationName() {
         return selectedLocation.getName();
     }
@@ -142,7 +148,7 @@ public class ItemListActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "Username: " + user.getUsername());
                 if ((Model.getInstance().getLoggedInUser().getType() == UserTypes.LOCATION_EMPLOYEE)
-                    && (Model.getInstance().getLoggedInUser().getLocation() != null)){
+                        && (Model.getInstance().getLoggedInUser().getLocation() != null)){
                     Log.d(TAG, Model.getInstance().getLoggedInUser().getLocation().getName());
                 } else {
                     Log.d(TAG, locationList.get(0).getName());
@@ -194,6 +200,10 @@ public class ItemListActivity extends Activity {
         return this;
     }
 
+    /**
+     * Gets the selected location
+     * @return the location
+     */
     public Location getSelectedLocation() {
         return selectedLocation;
     }

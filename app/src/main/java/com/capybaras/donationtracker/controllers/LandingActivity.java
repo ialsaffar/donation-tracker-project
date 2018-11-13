@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.capybaras.donationtracker.R;
-import com.capybaras.donationtracker.models.DataManagementFacade;
 
-import java.io.File;
-
+/**
+ * LandingActivity class
+ */
 public class LandingActivity extends AppCompatActivity {
 
     @Override
@@ -19,14 +19,14 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        Button mSignInButton = (Button) findViewById(R.id.sign_out_button);
+        Button mSignInButton = findViewById(R.id.sign_out_button);
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        Button mLocationsButton = (Button) findViewById(R.id.locations_button);
+        Button mLocationsButton = findViewById(R.id.locations_button);
         mLocationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

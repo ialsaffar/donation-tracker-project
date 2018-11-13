@@ -16,11 +16,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.capybaras.donationtracker.R;
 
+/**
+ * MapsActivity class: Creates a google map with current locations
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    public static final float ZOOM = 12.0f;
     private GoogleMap mMap;
     private Model model;
-    //Longitude and Latitue of the default zoom location of the map.
+    //Longitude and Latitude of the default zoom location of the map.
     //Currently the center of Atlanta.
     private final LatLng DEFAULT_MAP_POSITION = new LatLng(33.7490, -84.3880);
 
@@ -50,7 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_MAP_POSITION, 12.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_MAP_POSITION, ZOOM));
         for(Location location : model.getLocations()){
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(location.getLatitude(), location.getLongitude()));
@@ -80,9 +84,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public View getInfoContents(Marker marker) {
 
-            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+            TextView tvTitle = (myContentsView.findViewById(R.id.title));
             tvTitle.setText(marker.getTitle());
-            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+            TextView tvSnippet = (myContentsView.findViewById(R.id.snippet));
             tvSnippet.setText(marker.getSnippet());
 
             return myContentsView;
@@ -90,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         public View getInfoWindow(Marker marker) {
-            // TODO Auto-generated method stub
+            //Auto-generated method stub
             return null;
         }
 

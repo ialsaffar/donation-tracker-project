@@ -8,15 +8,12 @@ import android.widget.Button;
 import android.content.Intent;
 import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.DataManagementFacade;
-import com.capybaras.donationtracker.models.Item;
-import com.capybaras.donationtracker.models.Location;
-import com.capybaras.donationtracker.models.LocationList;
-import com.capybaras.donationtracker.models.Model;
-import com.capybaras.donationtracker.models.User;
 
 import java.io.File;
-import java.util.List;
 
+/**
+ * MainActivity class
+ */
 public class MainActivity extends AppCompatActivity {
 
     File getFilesDir = null;
@@ -26,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button mSignInButton = (Button) findViewById(R.id.sign_in_button);
-        Button mRegisterButton = (Button) findViewById(R.id.register_button);
+        Button mSignInButton = findViewById(R.id.sign_in_button);
+        Button mRegisterButton = findViewById(R.id.register_button);
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,5 +56,9 @@ public class MainActivity extends AppCompatActivity {
         return this;
     }
 
+    /**
+     * Gets the file Directory
+     * @return the File
+     */
     public  File getFileDirectory() {return getFilesDir; }
 }
