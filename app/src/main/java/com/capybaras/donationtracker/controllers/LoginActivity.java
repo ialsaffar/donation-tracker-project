@@ -45,11 +45,14 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        model = Model.getInstance();
+        //reset logged in user
+        Model.getInstance().setLoggedInUser(null);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mUsernameView = (EditText) findViewById(R.id.username);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mUsernameView = findViewById(R.id.username);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -61,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mSignInButton = (Button) findViewById(R.id.sign_in_button);
+        Button mSignInButton = findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        model = Model.getInstance();
     }
 
 
@@ -180,6 +182,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        public static final int MILLIS = 2000;
         private final String mUsername;
         private final String mPassword;
 
@@ -194,11 +197,12 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(MILLIS);
             } catch (InterruptedException e) {
                 return false;
             }
 
+            System.out.println(model.isUser(mUsername) && model.userPasswordMatch(mUsername, mPassword));
             return model.isUser(mUsername) && model.userPasswordMatch(mUsername, mPassword);
         }
 
@@ -208,6 +212,7 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
+                Model.getInstance().setLoggedInUser(Model.getUsers().get(mUsername));
                 finish();
                 Intent intent = new Intent(getActivity(), LandingActivity.class);
                 startActivity(intent);

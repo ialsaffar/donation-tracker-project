@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +14,20 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
+import com.capybaras.donationtracker.models.DataManagementFacade;
+import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
+import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
 
-public class RegistrationActivity extends AppCompatActivity {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * RegistrationActivity class
+ */
+public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //UI Widgets
     private Button registerButton;
@@ -28,46 +39,82 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText emailInputText;
     private LinearLayout linearLayout;
     private Model model;
+    private Spinner locationSpinner;
 
+    // Log tag
+    private static final String TAG = "RegistrationActivity";
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        this.linearLayout = findViewById(R.id.linearLayout);
 
-        this.passwordInputText = (EditText) findViewById(R.id.passwordInputText);
-        this.reenterPasswordInputText = (EditText) findViewById(R.id.reenterPasswordInputText);
-        this.nameTextInputPlainText = (EditText) findViewById(R.id.nameTextInputPlainText);
-        this.emailInputText = (EditText) findViewById(R.id.emailInputText);
+        this.passwordInputText = findViewById(R.id.passwordInputText);
+        this.reenterPasswordInputText = findViewById(R.id.reenterPasswordInputText);
+        this.nameTextInputPlainText = findViewById(R.id.nameTextInputPlainText);
+        this.emailInputText = findViewById(R.id.emailInputText);
 
-        this.registerButton = (Button) findViewById(R.id.registerButton);
-        this.cancelButton = (Button) findViewById(R.id.cancelButton);
+        this.registerButton = findViewById(R.id.registerButton);
+        this.cancelButton = findViewById(R.id.cancelButton);
 
-        this.userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
+        this.userTypeSpinner = findViewById(R.id.userTypeSpinner);
 
         //Sets the adapter to display the user types
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.userTypeSpinner.setAdapter(adapter);
         model = Model.getInstance();
+
+        // location spinner
+        locationSpinner = findViewById(R.id.location_spinner);
+        List<String> locationNames = new ArrayList<>();
+        for (Location l: model.getLocations()) {
+            locationNames.add(l.getName());
+        }
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationNames);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(adapter2);
+        locationSpinner.setVisibility(View.GONE);
+
+        userTypeSpinner.setOnItemSelectedListener(this);
     }
 
 
     /**
      * Event handler for the Register button
      *
-     * @param view
+     * @param view the view
      */
     public void onRegisterPressed(View view) {
         if (this.allBoxesFilled()) {
             if (this.passwordsMatch()) {
                 //means password and re entered passwords are equal (may continue)
-                //todo add to the database of user info
-                model.addUser(this.nameTextInputPlainText.getText().toString(), this.passwordInputText.getText().toString());
+                User newUser;
+                if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
+                        == UserTypes.LOCATION_EMPLOYEE) {
+                    Log.d(TAG, "new user is a location employee");
+                    Location loc = model.getLocations().get(locationSpinner.getSelectedItemPosition());
+                    Log.d(TAG, loc.getName());
+                    newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                            this.passwordInputText.getText().toString(),
+                            this.emailInputText.toString(),
+                            UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()),
+                            model.getLocations().get(locationSpinner.getSelectedItemPosition()));
+                } else {
+                    newUser = new User(this.nameTextInputPlainText.getText().toString(),
+                            this.passwordInputText.getText().toString(),
+                            this.emailInputText.toString(),
+                            UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString()));
+                }
+                model.addUser(newUser);
+                DataManagementFacade dmf = DataManagementFacade.getInstance();
+                File file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
+                dmf.saveUserText(file);
                 finish();
             } else {
                 Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)
@@ -83,7 +130,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * Event handler for the Cancel Button
      *
      * Nothing is saved
-     * @param view
+     * @param view the view
      */
     public void onCancelPressed(View view) {
         Log.d("Donation Tracker App", "Cancel Button Pressed");
@@ -91,10 +138,10 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean allBoxesFilled() {
-       return !(this.nameTextInputPlainText.getText().toString().isEmpty()
-       || this.emailInputText.getText().toString().isEmpty()
-       || this.passwordInputText.getText().toString().isEmpty()
-       || this.reenterPasswordInputText.getText().toString().isEmpty());
+        return !(this.nameTextInputPlainText.getText().toString().isEmpty()
+                || this.emailInputText.getText().toString().isEmpty()
+                || this.passwordInputText.getText().toString().isEmpty()
+                || this.reenterPasswordInputText.getText().toString().isEmpty());
     }
 
     private boolean passwordsMatch() {
@@ -107,4 +154,17 @@ public class RegistrationActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 1) {
+            locationSpinner.setVisibility(View.VISIBLE);
+        } else {
+            locationSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        locationSpinner.setVisibility(View.GONE);
+    }
 }
