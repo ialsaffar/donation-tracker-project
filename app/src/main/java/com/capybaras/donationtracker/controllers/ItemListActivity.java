@@ -147,11 +147,8 @@ public class ItemListActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "Username: " + user.getUsername());
-                if ((Model.getInstance().getLoggedInUser().getType() == UserTypes.LOCATION_EMPLOYEE)
-                        && (Model.getInstance().getLoggedInUser().getLocation() != null)){
+                if (Model.getInstance().getLoggedInUser().getType() == UserTypes.LOCATION_EMPLOYEE){
                     Log.d(TAG, Model.getInstance().getLoggedInUser().getLocation().getName());
-                } else {
-                    Log.d(TAG, locationList.get(0).getName());
                 }
                 selectedLocation = locationList.get(position);
                 if (selectedLocation != null) {

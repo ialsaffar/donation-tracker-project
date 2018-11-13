@@ -225,13 +225,18 @@ public class User {
             return fromFile;
         }
 
+        boolean hasChanged = false;
         Location loc = Location.parseEntry(locLine);
         List<Location> locList = LocationList.getLocations();
         for (int i = 0; i < locList.size(); i++) {
             if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
                 loc = locList.get(i);
                 i = locList.size();
+                hasChanged = true;
             }
+        }
+        if (!hasChanged) {
+            LocationList.addLocation(loc);
         }
 
         User fromFile = new User(parseInt(tokens[0]),
