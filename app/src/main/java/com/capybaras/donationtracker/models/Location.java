@@ -375,4 +375,44 @@ public class Location extends Application{
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+
+        if(o == this) {
+            return true;
+        }
+
+        if( !(o instanceof Location) ) {
+            return false;
+        }
+
+        Location other = (Location) o;
+
+        boolean equality = this.key == other.key
+                && this.name.equals(other.name)
+                && this.latitude == other.latitude
+                && this.longitude == other.longitude
+                && this.streetAddress.equals(other.streetAddress)
+                && this.city.equals(other.city)
+                && this.state.equals(other.state)
+                && this.zipCode == other.zipCode
+                && this.type.equals(other.type)
+                && this.phone.equals(other.phone)
+                && this.website.equals(other.website);
+
+        return equality;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + zipCode;
+        result = 31 * result + streetAddress.hashCode();
+        return result;
+    }
+
 }
