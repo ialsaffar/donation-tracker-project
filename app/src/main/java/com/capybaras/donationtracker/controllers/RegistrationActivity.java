@@ -94,8 +94,6 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         if (this.allBoxesFilled()) {
             if (this.passwordsMatch()) {
                 //means password and re entered passwords are equal (may continue)
-                //todo add to the database of user info
-
                 User newUser;
                 if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
                         == UserTypes.LOCATION_EMPLOYEE) {

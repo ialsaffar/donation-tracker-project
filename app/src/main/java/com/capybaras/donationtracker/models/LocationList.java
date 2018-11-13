@@ -27,7 +27,7 @@ public class LocationList {
      */
     public LocationList() {
 
-        if (locations.size() == 0) {
+        if (locations.isEmpty()) {
 
             // Read the raw csv file
             InputStream is = this.getClass().getClassLoader().getResourceAsStream("res/raw/locationdata.csv");

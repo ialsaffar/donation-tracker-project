@@ -354,7 +354,7 @@ public class Location extends Application{
             String locLine = reader.readLine();
             Location.parseEntry(locLine);
 
-            if (nextLine.equals("With")) {
+            if ("With".equals(nextLine)) {
                 String countStr = reader.readLine();
                 assert countStr != null;
                 int count = Integer.parseInt(countStr);

@@ -33,11 +33,11 @@ public enum UserTypes {
      * @return the User type
      */
     public static UserTypes getByName(String name) {
-        if (name.equals("Administrator")) {
+        if ("Administrator".equals(name)) {
             return ADMIN;
-        } else if (name.equals("Location Employee")) {
+        } else if ("Location Employee".equals(name)) {
             return LOCATION_EMPLOYEE;
-        } else if (name.equals("Manager")) {
+        } else if ("Manager".equals(name)) {
             return MANAGER;
         } else {
             throw new IllegalArgumentException("No such UserType");
