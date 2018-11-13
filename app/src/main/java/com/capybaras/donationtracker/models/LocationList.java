@@ -101,6 +101,10 @@ public class LocationList {
         return locationMap;
     }
 
+    public static void addLocation(Location loc) {
+        locations.add(loc);
+    }
+
     /**
      * Saves location's info/list as a file
      * @param writer the print writer
