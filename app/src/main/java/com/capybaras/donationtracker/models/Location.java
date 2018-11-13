@@ -327,6 +327,7 @@ public class Location extends Application{
     public void saveAsText(PrintWriter writer) {
         writer.println("With");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
+        writer.println(Item.getNumberOfItems());
         writer.println(items.size());
         for (int i = 0; i < items.size(); i++) {
             items.get(i).saveAsText(writer);
@@ -355,6 +356,9 @@ public class Location extends Application{
             Location.parseEntry(locLine);
 
             if ("With".equals(nextLine)) {
+                String numItems = reader.readLine();
+                Item.setNumberOfItems(Integer.parseInt(numItems));
+
                 String countStr = reader.readLine();
                 assert countStr != null;
                 int count = Integer.parseInt(countStr);
