@@ -1,8 +1,6 @@
 package com.capybaras.donationtracker;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.LocationList;
@@ -10,8 +8,19 @@ import com.capybaras.donationtracker.models.Model;
 import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
+/**
+ * Model test: will execute on an Android device.
+ */
+@RunWith(AndroidJUnit4.class)
 public class ModelTest {
     private Model model;
 
@@ -38,10 +47,11 @@ public class ModelTest {
 
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void addUserTestNull() {
         //Checks to make sure that the call to addUser will
         //fail if a null value is passed in (there is no such thing as a null user)
+
         model.addUser(null);
         Assert.fail("Should have thrown an exception");
     }
@@ -50,7 +60,7 @@ public class ModelTest {
     public void addUserParams() {
         //Test for the addUser(username, password, email, userType) works
         //Individually creates each part of a new User
-        String username = "user";
+        String username = "username";
         String password = "pass";
         String email = "email";
         UserTypes userType = UserTypes.ADMIN;
@@ -61,7 +71,7 @@ public class ModelTest {
         assertTrue(model.isUser(username));
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void addUserParamsUsernameNull() {
         //Individual parts to a User (except username)
         String password = "pass";
@@ -74,7 +84,7 @@ public class ModelTest {
         Assert.fail();
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void addUserParamsPasswordNull() {
         //Individual parts to a User (except password)
         String username = "user";
@@ -87,7 +97,7 @@ public class ModelTest {
         Assert.fail();
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void addUserParamsEmailNull() {
         //Individual parts to a User (except email)
         String username = "user";
@@ -100,7 +110,7 @@ public class ModelTest {
         Assert.fail();
     }
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void addUserParamsUserTypeNull() {
         //Individual parts to a User (except userType)
         String username = "user";
@@ -129,7 +139,7 @@ public class ModelTest {
 
     }
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void getLocationByKeyTestException() {
         //Creates a new Location
         Location location = new Location(111,"name", 11011,
@@ -146,7 +156,4 @@ public class ModelTest {
         Assert.fail("The previous call should have caused a NoSuchElementException.");
 
     }
-
-
-
 }
