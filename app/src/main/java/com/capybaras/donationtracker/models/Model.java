@@ -66,7 +66,6 @@ public class Model extends Application{
         if (type == null) {
             throw new IllegalArgumentException("The userType cannot be null.");
         }
-
         if (users.containsKey(username)) {
             throw new IllegalArgumentException("username already exists");
         }

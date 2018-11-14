@@ -72,6 +72,29 @@ public class ModelTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
+    public void addUserParamsAlreadyExistingUser() {
+        //Test for the addUser(username, password, email, userType) works
+        //Individually creates each part of a new User
+        String username = "userExists";
+        String password = "pass";
+        String email = "email";
+        UserTypes userType = UserTypes.ADMIN;
+
+        //Adds the new user through each individual part instead of
+        //constructing a new user first
+        model.addUser(username, password, email, userType);
+
+        //Should not add the user because the same username has just
+        //been used in the prior line of code (This means that since the
+        //username is taken by another user, the current user trying to
+        //enter his/her information will be denied and should change
+        //his/her username
+        model.addUser(username, password, email, userType);
+        Assert.fail("Username already exists, should not be added.");
+
+    }
+
+    @Test (expected = IllegalArgumentException.class)
     public void addUserParamsUsernameNull() {
         //Individual parts to a User (except username)
         String password = "pass";
