@@ -60,7 +60,7 @@ public class ModelTest {
     public void addUserParams() {
         //Test for the addUser(username, password, email, userType) works
         //Individually creates each part of a new User
-        String username = "username";
+        String username = "user32";
         String password = "pass";
         String email = "email";
         UserTypes userType = UserTypes.ADMIN;
