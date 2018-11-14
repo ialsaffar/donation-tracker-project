@@ -54,6 +54,19 @@ public class Model extends Application{
      * @param type the user's type
      */
     public void addUser(String username, String password, String email, UserTypes type){
+        if (username == null) {
+            throw new IllegalArgumentException("The username cannot be null.");
+        }
+        if (password == null) {
+            throw new IllegalArgumentException("The password cannot be null.");
+        }
+        if (email == null) {
+            throw new IllegalArgumentException("The email cannot be null.");
+        }
+        if (type == null) {
+            throw new IllegalArgumentException("The userType cannot be null.");
+        }
+
         if (users.containsKey(username)) {
             throw new IllegalArgumentException("username already exists");
         }
@@ -144,6 +157,10 @@ public class Model extends Application{
      * @param newUser the new User
      */
     public void addUser(User newUser) {
+        if (newUser == null) {
+            throw new IllegalArgumentException("The new user cannot be null.");
+        }
+
         userList.add(newUser);
         users.put(newUser.getUsername(), newUser);
     }
