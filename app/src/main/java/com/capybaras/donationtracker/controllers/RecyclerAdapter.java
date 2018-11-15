@@ -100,6 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        @SuppressWarnings("unused")
         final CircleImageView image;
         final TextView textView;
         final RelativeLayout relativeLayout;

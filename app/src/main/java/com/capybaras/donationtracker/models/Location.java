@@ -1,6 +1,5 @@
 package com.capybaras.donationtracker.models;
 
-import android.app.Application;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +14,7 @@ import static java.lang.Integer.parseInt;
  * Created by mogedi on 10/11/2018.
  */
 
-public class Location extends Application{
+public class Location{
 
     private static final int TOKENS_LENGTH = 11;
     private int key;

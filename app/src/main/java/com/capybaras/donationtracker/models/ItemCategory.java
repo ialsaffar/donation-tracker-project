@@ -86,6 +86,7 @@ public class ItemCategory {
      * Gets the category description
      * @return the description
      */
+    @SuppressWarnings("unused")
     public String getCategoryDescription() {
         return categoryDescription;
     }
@@ -94,6 +95,7 @@ public class ItemCategory {
      * Sets the category name
      * @param categoryName the new name
      */
+    @SuppressWarnings("unused")
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
@@ -102,6 +104,7 @@ public class ItemCategory {
      * Sets the category description
      * @param categoryDescription the new description
      */
+    @SuppressWarnings("unused")
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
     }
@@ -110,6 +113,7 @@ public class ItemCategory {
      * Sets the current categories
      * @param currentCategories the new set of current categories
      */
+    @SuppressWarnings("unused")
     public static void setCurrentCategories(List<ItemCategory> currentCategories) {
         ItemCategory.currentCategories = currentCategories;
     }
