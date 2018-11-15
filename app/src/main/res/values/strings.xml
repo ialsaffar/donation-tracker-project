@@ -31,4 +31,5 @@
     <string name="type_item_name_to_search">Type Item Name to Search</string>
     <string name="search_item_names">Search Item Names</string>
     <string name="title_activity_maps">Map</string>
+    <string name="example_item">example item</string>
 </resources>

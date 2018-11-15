@@ -7,7 +7,7 @@
     tools:context=".controllers.ItemDetailsActivity">
 
     <TextView
-        android:id="@+id/details_locatoin"
+        android:id="@+id/details_location"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -30,7 +30,7 @@
         android:textColor="@color/primaryText"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details_locatoin" />
+        app:layout_constraintTop_toBottomOf="@+id/details_location" />
 
     <TextView
         android:id="@+id/details_short_description"
