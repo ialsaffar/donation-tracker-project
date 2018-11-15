@@ -299,7 +299,10 @@ public class Location {
      * @return the Location object
      */
     public static Location parseEntry(String line) {
-        assert line != null;
+//        assert line != null;
+
+        if(line == null) return null;
+
         String[] tokens = line.split("\t");
         if (tokens.length == TOKENS_LENGTH) {
             return new Location(parseInt(tokens[0]),
