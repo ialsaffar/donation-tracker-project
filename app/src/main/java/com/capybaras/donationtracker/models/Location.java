@@ -17,7 +17,7 @@ import static java.lang.Integer.parseInt;
 
 public class Location extends Application{
 
-    public static final int TOKENS_LENGTH = 11;
+    private static final int TOKENS_LENGTH = 11;
     private int key;
     private String name;
     private double latitude;

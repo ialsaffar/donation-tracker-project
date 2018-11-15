@@ -21,7 +21,7 @@ import com.capybaras.donationtracker.R;
  */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    public static final float ZOOM = 12.0f;
+    private static final float ZOOM = 12.0f;
     private GoogleMap mMap;
     private Model model;
     //Longitude and Latitude of the default zoom location of the map.

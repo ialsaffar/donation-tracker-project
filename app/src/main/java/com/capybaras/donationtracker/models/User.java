@@ -11,7 +11,7 @@ import static java.lang.Integer.parseInt;
 public class User {
     private static int numberOfUsers;
 
-    private int id;
+    private final int id;
     private String username;
     private String password;
     private String email;

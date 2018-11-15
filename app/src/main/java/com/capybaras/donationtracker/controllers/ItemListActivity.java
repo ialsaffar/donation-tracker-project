@@ -60,14 +60,6 @@ public class ItemListActivity extends Activity {
 
     }
 
-    /**
-     * Gets the location name
-     * @return the name
-     */
-    public String getLocationName() {
-        return selectedLocation.getName();
-    }
-
     private void setUpItemSearch() {
         searchItemName = findViewById(R.id.editText);
 
@@ -195,14 +187,6 @@ public class ItemListActivity extends Activity {
 
     private Activity getActivity(){
         return this;
-    }
-
-    /**
-     * Gets the selected location
-     * @return the location
-     */
-    public Location getSelectedLocation() {
-        return selectedLocation;
     }
 
 }

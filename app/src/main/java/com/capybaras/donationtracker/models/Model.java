@@ -20,9 +20,8 @@ public class Model extends Application{
     private static User loggedInUser;
     private static HashMap<String, User> users;
     private static List<User> userList;
-    private LocationList locationList;
-    private List<Location> locations;
-    private HashMap<Integer, Location> locationMap;
+    private final List<Location> locations;
+    private final HashMap<Integer, Location> locationMap;
 
     /**
      * Gets the one instance of the model
@@ -40,27 +39,27 @@ public class Model extends Application{
         userList = new ArrayList<>();
         users.put("user", new User("user", "pass", "abc@example.com", UserTypes.ADMIN));
         loggedInUser = null;
-        locationList = new LocationList();
-        locations = locationList.getLocations();
-        locationMap = locationList.getLocationMap();
+        new LocationList();
+        locations = LocationList.getLocations();
+        locationMap = LocationList.getLocationMap();
 
     }
 
-    /**
-     * Adds a User
-     * @param username the user's username
-     * @param password the user's password
-     * @param email the user's email
-     * @param type the user's type
-     */
-    public void addUser(String username, String password, String email, UserTypes type){
-        if (users.containsKey(username)) {
-            throw new IllegalArgumentException("username already exists");
-        }
-        User user = new User(username, password, email, type);
-        userList.add(user);
-        users.put(username, user);
-    }
+//    /**
+//     * Adds a User
+//     * @param username the user's username
+//     * @param password the user's password
+//     * @param email the user's email
+//     * @param type the user's type
+//     */
+//    public void addUser(String username, String password, String email, UserTypes type){
+//        if (users.containsKey(username)) {
+//            throw new IllegalArgumentException("username already exists");
+//        }
+//        User user = new User(username, password, email, type);
+//        userList.add(user);
+//        users.put(username, user);
+//    }
 
     /**
      * Determines if the specified user is already registered
