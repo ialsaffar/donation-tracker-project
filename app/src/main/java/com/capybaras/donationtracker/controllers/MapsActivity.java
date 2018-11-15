@@ -69,7 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /**
      * This class implements a custom layout for the pin
      */
-    class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+    final class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         private final View myContentsView;
 
