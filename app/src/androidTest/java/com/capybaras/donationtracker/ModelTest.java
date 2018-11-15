@@ -1,19 +1,13 @@
 package com.capybaras.donationtracker;
 
 import android.support.test.runner.AndroidJUnit4;
-
-import com.capybaras.donationtracker.models.Location;
-import com.capybaras.donationtracker.models.LocationList;
 import com.capybaras.donationtracker.models.Model;
-import com.capybaras.donationtracker.models.User;
 import com.capybaras.donationtracker.models.UserTypes;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
