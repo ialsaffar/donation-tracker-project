@@ -77,16 +77,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        viewHolder.textView.setText(mItemNames.get(i));
+        viewHolder.textView.setText(mItemNames.get(viewHolder.getAdapterPosition()));
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick clicked" + mItemNames.get(i));
+                Log.d(TAG, "onClick clicked" + mItemNames.get(viewHolder.getAdapterPosition()));
                 Intent intent = new Intent(mContext, ItemDetailsActivity.class);
-                intent.putExtra("item_id", "" + items.get(i).getId());
+                intent.putExtra("item_id", "" + items.get(viewHolder.getAdapterPosition()).getId());
                 intent.putExtra("location_key", "" + location.getKey());
                 mContext.startActivity(intent);
             }

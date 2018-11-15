@@ -1,5 +1,6 @@
 package com.capybaras.donationtracker.controllers;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -76,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         /**
          * Make the adapter
          */
+        @SuppressLint("InflateParams")
         CustomInfoWindowAdapter(){
             // hook up the custom layout view in res/custom_map_pin_layout.xml
             myContentsView = getLayoutInflater().inflate(R.layout.custom_map_pin_layout, null);
