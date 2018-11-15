@@ -22,9 +22,9 @@ public class NewLocationForm extends Activity {
     private EditText phoneNumber;
     private Button enterButton;
 
-    public static final String NAME_CODE = "Code for Location Name";
-    public static final String WEBSITE_CODE = "Code for Website of Location";
-    public static final String PHONE_CODE = "Code for phone number of Location";
+    private static final String NAME_CODE = "Code for Location Name";
+    private static final String WEBSITE_CODE = "Code for Website of Location";
+    private static final String PHONE_CODE = "Code for phone number of Location";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

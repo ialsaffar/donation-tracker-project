@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="somethilng sdkfj sadkjf"
+        android:text="@string/example_item"
         android:layout_toRightOf="@id/image"
         android:textColor="@color/primaryText"
         android:textSize="16sp"

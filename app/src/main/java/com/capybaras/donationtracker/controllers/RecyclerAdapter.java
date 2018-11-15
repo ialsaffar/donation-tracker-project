@@ -27,11 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    private Location location;
-    private List<Item> items;
-    private List<String> mItemNames = new ArrayList<>();
+    private final Location location;
+    private final List<Item> items;
+    private final List<String> mItemNames = new ArrayList<>();
     //private List<Image> mImages = new ArrayList<>();
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * RecyclerAdapter constructor
@@ -98,17 +98,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return mItemNames.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView image;
-        TextView textView;
-        RelativeLayout relativeLayout;
+        final CircleImageView image;
+        final TextView textView;
+        final RelativeLayout relativeLayout;
 
         /**
          * ViewHolder constructor
          * @param itemView the specific view
          */
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             textView = itemView.findViewById(R.id.item_name);

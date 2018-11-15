@@ -60,7 +60,7 @@ public class ItemDetailsActivity extends Activity {
         timestamp += item.getTimeStamp().getMinutes();
         timestampView.setText(timestamp);
 
-        locationView = findViewById(R.id.details_locatoin);
+        locationView = findViewById(R.id.details_location);
         locationView.setText("Location: " + item.getLocation().getName());
 
         employeeView = findViewById(R.id.details_employee);

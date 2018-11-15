@@ -14,16 +14,14 @@ public class DataManagementFacade {
     public final static String USERS_FILE_NAME = "UserData.txt";
     public final static String LOCATIONS_FILE_NAME = "LocationData.txt";
 
-    private Location loc;
-    private Model mod;
-    private LocationList locList;
+    private final Location loc;
+    private final Model mod;
 
-    private static DataManagementFacade instance = new DataManagementFacade();
+    private final static DataManagementFacade instance = new DataManagementFacade();
 
     private DataManagementFacade() {
         loc = new Location();
         mod = Model.getInstance();
-        locList = new LocationList();
     }
 
     /**
@@ -38,15 +36,13 @@ public class DataManagementFacade {
      * @param file the specified file to start loading items from
      * @return true if the item was loaded, false if otherwise
      */
-    public boolean loadItemText(File file) {
+    public void loadItemText(File file) {
         try {
             BufferedReader itemReader = new BufferedReader(new FileReader(file));
             loc.loadFromText(itemReader);
         } catch (FileNotFoundException e) {
-            return false;
+            e.printStackTrace();
         }
-
-        return true;
     }
 
     /**
@@ -54,15 +50,13 @@ public class DataManagementFacade {
      * @param file the file specified to start loading from
      * @return true if the info was loaded, false if otherwise
      */
-    public boolean loadUserText(File file) {
+    public void loadUserText(File file) {
         try {
             BufferedReader userReader = new BufferedReader(new FileReader(file));
             mod.loadFromText(userReader);
         } catch (FileNotFoundException e) {
-            return false;
+            e.printStackTrace();
         }
-
-        return true;
     }
 
     /**
@@ -73,7 +67,7 @@ public class DataManagementFacade {
     public boolean loadLocationText(File file) {
         try {
             BufferedReader locationReader = new BufferedReader(new FileReader(file));
-            locList.loadFromText(locationReader);
+            LocationList.loadFromText(locationReader);
         } catch (FileNotFoundException e) {
             return false;
         }
@@ -86,16 +80,14 @@ public class DataManagementFacade {
      * @param file the file to save all info to
      * @return true if the info was saved, false if otherwise
      */
-    public boolean saveItemText(File file) {
+    public void saveItemText(File file) {
         try {
             PrintWriter pw = new PrintWriter(file);
             loc.saveAsText(pw);
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
     /**
@@ -103,16 +95,14 @@ public class DataManagementFacade {
      * @param file the file to save info to
      * @return true if saved, false if otherwise
      */
-    public boolean saveUserText(File file) {
+    public void saveUserText(File file) {
         try {
             PrintWriter pw = new PrintWriter(file);
             mod.saveAsText(pw);
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
     /**
@@ -123,7 +113,7 @@ public class DataManagementFacade {
     public boolean saveLocationText(File file) {
         try {
             PrintWriter pw = new PrintWriter(file);
-            locList.saveAsText(pw);
+            LocationList.saveAsText(pw);
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

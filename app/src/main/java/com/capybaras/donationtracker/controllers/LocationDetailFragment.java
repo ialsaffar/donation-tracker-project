@@ -19,7 +19,7 @@ import com.capybaras.donationtracker.models.Model;
  * on handsets.
  */
 public class LocationDetailFragment extends Fragment {
-    Model model = Model.getInstance();
+    private final Model model = Model.getInstance();
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
