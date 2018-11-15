@@ -300,7 +300,10 @@ public class Location extends Application{
      * @return the Location object
      */
     public static Location parseEntry(String line) {
-        assert line != null;
+//        assert line != null;
+
+        if(line == null) return null;
+
         String[] tokens = line.split("\t");
         assert tokens.length == TOKENS_LENGTH;
 

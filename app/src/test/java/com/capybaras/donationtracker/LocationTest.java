@@ -55,6 +55,8 @@ public class LocationTest {
         assertEquals("Location2 Parse Test",
                 location2,
                 location2.parseEntry("2\tBOYS & GILRS CLUB W.W. WOOLFOLK\t33.73182\t-84.43971\t1642 RICHLAND RD\tAtlanta\tGA\t30332\tStore\t(404) 555 - 1234\twww.bgc.wool.ga"));
+
+        assertNull(location1.parseEntry(null));
     }
 
     @Test
