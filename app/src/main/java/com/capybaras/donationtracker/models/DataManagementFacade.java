@@ -23,7 +23,6 @@ public class DataManagementFacade {
     private DataManagementFacade() {
         loc = new Location();
         mod = Model.getInstance();
-        locList = new LocationList();
     }
 
     /**
@@ -73,7 +72,7 @@ public class DataManagementFacade {
     public boolean loadLocationText(File file) {
         try {
             BufferedReader locationReader = new BufferedReader(new FileReader(file));
-            locList.loadFromText(locationReader);
+            LocationList.loadFromText(locationReader);
         } catch (FileNotFoundException e) {
             return false;
         }
@@ -123,7 +122,7 @@ public class DataManagementFacade {
     public boolean saveLocationText(File file) {
         try {
             PrintWriter pw = new PrintWriter(file);
-            locList.saveAsText(pw);
+            LocationList.saveAsText(pw);
             pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

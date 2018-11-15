@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         dmf.loadItemText(file);
         file = new File(this.getFilesDir(), DataManagementFacade.USERS_FILE_NAME);
         dmf.loadUserText(file);
-//        file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
-//        dmf.loadLocationText(file);
+        file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
+        dmf.loadLocationText(file);
         getFilesDir = getFilesDir().getAbsoluteFile();
     }
 

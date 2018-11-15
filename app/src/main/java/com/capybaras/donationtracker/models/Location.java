@@ -5,8 +5,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
@@ -29,7 +32,8 @@ public class Location extends Application{
     private String type;
     private String phone;
     private String website;
-    private static List<Item> items = new ArrayList<>();
+    private static Set<Item> items = new HashSet<>();
+    private List<Item> locItems = new ArrayList<>();
 
     /**
      * Default constructor
@@ -80,6 +84,7 @@ public class Location extends Application{
      */
     public void addItem(Item item) {
         items.add(item);
+        locItems.add(item);
     }
 
     /**
@@ -276,7 +281,15 @@ public class Location extends Application{
      * Gets the items at the location
      * @return the list of items
      */
-    public static List<Item> getItems() {
+    public List<Item> getItems() {
+        return locItems;
+    }
+
+    /**
+     * Gets all items at all locations
+     * @return a set of all items at all locations
+     */
+    public static Set<Item> getAllItems() {
         return items;
     }
 
@@ -284,7 +297,15 @@ public class Location extends Application{
      * Sets/updates the list of items at the location
      * @param items the new list of items
      */
-    public static void setItems(List<Item> items) {
+    public void setItems(List<Item> items) {
+          locItems = items;
+    }
+
+    /**
+     * Sets the set of all items at all locations
+     * @param items the new set of all items at all locations
+     */
+    public static void setAllItems(Set<Item> items) {
         Location.items = items;
     }
 
@@ -328,9 +349,9 @@ public class Location extends Application{
         writer.println("With");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
         writer.println(Item.getNumberOfItems());
-        writer.println(items.size());
-        for (int i = 0; i < items.size(); i++) {
-            items.get(i).saveAsText(writer);
+        writer.println(locItems.size());
+        for (Item item: locItems) {
+            item.saveAsText(writer);
         }
     }
 
@@ -363,13 +384,12 @@ public class Location extends Application{
                 assert countStr != null;
                 int count = Integer.parseInt(countStr);
 
-                items.clear();
-
                 for (int i = 0; i < count; i++) {
                     String line = reader.readLine();
                     reader.readLine();
                     Item item = Item.parseEntry(line, reader.readLine());
                     items.add(item);
+                    locItems.add(item);
                 }
             }
 

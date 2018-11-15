@@ -16,8 +16,10 @@ import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,10 +45,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(Context mContext, Location location, ItemCategory category, String itemName) {
         this.location = location;
         this.mContext = mContext;
-        this.items = Location.getItems();
-        for (Item i : items) {
-            mItemNames.add(i.getName());
-            //mImages.add(i.getImage());
+
+        if (location == null) {
+            items = new ArrayList<>();
+            for (Item item: Location.getAllItems()) {
+                items.add(item);
+                mItemNames.add(item.getName());
+            }
+        } else {
+            this.items = location.getItems();
+            for (Item i : items) {
+                mItemNames.add(i.getName());
+                //mImages.add(i.getImage());
+            }
         }
         if (category != null) {
             for (int i = 0; i < items.size(); i++) {

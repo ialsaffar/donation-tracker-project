@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class LocationList {
 
     private static List<Location> locations = new ArrayList<>();
-    private HashMap<Integer, Location> locationMap = new HashMap<>();
+    private static HashMap<Integer, Location> locationMap = new HashMap<>();
 
     /**
      * Location List constructor
@@ -65,7 +66,8 @@ public class LocationList {
                     location.setType(tokens[8]);
                     location.setPhone(tokens[9]);
                     location.setWebsite(tokens[10]);
-                    Location.setItems(new LinkedList<Item>());
+                    location.setItems(new ArrayList<Item>());
+                    Location.setAllItems(new HashSet<Item>());
 
                     // Adding object to a class
                     locations.add(location);
@@ -97,7 +99,7 @@ public class LocationList {
      * Gets the locations map
      * @return the set of key value pairs for Locations
      */
-    public HashMap<Integer, Location> getLocationMap() {
+    public static HashMap<Integer, Location> getLocationMap() {
         return locationMap;
     }
 
@@ -109,14 +111,14 @@ public class LocationList {
      * Saves location's info/list as a file
      * @param writer the print writer
      */
-    public void saveAsText (PrintWriter writer) {
+    public static void saveAsText (PrintWriter writer) {
         writer.println(locations.size());
         for (int i = 0; i < locations.size(); i++) {
             locations.get(i).saveAsText(writer);
         }
     }
 
-    public void loadFromText(BufferedReader reader) {
+    public static void loadFromText(BufferedReader reader) {
         locations.clear();
         locationMap.clear();
         try {
