@@ -1,12 +1,11 @@
 package com.capybaras.donationtracker.models;
 
-import android.annotation.SuppressLint;
-
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
@@ -256,7 +255,6 @@ public class Item {
      * @param locLine location of line
      * @return the Item
      */
-    @SuppressLint("SimpleDateFormat")
     public static Item parseEntry(String line, String locLine) {
         assert line != null;
         String[] tokens = line.split("\t");
@@ -292,7 +290,7 @@ public class Item {
         try {
             fromFile = new Item(parseInt(tokens[1]),
                     tokens[2],
-                    new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[3]),
+                    new SimpleDateFormat("MM/dd/yyyy, hh:mm", Locale.US).parse(tokens[3]),
                     loc,
                     tokens[4],
                     tokens[5],

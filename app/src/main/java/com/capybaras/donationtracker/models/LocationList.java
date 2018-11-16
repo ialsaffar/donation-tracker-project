@@ -108,7 +108,7 @@ public class LocationList {
     /**
      * This method adds a location
      *
-     * @param loc
+     * @param loc the location to be added
      */
     public static void addLocation(Location loc) {
         locations.add(loc);
@@ -128,7 +128,7 @@ public class LocationList {
     /**
      * This method loads from text
      *
-     * @param reader
+     * @param reader the reader from which the data is loaded
      */
     public static void loadFromText(BufferedReader reader) {
         locations.clear();

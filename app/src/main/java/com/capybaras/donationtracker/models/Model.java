@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
@@ -90,7 +91,7 @@ public class Model extends Application{
      * Gets the Locations through key value pairs (location map)
      * @return the location map
      */
-    public HashMap<Integer, Location> getLocationMap() {
+    public Map<Integer, Location> getLocationMap() {
         return locationMap;
     }
 
@@ -114,7 +115,7 @@ public class Model extends Application{
      * Gets all the users
      * @return the users (a map of users)
      */
-    public HashMap<String, User> getUsers() {
+    public Map<String, User> getUsers() {
         return users;
     }
 
