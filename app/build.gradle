@@ -36,4 +36,5 @@ dependencies {
 
     // circle image view
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    testImplementation 'junit:junit:4.12'
 }
