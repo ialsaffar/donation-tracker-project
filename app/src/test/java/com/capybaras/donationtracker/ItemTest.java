@@ -52,7 +52,7 @@ public class ItemTest {
     }
 
     @Test
-    public void 
+    public void
 
     @Test
     public void twoArgConstructorTest() {
