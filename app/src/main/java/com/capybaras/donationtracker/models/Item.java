@@ -305,4 +305,43 @@ public class Item {
 
         return fromFile;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+
+        if(o == this) {
+            return true;
+        }
+
+        if( !(o instanceof Item) ) {
+            return false;
+        }
+
+        Item other = (Item) o;
+
+        return this.id == other.getId()
+                && this.name.equals(other.name)
+                && this.timeStamp.equals(other.getTimeStamp())
+                && this.location.equals(other.getLocation())
+                && this.creator.equals(other.getCreator())
+                && this.shortDescription.equals(other.getShortDescription())
+                && this.fullDescription.equals(other.getFullDescription())
+                && this.cents == other.getCents()
+                && this.category.getCategoryName().equals(other.getCategory().getCategoryName());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + id;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + creator.hashCode();
+        result = 31 * result + shortDescription.hashCode();
+        result = 31 * result + fullDescription.hashCode();
+        result = 31 * result + cents;
+        return result;
+    }
 }
