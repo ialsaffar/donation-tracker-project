@@ -32,13 +32,6 @@ public class LocationDetailFragment extends Fragment {
      */
     private Location mItem;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public LocationDetailFragment() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,16 +61,14 @@ public class LocationDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            StringBuilder details = new StringBuilder();
-            details.append(mItem.getName() + "\n");
-            details.append("[" + mItem.getType() + "]\n\n");
-            details.append(mItem.getPhone() + "\n");
-            details.append(mItem.getWebsite() + "\n\n");
-            details.append(mItem.getStreetAddress() + "\n");
-            details.append(mItem.getCity() + ", " + mItem.getState() + " " +
-                    mItem.getZipCode() + "\n");
-            details.append(mItem.getLatitude() + "°, " + mItem.getLongitude() + "°\n");
-            ((TextView) rootView.findViewById(R.id.location_detail)).setText(details.toString());
+            String details = mItem.getName() + "\n" +
+                    "[" + mItem.getType() + "]\n\n" +
+                    mItem.getPhone() + "\n" +
+                    mItem.getWebsite() + "\n\n" +
+                    mItem.getStreetAddress() + "\n" +
+                    mItem.getCity() + ", " + mItem.getState() + " " + mItem.getZipCode() + "\n" +
+                    mItem.getLatitude() + "°, " + mItem.getLongitude() + "°\n";
+            ((TextView) rootView.findViewById(R.id.location_detail)).setText(details);
         }
 
         return rootView;

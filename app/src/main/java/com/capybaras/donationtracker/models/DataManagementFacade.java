@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 /**
  * DataManagementFacade class: Singleton
  */
-public class DataManagementFacade {
+public final class DataManagementFacade {
     public static final String ITEMS_FILE_NAME = "ItemData.txt";
     public static final String USERS_FILE_NAME = "UserData.txt";
     public static final String LOCATIONS_FILE_NAME = "LocationData.txt";

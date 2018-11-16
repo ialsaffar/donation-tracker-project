@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.capybaras.donationtracker.R;
@@ -20,7 +19,6 @@ public class NewLocationForm extends Activity {
     private EditText nameLocation;
     private EditText website;
     private EditText phoneNumber;
-    private Button enterButton;
 
     private static final String NAME_CODE = "Code for Location Name";
     private static final String WEBSITE_CODE = "Code for Website of Location";
@@ -28,22 +26,20 @@ public class NewLocationForm extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_location_form);
 
         this.nameLocation = findViewById(R.id.nameNewLocation);
         this.website = findViewById(R.id.websiteNewLocation);
         this.phoneNumber = findViewById(R.id.phoneNumberNewLocation);
-
-        this.enterButton = findViewById(R.id.enterButton);
-
     }
 
     /**
      * Gets the location's name from what was typed in
      * @return the Location's name
      */
-    public String getLocationName() {
+    private String getLocationName() {
         return this.nameLocation.getText().toString();
     }
 
@@ -51,7 +47,7 @@ public class NewLocationForm extends Activity {
      * Gets the location's website from what was typed in
      * @return the location's website
      */
-    public String getWebsite() {
+    private String getWebsite() {
         return this.website.getText().toString();
     }
 
@@ -59,7 +55,7 @@ public class NewLocationForm extends Activity {
      * Gets the location's phone number from  what was typed in
      * @return the location's phone number
      */
-    public String getPhoneNumber() {
+    private String getPhoneNumber() {
         return this.phoneNumber.getText().toString();
     }
 

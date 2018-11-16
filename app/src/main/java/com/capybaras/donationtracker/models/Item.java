@@ -16,10 +16,10 @@ import static java.lang.Integer.parseInt;
 public class Item {
     private static int numberOfItems;
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private Date timeStamp;
-    private Location location;
+    private final Location location;
     private String creator;
     private String shortDescription;
     private String fullDescription;
@@ -117,27 +117,11 @@ public class Item {
     }
 
     /**
-     * Sets the ID of the item
-     * @param id the new id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * Gets the name of the item
      * @return the name
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Sets the name of the item
-     * @param name the new name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -162,14 +146,6 @@ public class Item {
      */
     public Location getLocation() {
         return location;
-    }
-
-    /**
-     * Sets the location of the item
-     * @param location the location of the item
-     */
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     /**
@@ -240,6 +216,7 @@ public class Item {
      * Saves the item's information as a text file
      * @param writer the print writer
      */
+    @SuppressWarnings("deprecation")
     public void saveAsText (PrintWriter writer) {
         String dateFormatted = "" + timeStamp.getMonth() + "/" + timeStamp.getDay() + "/" +
                 timeStamp.getYear() + ", " + timeStamp.getHours() + ":" + timeStamp.getMinutes();

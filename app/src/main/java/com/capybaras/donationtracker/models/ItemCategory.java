@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * ItemCategory class
  */
-public class ItemCategory {
-    private static List<ItemCategory> currentCategories = generateCategories();
-    private String categoryName;
-    private String categoryDescription;
+public final class ItemCategory {
+    private static final List<ItemCategory> currentCategories = generateCategories();
+    private final String categoryName;
+    private final String categoryDescription;
 
     private static List<ItemCategory> generateCategories() {
         List<ItemCategory> list = new ArrayList<>();
@@ -51,7 +51,7 @@ public class ItemCategory {
      * @param description the new description of the category
      * @return the new Item Category
      */
-    public static ItemCategory newCategory(String name, String description) {
+    private static ItemCategory newCategory(String name, String description) {
         ItemCategory cat = new ItemCategory(name, description);
         currentCategories.add(cat);
         return cat;
@@ -62,7 +62,7 @@ public class ItemCategory {
      * @param name the name of the new category
      * @return the new Item Category
      */
-    public static ItemCategory newCategory(String name) {
+    private static ItemCategory newCategory(String name) {
         return newCategory(name, "");
     }
 
@@ -82,35 +82,4 @@ public class ItemCategory {
         return categoryName;
     }
 
-    /**
-     * Gets the category description
-     * @return the description
-     */
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    /**
-     * Sets the category name
-     * @param categoryName the new name
-     */
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    /**
-     * Sets the category description
-     * @param categoryDescription the new description
-     */
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
-
-    /**
-     * Sets the current categories
-     * @param currentCategories the new set of current categories
-     */
-    public static void setCurrentCategories(List<ItemCategory> currentCategories) {
-        ItemCategory.currentCategories = currentCategories;
-    }
 }

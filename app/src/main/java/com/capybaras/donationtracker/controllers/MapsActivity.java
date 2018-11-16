@@ -23,7 +23,6 @@ import com.capybaras.donationtracker.R;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final float ZOOM = 12.0f;
-    private GoogleMap mMap;
     private Model model;
     //Longitude and Latitude of the default zoom location of the map.
     //Currently the center of Atlanta.
@@ -55,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        GoogleMap mMap;
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_MAP_POSITION, ZOOM));

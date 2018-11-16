@@ -29,7 +29,6 @@ public class NewItemActivity extends Activity {
 
     // GUI Objects:
     private Button cancelButton;
-    private Button submitButton;
     private EditText itemNameField;
     private EditText shortDescriptionField;
     private EditText fullDescriptionField;
@@ -82,7 +81,6 @@ public class NewItemActivity extends Activity {
 
     private void guiObjects() {
         cancelButton = findViewById(R.id.new_item_cancel_button);
-        submitButton = findViewById(R.id.new_item_submit_button);
         itemNameField = findViewById(R.id.new_item_name);
         shortDescriptionField = findViewById(R.id.new_item_short_description);
         fullDescriptionField = findViewById(R.id.new_item_full_description);

@@ -55,12 +55,12 @@ public class User {
      * @param type the type of user
      * @param location the user's location
      */
-    public User(int id,
-                String username,
-                String password,
-                String email,
-                UserTypes type,
-                Location location) {
+    private User(int id,
+                 String username,
+                 String password,
+                 String email,
+                 UserTypes type,
+                 Location location) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -94,7 +94,8 @@ public class User {
     }
 
     private Location getLocationByID(int locationId) {
-        List<Location> locations = Model.getInstance().getLocations();
+        List<Location> locations;
+        locations = Model.getInstance().getLocations();
         for (Location l: locations) {
             if (locationId == l.getKey()) {
                 return l;

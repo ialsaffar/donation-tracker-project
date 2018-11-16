@@ -28,12 +28,6 @@ import com.capybaras.donationtracker.models.Model;
 public class LoginActivity extends AppCompatActivity {
 
     /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-//    private static final int REQUEST_READ_CONTACTS = 0;
-    private Model model;
-
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask;
@@ -46,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        model = Model.getInstance();
         //reset logged in user
         Model.getInstance().setLoggedInUser(null);
         super.onCreate(savedInstanceState);

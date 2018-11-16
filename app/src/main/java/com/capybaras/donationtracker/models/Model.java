@@ -19,10 +19,10 @@ public class Model extends Application{
     /** Singleton instance */
     private static final Model instance = new Model();
     private User loggedInUser;
-    private final HashMap<String, User> users;
+    private final Map<String, User> users;
     private final List<User> userList;
     private final List<Location> locations;
-    private final HashMap<Integer, Location> locationMap;
+    private final Map<Integer, Location> locationMap;
 
     /**
      * Gets the one instance of the model

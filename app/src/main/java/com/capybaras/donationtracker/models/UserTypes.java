@@ -33,6 +33,12 @@ public enum UserTypes {
      * @return the User type
      */
     public static UserTypes getByName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Null name");
+        }
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException("Empty name");
+        }
         switch (name) {
             case "Administrator":
                 return ADMIN;

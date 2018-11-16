@@ -32,9 +32,6 @@ import java.util.List;
 public class ItemListActivity extends Activity {
 
     private static final String TAG = "ItemListActivity";
-    private Spinner spinner;
-    private Spinner sortByCategory;
-    private EditText searchItemName;
     private ItemCategory selectedCategory;
     private Location selectedLocation;
     private String itemSearch;
@@ -61,6 +58,7 @@ public class ItemListActivity extends Activity {
     }
 
     private void setUpItemSearch() {
+        EditText searchItemName;
         searchItemName = findViewById(R.id.editText);
 
         searchItemName.addTextChangedListener(new TextWatcher() {
@@ -86,12 +84,11 @@ public class ItemListActivity extends Activity {
     }
 
     private void setUpSortSpinnerCategory() {
+        Spinner sortByCategory;
         sortByCategory = findViewById(R.id.itemTypeSpinner);
         final List<ItemCategory> sortCategoryList = new ArrayList<>();
         sortCategoryList.add(null);
-        for (int j = 0; j < ItemCategory.getCurrentCategories().size(); j++) {
-            sortCategoryList.add(ItemCategory.getCurrentCategories().get(j));
-        }
+        sortCategoryList.addAll(ItemCategory.getCurrentCategories());
         List<String> categoryNames = new ArrayList<>();
         categoryNames.add("Item Type");
         for(int i = 1; i < sortCategoryList.size(); i++) {
@@ -118,12 +115,11 @@ public class ItemListActivity extends Activity {
     }
 
     private void setUpSpinner() {
+        Spinner spinner;
         spinner = findViewById(R.id.spinner);
         final List<Location> locationList = new ArrayList<>();
         locationList.add(null);
-        for (int j = 0; j < Model.getInstance().getLocations().size(); j++) {
-            locationList.add(Model.getInstance().getLocations().get(j));
-        }
+        locationList.addAll(Model.getInstance().getLocations());
         List<String> locationNameList = new LinkedList<>();
         locationNameList.add("All Items");
         for (int i = 1; i < locationList.size(); i++) {

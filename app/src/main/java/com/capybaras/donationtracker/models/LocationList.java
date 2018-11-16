@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mogedi on 10/12/2018.
@@ -22,7 +23,7 @@ public class LocationList {
 
     private static final List<Location> locations = new ArrayList<>();
     @SuppressLint("UseSparseArrays")
-    private static final HashMap<Integer, Location> locationMap = new HashMap<>();
+    private static final Map<Integer, Location> locationMap = new HashMap<>();
 
     /**
      * Location List constructor
@@ -101,7 +102,7 @@ public class LocationList {
      * Gets the locations map
      * @return the set of key value pairs for Locations
      */
-    public static HashMap<Integer, Location> getLocationMap() {
+    public static Map<Integer, Location> getLocationMap() {
         return locationMap;
     }
 
@@ -150,4 +151,6 @@ public class LocationList {
             e.printStackTrace();
         }
     }
+
+
 }

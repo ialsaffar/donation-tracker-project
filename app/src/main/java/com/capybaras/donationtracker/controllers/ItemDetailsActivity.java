@@ -15,24 +15,25 @@ import java.util.Locale;
  * ItemDetailsActivity class
  */
 public class ItemDetailsActivity extends Activity {
-
-    private TextView nameView;
-    private TextView shortDescriptionView;
-    private TextView fullDescriptionView;
-    private TextView categoryView;
-    private TextView valueView;
-    private TextView timestampView;
-    private TextView locationView;
-    private TextView employeeView;
-
-    private Item item;
     private int itemId;
     private int locationKey;
     private static final String TAG = "ItemDetailsActivity";
     private static final double CENTS_IN_DOLLAR = 100.0;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TextView nameView;
+        TextView shortDescriptionView;
+        TextView fullDescriptionView;
+        TextView categoryView;
+        TextView valueView;
+        TextView timestampView;
+        TextView locationView;
+        TextView employeeView;
+
+        Item item;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
         getIncomingIntent();

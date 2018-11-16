@@ -42,7 +42,6 @@ public class RegistrationActivity extends AppCompatActivity
     private static final String TAG = "RegistrationActivity";
 
     @Override
-    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
@@ -148,7 +147,6 @@ public class RegistrationActivity extends AppCompatActivity
     }
 
     private boolean emailAlreadyUse() {
-        Model model = Model.getInstance();
         List<User> users = Model.getInstance().getUserList();
         for (User user: users) {
             if (user.getEmail().equals(emailInputText.getText().toString())) {
