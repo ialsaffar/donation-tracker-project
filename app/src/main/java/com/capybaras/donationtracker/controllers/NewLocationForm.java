@@ -20,7 +20,6 @@ public class NewLocationForm extends Activity {
     private EditText nameLocation;
     private EditText website;
     private EditText phoneNumber;
-    private Button enterButton;
 
     private static final String NAME_CODE = "Code for Location Name";
     private static final String WEBSITE_CODE = "Code for Website of Location";
@@ -34,9 +33,6 @@ public class NewLocationForm extends Activity {
         this.nameLocation = findViewById(R.id.nameNewLocation);
         this.website = findViewById(R.id.websiteNewLocation);
         this.phoneNumber = findViewById(R.id.phoneNumberNewLocation);
-
-        this.enterButton = findViewById(R.id.enterButton);
-
     }
 
     /**
@@ -67,6 +63,7 @@ public class NewLocationForm extends Activity {
      * On click listener for the enter button
      * @param view the view
      */
+    @SuppressWarnings("unused")
     public void onEnterPressed(View view) {
         Intent intent = new Intent();
         intent.putExtra(NAME_CODE, this.getLocationName());

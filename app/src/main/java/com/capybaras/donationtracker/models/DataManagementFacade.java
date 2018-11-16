@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 public class DataManagementFacade {
     public final static String ITEMS_FILE_NAME = "ItemData.txt";
     public final static String USERS_FILE_NAME = "UserData.txt";
+    @SuppressWarnings("unused")
     public final static String LOCATIONS_FILE_NAME = "LocationData.txt";
 
     private final Location loc;
@@ -64,6 +65,7 @@ public class DataManagementFacade {
      * @param file the specified file to start loading from
      * @return true if the locations were loaded, false if otherwise
      */
+    @SuppressWarnings("unused")
     public boolean loadLocationText(File file) {
         try {
             BufferedReader locationReader = new BufferedReader(new FileReader(file));
@@ -110,6 +112,7 @@ public class DataManagementFacade {
      * @param file the file to save info into
      * @return true if the location information was saved, false if otherwise
      */
+    @SuppressWarnings("unused")
     public boolean saveLocationText(File file) {
         try {
             PrintWriter pw = new PrintWriter(file);

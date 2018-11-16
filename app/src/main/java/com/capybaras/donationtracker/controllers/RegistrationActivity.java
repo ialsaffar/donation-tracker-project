@@ -127,6 +127,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
      * Nothing is saved
      * @param view the view
      */
+    @SuppressWarnings("unused")
     public void onCancelPressed(View view) {
         Log.d("Donation Tracker App", "Cancel Button Pressed");
         finish();
@@ -144,7 +145,6 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     }
 
     private boolean emailAlreadyUse() {
-        Model model = Model.getInstance();
         List<User> users = Model.getUserList();
         for (User user: users) {
             if (user.getEmail().equals(emailInputText)) {

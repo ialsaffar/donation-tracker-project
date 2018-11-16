@@ -120,6 +120,7 @@ public class Item {
      * Sets the ID of the item
      * @param id the new id
      */
+    @SuppressWarnings("unused")
     public void setId(int id) {
         this.id = id;
     }
@@ -136,6 +137,7 @@ public class Item {
      * Sets the name of the item
      * @param name the new name
      */
+    @SuppressWarnings("unused")
     public void setName(String name) {
         this.name = name;
     }
@@ -168,6 +170,7 @@ public class Item {
      * Sets the location of the item
      * @param location the location of the item
      */
+    @SuppressWarnings("unused")
     public void setLocation(Location location) {
         this.location = location;
     }

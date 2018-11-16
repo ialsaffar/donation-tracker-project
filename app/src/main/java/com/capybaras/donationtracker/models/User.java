@@ -80,6 +80,7 @@ public class User {
      * Sets the location of the user
      * @param location the new location
      */
+    @SuppressWarnings("unused")
     public void setLocation(Location location) {
         this.location = location;
     }
@@ -88,6 +89,7 @@ public class User {
      * Sets the location of the user by the locationID
      * @param locationId the location's ID
      */
+    @SuppressWarnings("unused")
     public void setLocation(int locationId) {
         location = getLocationByID(locationId);
     }
@@ -106,6 +108,7 @@ public class User {
      * Gets the user's ID
      * @return the ID
      */
+    @SuppressWarnings("unused")
     public int getId() {
         return id;
     }
@@ -122,6 +125,7 @@ public class User {
      * Sets the user's username
      * @param username the new username
      */
+    @SuppressWarnings("unused")
     public void setUsername(String username) {
         this.username = username;
     }
@@ -138,6 +142,7 @@ public class User {
      * Sets the password of the user's account
      * @param password the new password
      */
+    @SuppressWarnings("unused")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -154,6 +159,7 @@ public class User {
      * Sets the user's email
      * @param email the new email
      */
+    @SuppressWarnings("unused")
     public void setEmail(String email) {
         this.email = email;
     }
@@ -170,6 +176,7 @@ public class User {
      * Sets the user type
      * @param type the new user type
      */
+    @SuppressWarnings("unused")
     public void setType(UserTypes type) {
         this.type = type;
     }
