@@ -14,7 +14,7 @@ import static java.lang.Integer.parseInt;
  * Created by mogedi on 10/11/2018.
  */
 
-public class Location{
+public class Location {
 
     private static final int TOKENS_LENGTH = 11;
     private int key;
@@ -299,23 +299,26 @@ public class Location{
      * @return the Location object
      */
     public static Location parseEntry(String line) {
-        assert line != null;
+//        assert line != null;
+
+        if(line == null) return null;
+
         String[] tokens = line.split("\t");
-        assert tokens.length == TOKENS_LENGTH;
-
-        Location fromFile = new Location(parseInt(tokens[0]),
-                tokens[1],
-                parseDouble(tokens[2]),
-                parseDouble(tokens[3]),
-                tokens[4],
-                tokens[5],
-                tokens[6],
-                parseInt(tokens[7]),
-                tokens[8],
-                tokens[9],
-                tokens[10]);
-
-        return fromFile;
+        if (tokens.length == TOKENS_LENGTH) {
+            return new Location(parseInt(tokens[0]),
+                    tokens[1],
+                    parseDouble(tokens[2]),
+                    parseDouble(tokens[3]),
+                    tokens[4],
+                    tokens[5],
+                    tokens[6],
+                    parseInt(tokens[7]),
+                    tokens[8],
+                    tokens[9],
+                    tokens[10]);
+        } else {
+            throw new RuntimeException("The token length is inconsistent");
+        }
     }
 
     /**
@@ -323,7 +326,7 @@ public class Location{
      * as a text
      * @param writer the print writer
      */
-    public void saveAsText(PrintWriter writer) {
+    void saveAsText(PrintWriter writer) {
         writer.println("With");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
         writer.println(Item.getNumberOfItems());
@@ -337,7 +340,7 @@ public class Location{
      * Saves the Location without items
      * @param writer the print writer
      */
-    public void saveAsTextSansItems(PrintWriter writer) {
+    void saveAsTextSansItems(PrintWriter writer) {
         writer.println("Without");
         writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
     }
@@ -346,7 +349,7 @@ public class Location{
      * Loads the location from a text
      * @param reader the reader to take in the info
      */
-    public void loadFromText(BufferedReader reader) {
+    void loadFromText(BufferedReader reader) {
         System.out.println("I'm here!");
 
         try {
@@ -394,7 +397,7 @@ public class Location{
 
         Location other = (Location) o;
 
-        boolean equality = this.key == other.key
+        return this.key == other.key
                 && this.name.equals(other.name)
                 && this.latitude == other.latitude
                 && this.longitude == other.longitude
@@ -405,8 +408,6 @@ public class Location{
                 && this.type.equals(other.type)
                 && this.phone.equals(other.phone)
                 && this.website.equals(other.website);
-
-        return equality;
     }
 
     @Override

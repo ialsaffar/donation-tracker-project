@@ -34,15 +34,13 @@ public class Model extends Application{
     /**
      * Default Constructor for the Model
      */
-    private Model() {
+    public Model() {
         users = new HashMap<>();
         userList = new ArrayList<>();
-        users.put("user", new User("user", "pass", "abc@example.com", UserTypes.ADMIN));
         loggedInUser = null;
         new LocationList();
         locations = LocationList.getLocations();
         locationMap = LocationList.getLocationMap();
-
     }
 
 //    /**
