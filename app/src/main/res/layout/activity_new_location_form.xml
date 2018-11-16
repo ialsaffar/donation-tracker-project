@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         android:layout_marginTop="38dp"
         android:layout_marginEnd="93dp"
         android:layout_marginBottom="484dp"
-        android:text="New Location"
+        android:text="@string/new_location"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +40,7 @@
             android:id="@+id/nameNewLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name of Location" />
+            android:hint="@string/name_of_location" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -59,7 +60,7 @@
             android:id="@+id/websiteNewLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Website" />
+            android:hint="@string/website" />
     </android.support.design.widget.TextInputLayout>
 
     <EditText
@@ -71,12 +72,13 @@
         android:layout_marginEnd="161dp"
         android:layout_marginBottom="171dp"
         android:ems="10"
-        android:hint="Phone Number"
+        android:hint="@string/phone_number"
         android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/enterButton"
@@ -87,7 +89,7 @@
         android:layout_marginEnd="136dp"
         android:layout_marginBottom="58dp"
         android:onClick="onEnterPressed"
-        android:text="Enter"
+        android:text="@string/enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

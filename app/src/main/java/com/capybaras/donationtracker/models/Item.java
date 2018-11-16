@@ -15,7 +15,7 @@ import static java.lang.Integer.parseInt;
  * specific to an item
  */
 public class Item {
-    private static int numberOfItems = 0;
+    private static int numberOfItems;
 
     private int id;
     private String name;
@@ -33,7 +33,7 @@ public class Item {
      * @param location the location of the item
      */
     public Item(String name, Location location) {
-        this(++numberOfItems,
+        this(numberOfItems + 1,
                 name,
                 new Date(),
                 location,
@@ -42,6 +42,7 @@ public class Item {
                 null,
                 0,
                 null);
+        numberOfItems++;
     }
 
     /**
@@ -56,7 +57,7 @@ public class Item {
      * @param cents cost in cents of the item
      * @param category category of item
      */
-    public Item(int id,
+    private Item(int id,
                 String name,
                 Date timeStamp,
                 Location location,
@@ -241,8 +242,11 @@ public class Item {
      * @param writer the print writer
      */
     public void saveAsText (PrintWriter writer) {
-        String dateFormatted = "" + timeStamp.getMonth() + "/" + timeStamp.getDay() + "/" + timeStamp.getYear() + ", " + timeStamp.getHours() + ":" + timeStamp.getMinutes();
-        writer.println(numberOfItems + "\t" + id + "\t" + name + "\t" + dateFormatted + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
+        String dateFormatted = "" + timeStamp.getMonth() + "/" + timeStamp.getDay() + "/" +
+                timeStamp.getYear() + ", " + timeStamp.getHours() + ":" + timeStamp.getMinutes();
+        writer.println(numberOfItems + "\t" + id + "\t" + name + "\t" + dateFormatted + "\t" +
+                creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" +
+                category.getCategoryName());
         location.saveAsTextSansItems(writer);
     }
 
@@ -261,7 +265,7 @@ public class Item {
             List<ItemCategory> currentCategories = ItemCategory.getCurrentCategories();
             currentCategory = currentCategories.get(0);
             for (int i = 0; i < currentCategories.size(); i++) {
-                if (tokens[7] == currentCategories.get(i).getCategoryName()) {
+                if (tokens[7].equals(currentCategories.get(i).getCategoryName())) {
                     currentCategory = currentCategories.get(i);
                     i = currentCategories.size();
                 }
@@ -274,7 +278,8 @@ public class Item {
         Location loc = Location.parseEntry(locLine);
         List<Location> locList = LocationList.getLocations();
         for (int i = 0; i < locList.size(); i++) {
-            if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
+            if ((loc.getPhone().equals(locList.get(i).getPhone()))
+                    && (loc.getName().equals(locList.get(i).getName()))) {
                 loc = locList.get(i);
                 i = locList.size();
                 hasChanged = true;

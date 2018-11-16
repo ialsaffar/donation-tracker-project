@@ -127,7 +127,6 @@ public class ItemListActivity extends Activity {
         List<String> locationNameList = new LinkedList<>();
         locationNameList.add("All Items");
         for (int i = 1; i < locationList.size(); i++) {
-            System.out.println(locationList.get(i).getName());
             locationNameList.add(locationList.get(i).getName());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -144,8 +143,7 @@ public class ItemListActivity extends Activity {
                 }
                 selectedLocation = locationList.get(position);
                 if (selectedLocation != null) {
-                    System.out.println("User Location: " + user.getLocation().getName());
-                    if (user.getType() == UserTypes.LOCATION_EMPLOYEE
+                    if ((user.getType() == UserTypes.LOCATION_EMPLOYEE)
                             && selectedLocation.equals(user.getLocation())) {
                         addItemButton.setVisibility(View.VISIBLE);
                     } else {
@@ -166,7 +164,8 @@ public class ItemListActivity extends Activity {
 
     private void setUpRecycler() {
         recyclerView = findViewById(R.id.recycler);
-        RecyclerAdapter adapter = new RecyclerAdapter(this, selectedLocation, selectedCategory, itemSearch);
+        RecyclerAdapter adapter = new RecyclerAdapter(this, selectedLocation,
+                selectedCategory, itemSearch);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

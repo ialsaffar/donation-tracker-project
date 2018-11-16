@@ -17,9 +17,9 @@ import java.util.NoSuchElementException;
 public class Model extends Application{
     /** Singleton instance */
     private static final Model instance = new Model();
-    private static User loggedInUser;
-    private static HashMap<String, User> users;
-    private static List<User> userList;
+    private User loggedInUser;
+    private final HashMap<String, User> users;
+    private final List<User> userList;
     private final List<Location> locations;
     private final HashMap<Integer, Location> locationMap;
 
@@ -37,7 +37,6 @@ public class Model extends Application{
     public Model() {
         users = new HashMap<>();
         userList = new ArrayList<>();
-        loggedInUser = null;
         new LocationList();
         locations = LocationList.getLocations();
         locationMap = LocationList.getLocationMap();
@@ -115,7 +114,7 @@ public class Model extends Application{
      * Gets all the users
      * @return the users (a map of users)
      */
-    public static HashMap<String, User> getUsers() {
+    public HashMap<String, User> getUsers() {
         return users;
     }
 
@@ -123,7 +122,7 @@ public class Model extends Application{
      * Gets the list of users
      * @return the list of users (List)
      */
-    public static List<User> getUserList() { return userList; }
+    public List<User> getUserList() { return userList; }
 
 
 

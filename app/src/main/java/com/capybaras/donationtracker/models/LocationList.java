@@ -1,5 +1,6 @@
 package com.capybaras.donationtracker.models;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -19,18 +20,20 @@ import java.util.List;
 
 public class LocationList {
 
-    private static List<Location> locations = new ArrayList<>();
-    private static HashMap<Integer, Location> locationMap = new HashMap<>();
+    private static final List<Location> locations = new ArrayList<>();
+    @SuppressLint("UseSparseArrays")
+    private static final HashMap<Integer, Location> locationMap = new HashMap<>();
 
     /**
      * Location List constructor
      */
-    public LocationList() {
+    LocationList() {
 
         if (locations.isEmpty()) {
 
             // Read the raw csv file
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream("res/raw/locationdata.csv");
+            InputStream is = this.getClass().getClassLoader()
+                    .getResourceAsStream("res/raw/locationdata.csv");
 
             // Reads text from character-input stream, buffering characters for efficient reading
             BufferedReader reader = new BufferedReader(
@@ -46,7 +49,8 @@ public class LocationList {
                 reader.readLine();
 
                 // If buffer is not empty
-                while ((line = reader.readLine()) != null) {
+                while (reader.readLine() != null) {
+                    line = reader.readLine();
                     Log.d("MyActivity", "Lines: " + line);
                     // use comma as separator columns of CSV
                     String[] tokens = line.split(",");
@@ -101,6 +105,11 @@ public class LocationList {
         return locationMap;
     }
 
+    /**
+     * This method adds a location
+     *
+     * @param loc
+     */
     public static void addLocation(Location loc) {
         locations.add(loc);
     }
@@ -116,6 +125,11 @@ public class LocationList {
         }
     }
 
+    /**
+     * This method loads from text
+     *
+     * @param reader
+     */
     public static void loadFromText(BufferedReader reader) {
         locations.clear();
         locationMap.clear();

@@ -7,10 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.capybaras.donationtracker.R;
@@ -27,7 +25,8 @@ import java.util.List;
 /**
  * RegistrationActivity class
  */
-public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RegistrationActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
 
     //UI Widgets
     private Spinner userTypeSpinner;
@@ -60,7 +59,8 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         this.userTypeSpinner = findViewById(R.id.userTypeSpinner);
 
         //Sets the adapter to display the user types
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, UserTypes.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(
+                this, android.R.layout.simple_spinner_item, UserTypes.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.userTypeSpinner.setAdapter(adapter);
         model = Model.getInstance();
@@ -71,7 +71,8 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         for (Location l: model.getLocations()) {
             locationNames.add(l.getName());
         }
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationNames);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locationNames);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(adapter2);
         locationSpinner.setVisibility(View.GONE);
@@ -93,7 +94,8 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                 if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
                         == UserTypes.LOCATION_EMPLOYEE) {
                     Log.d(TAG, "new user is a location employee");
-                    Location loc = model.getLocations().get(locationSpinner.getSelectedItemPosition());
+                    Location loc = model.getLocations()
+                            .get(locationSpinner.getSelectedItemPosition());
                     Log.d(TAG, loc.getName());
                     newUser = new User(this.nameTextInputPlainText.getText().toString(),
                             this.passwordInputText.getText().toString(),
@@ -112,7 +114,8 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
                 dmf.saveUserText(file);
                 finish();
             } else {
-                Snackbar.make(view, "Your passwords do not match. Please try again.", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Your passwords do not match. Please try again.",
+                        Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         } else {
@@ -140,14 +143,15 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     }
 
     private boolean passwordsMatch() {
-        return this.passwordInputText.getText().toString().equals(this.reenterPasswordInputText.getText().toString());
+        return this.passwordInputText.getText().toString()
+                .equals(this.reenterPasswordInputText.getText().toString());
     }
 
     private boolean emailAlreadyUse() {
         Model model = Model.getInstance();
-        List<User> users = Model.getUserList();
+        List<User> users = Model.getInstance().getUserList();
         for (User user: users) {
-            if (user.getEmail().equals(emailInputText)) {
+            if (user.getEmail().equals(emailInputText.getText().toString())) {
                 return true;
             }
         }

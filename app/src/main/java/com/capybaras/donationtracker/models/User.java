@@ -42,7 +42,8 @@ public class User {
                 String email,
                 UserTypes type,
                 Location location) {
-        this(++numberOfUsers, username,password,email,type,location);
+        this(numberOfUsers + 1, username,password,email,type,location);
+        numberOfUsers++;
     }
 
     /**
@@ -176,17 +177,17 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
+        if ((o == null) || (getClass() != o.getClass())) {
             return false;
         }
         if (this == o) {
             return true;
         }
         User that = (User) o;
-        return id == that.id &&
+        return (id == that.id) &&
                 username.equals(that.username) &&
                 email.equals(that.email) &&
-                type == that.type;
+                (type == that.type);
     }
 
     @Override
@@ -199,7 +200,8 @@ public class User {
      * @param writer the print writer
      */
     public void saveAsText(PrintWriter writer) {
-        writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" + type.getNonCaps());
+        writer.println(id + "\t" + username + "\t" + password + "\t" + email + "\t" +
+                type.getNonCaps());
         if(location != null) {
             location.saveAsTextSansItems(writer);
         }
@@ -215,21 +217,21 @@ public class User {
         assert line != null;
         String[] tokens = line.split("\t");
         if (locLine == null) {
-            User fromFile = new User(parseInt(tokens[0]),
+
+            return new User(parseInt(tokens[0]),
                     tokens[1],
                     tokens[2],
                     tokens[3],
                     UserTypes.getByName(tokens[4]),
                     null);
-
-            return fromFile;
         }
 
         boolean hasChanged = false;
         Location loc = Location.parseEntry(locLine);
         List<Location> locList = LocationList.getLocations();
         for (int i = 0; i < locList.size(); i++) {
-            if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
+            if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName()
+                    .equals(locList.get(i).getName()))) {
                 loc = locList.get(i);
                 i = locList.size();
                 hasChanged = true;
@@ -239,13 +241,11 @@ public class User {
             LocationList.addLocation(loc);
         }
 
-        User fromFile = new User(parseInt(tokens[0]),
+        return new User(parseInt(tokens[0]),
                 tokens[1],
                 tokens[2],
                 tokens[3],
                 UserTypes.getByName(tokens[4]),
                 loc);
-
-        return fromFile;
     }
 }

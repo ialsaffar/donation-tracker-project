@@ -39,7 +39,7 @@ public class ItemDetailsActivity extends Activity {
         item = Model.getInstance().getLocationByKey(locationKey).getItemById(itemId);
 
         nameView = findViewById(R.id.details_name);
-        nameView.setText("Name: " + item.getName());
+        nameView.setText(String.format("%s%s", getString(R.string.Name1), item.getName()));
 
         shortDescriptionView = findViewById(R.id.details_short_description);
         shortDescriptionView.setText(item.getShortDescription());
@@ -48,10 +48,14 @@ public class ItemDetailsActivity extends Activity {
         fullDescriptionView.setText(item.getFullDescription());
 
         categoryView = findViewById(R.id.details_category);
-        categoryView.setText("Category: " + item.getCategory().getCategoryName());
+        categoryView.setText(String.format("%s%s", getString(R.string.category1), item.getCategory()
+                .getCategoryName()));
 
         valueView = findViewById(R.id.details_value);
-        valueView.setText(String.format(Locale.ENGLISH,"Value: $%s", String.format(Locale.ENGLISH, "%.2f", item.getCents() / CENTS_IN_DOLLAR)));
+        valueView.setText(String.format(
+                Locale.ENGLISH,"Value: $%s",
+                String.format(Locale.ENGLISH,
+                        "%.2f", item.getCents() / CENTS_IN_DOLLAR)));
 
         timestampView = findViewById(R.id.details_date);
         String timestamp = "Timestamp: ";
@@ -63,10 +67,12 @@ public class ItemDetailsActivity extends Activity {
         timestampView.setText(timestamp);
 
         locationView = findViewById(R.id.details_location);
-        locationView.setText("Location: " + item.getLocation().getName());
+        locationView.setText(String.format("%s%s", getString(R.string.location1), item.getLocation()
+                .getName()));
 
         employeeView = findViewById(R.id.details_employee);
-        employeeView.setText("Added by: " + item.getCreator());
+        employeeView.setText(String.format("%s%s", getString(R.string.addedBy1),
+                item.getCreator()));
     }
 
     private void getIncomingIntent() {

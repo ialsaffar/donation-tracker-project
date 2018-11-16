@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
@@ -19,10 +20,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
         android:layout_marginTop="8dp"
         android:onClick="onRegisterPressed"
-        android:text="Register"
+        android:text="@string/register"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,10 +68,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Re-Enter Password"
+            android:hint="@string/re_enter_password"
             android:inputType="textPassword"
             android:singleLine="false"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="Autofill" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -98,10 +99,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:singleLine="false"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="Autofill" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -111,12 +113,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="onCancelPressed"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/registerButton"
@@ -135,7 +135,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="REGISTRATION"
+        android:text="@string/registration"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -168,9 +168,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="textPersonName"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="Autofill" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -197,9 +198,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Email: abc@gmail.com"
+            android:hint="@string/email_abc_gmail_com"
             android:inputType="textEmailAddress"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="Autofill" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -212,7 +214,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Select User Type"
+        android:text="@string/select_user_type"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
         android:textStyle="normal|italic"
@@ -227,7 +229,6 @@
         android:layout_width="296dp"
         android:layout_height="35dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/cancelButton"

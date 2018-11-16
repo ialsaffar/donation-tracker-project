@@ -40,7 +40,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
      * @param category the item category
      * @param itemName the name of the item
      */
-    public RecyclerAdapter(Context mContext, Location location, ItemCategory category, String itemName) {
+    public RecyclerAdapter(Context mContext, Location location, ItemCategory category,
+                           String itemName) {
         this.location = location;
         this.mContext = mContext;
         this.items = Location.getItems();
@@ -57,7 +58,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 }
             }
         }
-        if ((itemName != null) && (!itemName.equals(""))) {
+        if ((itemName != null) && (!"".equals(itemName))) {
             for (int i = 0; i < mItemNames.size(); i++) {
                 if (!(mItemNames.get(i).equals(itemName))){
                     mItemNames.remove(i);
@@ -71,9 +72,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recycler_view, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recycler_view,
+                viewGroup, false);
+        return new ViewHolder(view);
     }
 
     @Override

@@ -301,7 +301,9 @@ public class Location {
     public static Location parseEntry(String line) {
 //        assert line != null;
 
-        if(line == null) return null;
+        if(line == null) {
+            return null;
+        }
 
         String[] tokens = line.split("\t");
         if (tokens.length == TOKENS_LENGTH) {
@@ -328,7 +330,9 @@ public class Location {
      */
     void saveAsText(PrintWriter writer) {
         writer.println("With");
-        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
+        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" +
+                streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type +
+                "\t" + phone + "\t" + website);
         writer.println(Item.getNumberOfItems());
         writer.println(items.size());
         for (int i = 0; i < items.size(); i++) {
@@ -342,7 +346,9 @@ public class Location {
      */
     void saveAsTextSansItems(PrintWriter writer) {
         writer.println("Without");
-        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" + streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type + "\t" + phone + "\t" + website);
+        writer.println(key + "\t" + name + "\t" + latitude + "\t" + longitude + "\t" +
+                streetAddress + "\t" + city + "\t" + state + "\t" + zipCode + "\t" + type +
+                "\t" + phone + "\t" + website);
     }
 
     /**
@@ -350,8 +356,6 @@ public class Location {
      * @param reader the reader to take in the info
      */
     void loadFromText(BufferedReader reader) {
-        System.out.println("I'm here!");
-
         try {
             String nextLine = reader.readLine();
             String locLine = reader.readLine();
@@ -397,14 +401,14 @@ public class Location {
 
         Location other = (Location) o;
 
-        return this.key == other.key
+        return (this.key == other.key)
                 && this.name.equals(other.name)
-                && this.latitude == other.latitude
-                && this.longitude == other.longitude
+                && (this.latitude == other.latitude)
+                && (this.longitude == other.longitude)
                 && this.streetAddress.equals(other.streetAddress)
                 && this.city.equals(other.city)
                 && this.state.equals(other.state)
-                && this.zipCode == other.zipCode
+                && (this.zipCode == other.zipCode)
                 && this.type.equals(other.type)
                 && this.phone.equals(other.phone)
                 && this.website.equals(other.website);
@@ -413,9 +417,9 @@ public class Location {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + zipCode;
-        result = 31 * result + streetAddress.hashCode();
+        result = (31 * result) + name.hashCode();
+        result = (31 * result) + zipCode;
+        result = (31 * result) + streetAddress.hashCode();
         return result;
     }
 

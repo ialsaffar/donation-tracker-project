@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/snippet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"/>
-    </LinearLayout>
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/snippet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
 </LinearLayout>

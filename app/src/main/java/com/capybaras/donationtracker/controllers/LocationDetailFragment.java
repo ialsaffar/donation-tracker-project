@@ -1,6 +1,7 @@
 package com.capybaras.donationtracker.controllers;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,14 +43,18 @@ public class LocationDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if ((getArguments() != null) && getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = model.getLocationMap().get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
+            mItem = model.getLocationMap()
+                    .get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = null;
+            if (activity != null) {
+                appBarLayout = activity.findViewById(R.id.toolbar_layout);
+            }
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getName());
             }
@@ -57,7 +62,7 @@ public class LocationDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.location_detail, container, false);
 
@@ -69,7 +74,8 @@ public class LocationDetailFragment extends Fragment {
             details.append(mItem.getPhone() + "\n");
             details.append(mItem.getWebsite() + "\n\n");
             details.append(mItem.getStreetAddress() + "\n");
-            details.append(mItem.getCity() + ", " + mItem.getState() + " " + mItem.getZipCode() + "\n");
+            details.append(mItem.getCity() + ", " + mItem.getState() + " " +
+                    mItem.getZipCode() + "\n");
             details.append(mItem.getLatitude() + "°, " + mItem.getLongitude() + "°\n");
             ((TextView) rootView.findViewById(R.id.location_detail)).setText(details.toString());
         }

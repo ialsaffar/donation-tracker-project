@@ -18,7 +18,8 @@
     
     -->
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/location_list"
         android:name="com.capybaras.donationtracker.controllers.LocationListFragment"
@@ -32,8 +33,7 @@
 
     <FrameLayout
         android:id="@+id/location_detail_container"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_width="900dp"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

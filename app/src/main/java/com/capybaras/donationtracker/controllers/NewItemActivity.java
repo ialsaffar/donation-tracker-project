@@ -15,6 +15,7 @@ import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.ItemCategory;
 import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
+import com.capybaras.donationtracker.models.UserTypes;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,7 +45,11 @@ public class NewItemActivity extends Activity {
         Log.d(TAG, "Activity started");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
-        location = Model.getInstance().getLoggedInUser().getLocation(); // TODO: what if not a location employee?
+        if (Model.getInstance().getLoggedInUser().getType() == UserTypes.LOCATION_EMPLOYEE) {
+            location = Model.getInstance().getLoggedInUser().getLocation();
+        } else {
+            throw new RuntimeException("Not location employee");
+        }
         guiObjects();
         setUpCancelButton();
 //        setUpSubmitButton();
@@ -108,8 +113,6 @@ public class NewItemActivity extends Activity {
             DataManagementFacade dmf = DataManagementFacade.getInstance();
             File file = new File(this.getFilesDir(), DataManagementFacade.ITEMS_FILE_NAME);
             dmf.saveItemText(file);
-            System.out.println(item.getName());
-            System.out.println("Location: " + item.getLocation());
             finish();
         } else {
             throw new IllegalArgumentException("must fill in name");

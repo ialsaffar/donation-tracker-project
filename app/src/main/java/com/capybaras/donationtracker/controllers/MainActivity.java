@@ -16,7 +16,7 @@ import java.io.File;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private File getFilesDir = null;
+    private File getFilesDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

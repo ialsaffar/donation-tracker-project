@@ -10,14 +10,14 @@ import java.io.PrintWriter;
  * DataManagementFacade class: Singleton
  */
 public class DataManagementFacade {
-    public final static String ITEMS_FILE_NAME = "ItemData.txt";
-    public final static String USERS_FILE_NAME = "UserData.txt";
-    public final static String LOCATIONS_FILE_NAME = "LocationData.txt";
+    public static final String ITEMS_FILE_NAME = "ItemData.txt";
+    public static final String USERS_FILE_NAME = "UserData.txt";
+    public static final String LOCATIONS_FILE_NAME = "LocationData.txt";
 
     private final Location loc;
     private final Model mod;
 
-    private final static DataManagementFacade instance = new DataManagementFacade();
+    private static final DataManagementFacade instance = new DataManagementFacade();
 
     private DataManagementFacade() {
         loc = new Location();
@@ -34,7 +34,6 @@ public class DataManagementFacade {
     /**
      * Loads an item from a specified file
      * @param file the specified file to start loading items from
-     * @return true if the item was loaded, false if otherwise
      */
     public void loadItemText(File file) {
         try {
@@ -48,7 +47,6 @@ public class DataManagementFacade {
     /**
      * Loads users from a file
      * @param file the file specified to start loading from
-     * @return true if the info was loaded, false if otherwise
      */
     public void loadUserText(File file) {
         try {
@@ -78,7 +76,6 @@ public class DataManagementFacade {
     /**
      * Saves item information into a file
      * @param file the file to save all info to
-     * @return true if the info was saved, false if otherwise
      */
     public void saveItemText(File file) {
         try {
@@ -93,7 +90,6 @@ public class DataManagementFacade {
     /**
      * Saves user information to a specified file
      * @param file the file to save info to
-     * @return true if saved, false if otherwise
      */
     public void saveUserText(File file) {
         try {

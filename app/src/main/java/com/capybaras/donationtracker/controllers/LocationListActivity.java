@@ -18,6 +18,7 @@ import com.capybaras.donationtracker.models.Location;
 import com.capybaras.donationtracker.models.Model;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * An activity representing a list of Locations. This activity
@@ -68,7 +69,8 @@ public class LocationListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, model.getLocations(), mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, model.getLocations(),
+                mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -83,7 +85,8 @@ public class LocationListActivity extends AppCompatActivity {
                 Location location = (Location) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(LocationDetailFragment.ARG_ITEM_ID, Integer.toString(location.getKey()));
+                    arguments.putString(LocationDetailFragment.ARG_ITEM_ID,
+                            Integer.toString(location.getKey()));
                     LocationDetailFragment fragment = new LocationDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -92,7 +95,8 @@ public class LocationListActivity extends AppCompatActivity {
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, LocationDetailActivity.class);
-                    intent.putExtra(LocationDetailFragment.ARG_ITEM_ID, Integer.toString(location.getKey()));
+                    intent.putExtra(LocationDetailFragment.ARG_ITEM_ID,
+                            Integer.toString(location.getKey()));
 
                     context.startActivity(intent);
                 }
@@ -113,16 +117,18 @@ public class LocationListActivity extends AppCompatActivity {
             mTwoPane = twoPane;
         }
 
+        @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.location_list_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(Integer.toString(mValues.get(position).getKey()));
+        public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+            holder.mIdView.setText(String.format(Locale.ENGLISH,
+                    Integer.toString(mValues.get(position).getKey())));
             holder.mContentView.setText(mValues.get(position).getName());
 
             holder.itemView.setTag(mValues.get(position));
