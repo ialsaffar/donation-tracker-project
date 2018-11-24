@@ -20,9 +20,8 @@ public class Model extends Application{
     private static User loggedInUser;
     private static HashMap<String, User> users;
     private static List<User> userList;
-    private LocationList locationList;
-    private List<Location> locations;
-    private HashMap<Integer, Location> locationMap;
+    private final List<Location> locations;
+    private final HashMap<Integer, Location> locationMap;
 
     /**
      * Gets the one instance of the model
@@ -38,12 +37,10 @@ public class Model extends Application{
     private Model() {
         users = new HashMap<>();
         userList = new ArrayList<>();
-        users.put("user", new User("user", "pass", "abc@example.com", UserTypes.ADMIN));
         loggedInUser = null;
-        locationList = new LocationList();
-        locations = locationList.getLocations();
-        locationMap = locationList.getLocationMap();
-
+        new LocationList();
+        locations = LocationList.getLocations();
+        locationMap = LocationList.getLocationMap();
     }
 
     /**

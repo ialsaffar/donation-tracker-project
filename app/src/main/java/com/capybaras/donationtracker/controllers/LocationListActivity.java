@@ -28,7 +28,7 @@ import java.util.List;
  * item details side-by-side using two vertical panes.
  */
 public class LocationListActivity extends AppCompatActivity {
-    private Model model = Model.getInstance();
+    private final Model model = Model.getInstance();
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -105,7 +105,7 @@ public class LocationListActivity extends AppCompatActivity {
          * @param locations list of all locations
          * @param twoPane true if twoPane, false if otherwise
          */
-        public SimpleItemRecyclerViewAdapter(LocationListActivity parent,
+        SimpleItemRecyclerViewAdapter(LocationListActivity parent,
                                              List<Location> locations,
                                              boolean twoPane) {
             mValues = locations;

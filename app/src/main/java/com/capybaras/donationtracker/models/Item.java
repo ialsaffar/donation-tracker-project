@@ -1,5 +1,7 @@
 package com.capybaras.donationtracker.models;
 
+import android.annotation.SuppressLint;
+
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +15,7 @@ import static java.lang.Integer.parseInt;
  * specific to an item
  */
 public class Item {
-    private static int numberOfItems;
+    private static int numberOfItems = 0;
 
     private int id;
     private String name;
@@ -118,6 +120,7 @@ public class Item {
      * Sets the ID of the item
      * @param id the new id
      */
+    @SuppressWarnings("unused")
     public void setId(int id) {
         this.id = id;
     }
@@ -134,6 +137,7 @@ public class Item {
      * Sets the name of the item
      * @param name the new name
      */
+    @SuppressWarnings("unused")
     public void setName(String name) {
         this.name = name;
     }
@@ -166,6 +170,7 @@ public class Item {
      * Sets the location of the item
      * @param location the location of the item
      */
+    @SuppressWarnings("unused")
     public void setLocation(Location location) {
         this.location = location;
     }
@@ -240,7 +245,7 @@ public class Item {
      */
     public void saveAsText (PrintWriter writer) {
         String dateFormatted = "" + timeStamp.getMonth() + "/" + timeStamp.getDay() + "/" + timeStamp.getYear() + ", " + timeStamp.getHours() + ":" + timeStamp.getMinutes();
-        writer.println(id + "\t" + name + "\t" + dateFormatted + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
+        writer.println(numberOfItems + "\t" + id + "\t" + name + "\t" + dateFormatted + "\t" + creator + "\t" + shortDescription + "\t" + fullDescription + "\t" + cents + "\t" + category.getCategoryName());
         location.saveAsTextSansItems(writer);
     }
 
@@ -250,11 +255,12 @@ public class Item {
      * @param locLine location of line
      * @return the Item
      */
+    @SuppressLint("SimpleDateFormat")
     public static Item parseEntry(String line, String locLine) {
         assert line != null;
         String[] tokens = line.split("\t");
         ItemCategory currentCategory = ItemCategory.getCurrentCategories().get(0);
-        if (tokens.length == 8) {
+        if (tokens.length == 9) {
             List<ItemCategory> currentCategories = ItemCategory.getCurrentCategories();
             currentCategory = currentCategories.get(0);
             for (int i = 0; i < currentCategories.size(); i++) {
@@ -267,32 +273,75 @@ public class Item {
 
         Item fromFile = null;
 
+        boolean hasChanged = false;
         Location loc = Location.parseEntry(locLine);
         List<Location> locList = LocationList.getLocations();
         for (int i = 0; i < locList.size(); i++) {
             if ((loc.getPhone().equals(locList.get(i).getPhone())) && (loc.getName().equals(locList.get(i).getName()))) {
                 loc = locList.get(i);
                 i = locList.size();
+                hasChanged = true;
             }
+        }
+        if (!hasChanged) {
+            LocationList.addLocation(loc);
         }
 
         try {
-            fromFile = new Item(parseInt(tokens[0]),
-                    tokens[1],
-                    new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[2]),
+            fromFile = new Item(parseInt(tokens[1]),
+                    tokens[2],
+                    new SimpleDateFormat("MM/dd/yyyy, hh:mm").parse(tokens[3]),
                     loc,
-                    tokens[3],
                     tokens[4],
                     tokens[5],
-                    parseInt(tokens[6]),
+                    tokens[6],
+                    parseInt(tokens[7]),
                     currentCategory);
+            Item.setNumberOfItems(parseInt(tokens[0]));
         } catch (ParseException e){
-            //TODO add a better catch block
+            e.printStackTrace();
             e.getMessage();
         }
 
-        numberOfItems++;
-
         return fromFile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+
+        if(o == this) {
+            return true;
+        }
+
+        if( !(o instanceof Item) ) {
+            return false;
+        }
+
+        Item other = (Item) o;
+
+        return this.id == other.getId()
+                && this.name.equals(other.name)
+                && this.timeStamp.equals(other.getTimeStamp())
+                && this.location.equals(other.getLocation())
+                && this.creator.equals(other.getCreator())
+                && this.shortDescription.equals(other.getShortDescription())
+                && this.fullDescription.equals(other.getFullDescription())
+                && this.cents == other.getCents()
+                && this.category.getCategoryName().equals(other.getCategory().getCategoryName());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + id;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + creator.hashCode();
+        result = 31 * result + shortDescription.hashCode();
+        result = 31 * result + fullDescription.hashCode();
+        result = 31 * result + cents;
+        return result;
     }
 }

@@ -30,14 +30,12 @@ import java.util.List;
 public class RegistrationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //UI Widgets
-    private Button registerButton;
     private Spinner userTypeSpinner;
     private EditText passwordInputText;
     private EditText reenterPasswordInputText;
-    private Button cancelButton;
     private EditText nameTextInputPlainText;
     private EditText emailInputText;
-    private LinearLayout linearLayout;
+//    private LinearLayout linearLayout;
     private Model model;
     private Spinner locationSpinner;
 
@@ -52,15 +50,12 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.linearLayout = findViewById(R.id.linearLayout);
+//        this.linearLayout = findViewById(R.id.linearLayout);
 
         this.passwordInputText = findViewById(R.id.passwordInputText);
         this.reenterPasswordInputText = findViewById(R.id.reenterPasswordInputText);
         this.nameTextInputPlainText = findViewById(R.id.nameTextInputPlainText);
         this.emailInputText = findViewById(R.id.emailInputText);
-
-        this.registerButton = findViewById(R.id.registerButton);
-        this.cancelButton = findViewById(R.id.cancelButton);
 
         this.userTypeSpinner = findViewById(R.id.userTypeSpinner);
 
@@ -92,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
      */
     public void onRegisterPressed(View view) {
         if (this.allBoxesFilled()) {
-            if (this.passwordsMatch()) {
+            if (this.passwordsMatch() && !this.emailAlreadyUse()) {
                 //means password and re entered passwords are equal (may continue)
                 User newUser;
                 if (UserTypes.getByName(this.userTypeSpinner.getSelectedItem().toString())
@@ -132,6 +127,7 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
      * Nothing is saved
      * @param view the view
      */
+    @SuppressWarnings("unused")
     public void onCancelPressed(View view) {
         Log.d("Donation Tracker App", "Cancel Button Pressed");
         finish();
@@ -149,8 +145,12 @@ public class RegistrationActivity extends AppCompatActivity implements AdapterVi
     }
 
     private boolean emailAlreadyUse() {
-        //Cannot make this method yet
-        //(No where to store the data)
+        List<User> users = Model.getUserList();
+        for (User user: users) {
+            if (user.getEmail().equals(emailInputText)) {
+                return true;
+            }
+        }
         return false;
     }
 

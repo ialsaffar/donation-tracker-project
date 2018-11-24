@@ -16,8 +16,6 @@ import java.io.File;
  */
 public class MainActivity extends AppCompatActivity {
 
-    File getFilesDir = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +47,9 @@ public class MainActivity extends AppCompatActivity {
         dmf.loadUserText(file);
 //        file = new File(this.getFilesDir(), DataManagementFacade.LOCATIONS_FILE_NAME);
 //        dmf.loadLocationText(file);
-        getFilesDir = getFilesDir().getAbsoluteFile();
     }
 
     private Activity getActivity(){
         return this;
     }
-
-    /**
-     * Gets the file Directory
-     * @return the File
-     */
-    public  File getFileDirectory() {return getFilesDir; }
 }

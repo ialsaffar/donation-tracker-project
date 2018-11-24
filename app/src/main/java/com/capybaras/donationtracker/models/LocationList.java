@@ -20,7 +20,7 @@ import java.util.List;
 public class LocationList {
 
     private static List<Location> locations = new ArrayList<>();
-    private HashMap<Integer, Location> locationMap = new HashMap<>();
+    private static HashMap<Integer, Location> locationMap = new HashMap<>();
 
     /**
      * Location List constructor
@@ -97,22 +97,26 @@ public class LocationList {
      * Gets the locations map
      * @return the set of key value pairs for Locations
      */
-    public HashMap<Integer, Location> getLocationMap() {
+    public static HashMap<Integer, Location> getLocationMap() {
         return locationMap;
+    }
+
+    public static void addLocation(Location loc) {
+        locations.add(loc);
     }
 
     /**
      * Saves location's info/list as a file
      * @param writer the print writer
      */
-    public void saveAsText (PrintWriter writer) {
+    public static void saveAsText (PrintWriter writer) {
         writer.println(locations.size());
         for (int i = 0; i < locations.size(); i++) {
             locations.get(i).saveAsText(writer);
         }
     }
 
-    void loadFromText(BufferedReader reader) {
+    public static void loadFromText(BufferedReader reader) {
         locations.clear();
         locationMap.clear();
         try {

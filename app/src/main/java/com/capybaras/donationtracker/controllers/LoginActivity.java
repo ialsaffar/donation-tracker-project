@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Id to identity READ_CONTACTS permission request.
      */
-    private static final int REQUEST_READ_CONTACTS = 0;
+//    private static final int REQUEST_READ_CONTACTS = 0;
     private Model model;
 
     /**
@@ -131,12 +131,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isUsernameValid(String username) {
         //TODO: Replace this with logic
-        return true;
+        if (username.length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with logic
-        return true;
+        if (password.length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -180,9 +186,9 @@ public class LoginActivity extends AppCompatActivity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        public static final int MILLIS = 2000;
+        static final int MILLIS = 2000;
         private final String mUsername;
         private final String mPassword;
 

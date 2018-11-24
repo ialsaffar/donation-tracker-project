@@ -9,6 +9,8 @@ import com.capybaras.donationtracker.R;
 import com.capybaras.donationtracker.models.Item;
 import com.capybaras.donationtracker.models.Model;
 
+import java.util.Locale;
+
 /**
  * ItemDetailsActivity class
  */
@@ -49,7 +51,7 @@ public class ItemDetailsActivity extends Activity {
         categoryView.setText("Category: " + item.getCategory().getCategoryName());
 
         valueView = findViewById(R.id.details_value);
-        valueView.setText("Value: $" + String.format("%.2f", item.getCents()/CENTS_IN_DOLLAR));
+        valueView.setText(String.format(Locale.ENGLISH,"Value: $%s", String.format(Locale.ENGLISH, "%.2f", item.getCents() / CENTS_IN_DOLLAR)));
 
         timestampView = findViewById(R.id.details_date);
         String timestamp = "Timestamp: ";
@@ -60,7 +62,7 @@ public class ItemDetailsActivity extends Activity {
         timestamp += item.getTimeStamp().getMinutes();
         timestampView.setText(timestamp);
 
-        locationView = findViewById(R.id.details_locatoin);
+        locationView = findViewById(R.id.details_location);
         locationView.setText("Location: " + item.getLocation().getName());
 
         employeeView = findViewById(R.id.details_employee);
