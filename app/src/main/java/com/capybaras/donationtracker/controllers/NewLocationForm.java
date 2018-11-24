@@ -18,12 +18,12 @@ import com.capybaras.donationtracker.R;
 public class NewLocationForm extends Activity {
 
     private EditText nameLocation;
-    private EditText website;
+    private EditText type;
     private EditText phoneNumber;
 
-    private static final String NAME_CODE = "Code for Location Name";
-    private static final String WEBSITE_CODE = "Code for Website of Location";
-    private static final String PHONE_CODE = "Code for phone number of Location";
+    public static final String NAME_CODE = "Code for Location Name";
+    public static final String WEBSITE_CODE = "Code for Website of Location";
+    public static final String PHONE_CODE = "Code for phone number of Location";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class NewLocationForm extends Activity {
         setContentView(R.layout.activity_new_location_form);
 
         this.nameLocation = findViewById(R.id.nameNewLocation);
-        this.website = findViewById(R.id.websiteNewLocation);
+        this.type = findViewById(R.id.typeNewLocation);
         this.phoneNumber = findViewById(R.id.phoneNumberNewLocation);
     }
 
@@ -47,8 +47,8 @@ public class NewLocationForm extends Activity {
      * Gets the location's website from what was typed in
      * @return the location's website
      */
-    public String getWebsite() {
-        return this.website.getText().toString();
+    public String getType() {
+        return this.type.getText().toString();
     }
 
     /**
@@ -67,7 +67,7 @@ public class NewLocationForm extends Activity {
     public void onEnterPressed(View view) {
         Intent intent = new Intent();
         intent.putExtra(NAME_CODE, this.getLocationName());
-        intent.putExtra(WEBSITE_CODE, this.getWebsite());
+        intent.putExtra(WEBSITE_CODE, this.getType());
         intent.putExtra(PHONE_CODE, this.getPhoneNumber());
 
         setResult(Activity.RESULT_OK, intent);
