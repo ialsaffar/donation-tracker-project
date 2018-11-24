@@ -1,6 +1,8 @@
 package com.capybaras.donationtracker.controllers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +30,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Longitude and Latitude of the default zoom location of the map.
     //Currently the center of Atlanta.
     private final LatLng DEFAULT_MAP_POSITION = new LatLng(33.7490, -84.3880);
+
+    private LatLng currentLocation = new LatLng(37, -85);
+    private static final int REQUEST_CODE = 1010101;
 
 
     @Override
@@ -65,6 +70,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         //Use a custom layout for the pin data
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (resultCode == Activity.RESULT_OK) {
+//                    String nameOfLocation = data.getStringExtra(NewLocationForm.NAME_CODE);
+//                    String website = data.getStringExtra(NewLocationForm.WEBSITE_CODE);
+//                    String phone = data.getStringExtra(NewLocationForm.PHONE_CODE);
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(currentLocation);
+
+//                    markerOptions.title(nameOfLocation);
+//                    markerOptions.snippet(phone + "\n" + website);
+
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
+
+                    mMap.addMarker(markerOptions);
+                }
+        }
     }
 
     /**
