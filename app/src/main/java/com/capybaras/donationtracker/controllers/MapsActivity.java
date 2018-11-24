@@ -79,15 +79,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         switch (requestCode) {
             case REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
-//                    String nameOfLocation = data.getStringExtra(NewLocationForm.NAME_CODE);
-//                    String website = data.getStringExtra(NewLocationForm.WEBSITE_CODE);
-//                    String phone = data.getStringExtra(NewLocationForm.PHONE_CODE);
+                    String nameOfLocation = data.getStringExtra(NewLocationForm.NAME_CODE);
+                    String website = data.getStringExtra(NewLocationForm.WEBSITE_CODE);
+                    String phone = data.getStringExtra(NewLocationForm.PHONE_CODE);
 
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(currentLocation);
 
-//                    markerOptions.title(nameOfLocation);
-//                    markerOptions.snippet(phone + "\n" + website);
+                    markerOptions.title(nameOfLocation);
+                    markerOptions.snippet(phone + "\n" + website);
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
