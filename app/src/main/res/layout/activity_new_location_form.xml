@@ -59,7 +59,7 @@
             android:id="@+id/typeNewLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Website" />
+            android:hint="Type Of Location" />
     </android.support.design.widget.TextInputLayout>
 
     <EditText

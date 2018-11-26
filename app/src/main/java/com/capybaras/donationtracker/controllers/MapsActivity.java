@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.capybaras.donationtracker.models.Location;
+import com.capybaras.donationtracker.models.LocationList;
 import com.capybaras.donationtracker.models.Model;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -92,19 +93,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
                     String nameOfLocation = data.getStringExtra(NewLocationForm.NAME_CODE);
-                    String website = data.getStringExtra(NewLocationForm.WEBSITE_CODE);
+                    String type = data.getStringExtra(NewLocationForm.TYPE_CODE);
                     String phone = data.getStringExtra(NewLocationForm.PHONE_CODE);
 
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(currentLocation);
 
                     markerOptions.title(nameOfLocation);
-                    markerOptions.snippet(phone + "\n" + website);
+                    markerOptions.snippet(phone + "\n" + type);
 
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
                     mMap.addMarker(markerOptions);
-                    
+
+                    LocationList.addLocation(new Location(8, nameOfLocation, currentLocation.latitude, currentLocation.longitude, "Street Address", "City", "State", 30277, type, phone, "website"));
+
                     mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
                 }
         }

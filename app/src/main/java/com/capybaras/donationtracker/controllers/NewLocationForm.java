@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.capybaras.donationtracker.R;
@@ -22,7 +21,7 @@ public class NewLocationForm extends Activity {
     private EditText phoneNumber;
 
     public static final String NAME_CODE = "Code for Location Name";
-    public static final String WEBSITE_CODE = "Code for Website of Location";
+    public static final String TYPE_CODE = "Code for Website of Location";
     public static final String PHONE_CODE = "Code for phone number of Location";
 
     @Override
@@ -67,7 +66,7 @@ public class NewLocationForm extends Activity {
     public void onEnterPressed(View view) {
         Intent intent = new Intent();
         intent.putExtra(NAME_CODE, this.getLocationName());
-        intent.putExtra(WEBSITE_CODE, this.getType());
+        intent.putExtra(TYPE_CODE, this.getType());
         intent.putExtra(PHONE_CODE, this.getPhoneNumber());
 
         setResult(Activity.RESULT_OK, intent);
