@@ -32,7 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final LatLng DEFAULT_MAP_POSITION = new LatLng(33.7490, -84.3880);
 
     private LatLng currentLocation = new LatLng(37, -85);
-    private static final int REQUEST_CODE = 1010101;
+    private static final int REQUEST_CODE = 10101;
 
 
     @Override
@@ -104,6 +104,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
                     mMap.addMarker(markerOptions);
+                    
+                    mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
                 }
         }
     }
