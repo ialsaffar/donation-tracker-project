@@ -68,6 +68,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.snippet(location.getPhone() + "\n" + location.getType());
             mMap.addMarker(markerOptions);
         }
+        //Use a custom layout for the pin data
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
 
         // Setting a click event handler for the map
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -80,9 +82,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
-
-        //Use a custom layout for the pin data
-        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
     }
 
     @Override
