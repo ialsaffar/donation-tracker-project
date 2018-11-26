@@ -34,7 +34,7 @@ public class Model extends Application{
     /**
      * Default Constructor for the Model
      */
-    private Model() {
+    public Model() {
         users = new HashMap<>();
         userList = new ArrayList<>();
         loggedInUser = null;

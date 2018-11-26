@@ -68,6 +68,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.snippet(location.getPhone() + "\n" + location.getType());
             mMap.addMarker(markerOptions);
         }
+
+        // Setting a click event handler for the map
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+                currentLocation = latLng;
+
+                Intent intent = new Intent(getApplicationContext(), NewLocationForm.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
         //Use a custom layout for the pin data
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
     }
