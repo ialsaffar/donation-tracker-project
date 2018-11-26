@@ -92,9 +92,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         switch (requestCode) {
             case REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
+
+                    String key = data.getStringExtra(NewLocationForm.KEY_CODE);
+                    int keyActual = Integer.valueOf(key);
+
                     String nameOfLocation = data.getStringExtra(NewLocationForm.NAME_CODE);
+                    String address = data.getStringExtra(NewLocationForm.ADDRESS_CODE);
+                    String city = data.getStringExtra(NewLocationForm.CITY_CODE);
+                    String state = data.getStringExtra(NewLocationForm.STATE_CODE);
+
+                    String zipCode = data.getStringExtra(NewLocationForm.ZIPCODE_CODE);
+                    int zipCodeActual = Integer.valueOf(zipCode);
+
                     String type = data.getStringExtra(NewLocationForm.TYPE_CODE);
                     String phone = data.getStringExtra(NewLocationForm.PHONE_CODE);
+                    String website = data.getStringExtra(NewLocationForm.WEBSITE_CODE);
 
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(currentLocation);
@@ -106,7 +118,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     mMap.addMarker(markerOptions);
 
-                    LocationList.addLocation(new Location(8, nameOfLocation, currentLocation.latitude, currentLocation.longitude, "Street Address", "City", "State", 30277, type, phone, "website"));
+                    LocationList.addLocation(new Location(keyActual, nameOfLocation, currentLocation.latitude,
+                            currentLocation.longitude, address, city, state, zipCodeActual, type, phone, website));
 
                     mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
                 }
