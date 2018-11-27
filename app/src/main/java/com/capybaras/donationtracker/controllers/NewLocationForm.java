@@ -36,6 +36,16 @@ public class NewLocationForm extends Activity {
     public static final String PHONE_CODE = "Code for phone number of Location";
     public static final String WEBSITE_CODE = "Code for Location's website";
 
+    private static final String DEFAULT_KEY = "101";
+    private static final String DEFAULT_NAME = "Unnamed Location";
+    private static final String DEFAULT_ADDRESS = "Unspecified Address";
+    private static final String DEFAULT_CITY = "Unnamed City";
+    private static final String DEFAULT_STATE = "Unnamed State";
+    private static final String DEFAULT_ZIPCODE = "12345";
+    private static final String DEFAULT_TYPE = "Unspecified Type";
+    private static final String DEFAULT_PHONE = "1 800 123 456 7890";
+    private static final String DEFAULT_WEBSITE = "www.nothing.com";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,18 +137,63 @@ public class NewLocationForm extends Activity {
      * On click listener for the enter button
      * @param view the view
      */
-    @SuppressWarnings("unused")
     public void onEnterPressed(View view) {
         Intent intent = new Intent();
-        intent.putExtra(KEY_CODE, this.getKey());
-        intent.putExtra(NAME_CODE, this.getLocationName());
-        intent.putExtra(ADDRESS_CODE, this.getStreetAddress());
-        intent.putExtra(CITY_CODE, this.getCity());
-        intent.putExtra(STATE_CODE, this.getState());
-        intent.putExtra(ZIPCODE_CODE, this.getZipCode());
-        intent.putExtra(TYPE_CODE, this.getType());
-        intent.putExtra(PHONE_CODE, this.getPhoneNumber());
-        intent.putExtra(WEBSITE_CODE, this.getWebsite());
+
+        //Checking for Key Entry
+        if (this.getKey().isEmpty()) {
+            intent.putExtra(KEY_CODE, DEFAULT_KEY);
+        } else {
+            intent.putExtra(KEY_CODE, this.getKey());
+        }
+        //Checking for Name Entry
+        if (this.getLocationName().isEmpty()) {
+            intent.putExtra(NAME_CODE, DEFAULT_NAME);
+        } else {
+            intent.putExtra(NAME_CODE, this.getLocationName());
+        }
+        //Checking for Address Entry
+        if (this.getStreetAddress().isEmpty()) {
+            intent.putExtra(ADDRESS_CODE, DEFAULT_ADDRESS);
+        } else {
+            intent.putExtra(ADDRESS_CODE, this.getStreetAddress());
+        }
+        //Checking for City Entry
+        if (this.getCity().isEmpty()) {
+            intent.putExtra(CITY_CODE, DEFAULT_CITY);
+        } else {
+            intent.putExtra(CITY_CODE, this.getCity());
+        }
+        //Checking for State
+        if (this.getState().isEmpty()) {
+            intent.putExtra(STATE_CODE, DEFAULT_STATE);
+        } else {
+            intent.putExtra(STATE_CODE, this.getState());
+        }
+        //Checking for ZipCode Entry
+        if (this.getZipCode().isEmpty()) {
+            intent.putExtra(ZIPCODE_CODE, DEFAULT_ZIPCODE);
+        } else {
+            intent.putExtra(ZIPCODE_CODE, this.getZipCode());
+        }
+        //Checking for type Entry
+        if (this.getType().isEmpty()) {
+            intent.putExtra(TYPE_CODE, DEFAULT_TYPE);
+        } else {
+            intent.putExtra(TYPE_CODE, this.getType());
+        }
+        //Checking for Phone Entry
+        if (this.getPhoneNumber().isEmpty()) {
+            intent.putExtra(PHONE_CODE, DEFAULT_PHONE);
+        } else {
+            intent.putExtra(PHONE_CODE, this.getPhoneNumber());
+        }
+        //Checking for WebsiteEntry
+        if (this.getWebsite().isEmpty()) {
+            intent.putExtra(WEBSITE_CODE, DEFAULT_WEBSITE);
+        } else {
+            intent.putExtra(WEBSITE_CODE, this.getWebsite());
+        }
 
         setResult(Activity.RESULT_OK, intent);
         finish();
